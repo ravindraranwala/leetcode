@@ -21,24 +21,20 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	public static int lengthOfLongestSubstring(String s) {
 		char[] chars = s.toCharArray();
 		Map<Character, Integer> charDistributionMap = new HashMap<>();
-		int maxLength = 0;
+		int maxLength = 0, windowStart = 0, substrLen = 0;
 		for (int i = 0, n = chars.length; i < n; i++) {
-			final Integer previousIdx = charDistributionMap.putIfAbsent(chars[i], i);
+			final int previousIdx = charDistributionMap.getOrDefault(chars[i], -1);
 			// Checking for a duplicate.
-			if (previousIdx != null) {
-				final int substrLen = charDistributionMap.size();
+			if (previousIdx != -1 && previousIdx >= windowStart) {
 				maxLength = substrLen > maxLength ? substrLen : maxLength;
-				/*
-				 * reset current char pointer back to one after the duplicate char's first
-				 * occurrence.
-				 */
-				i = previousIdx;
-				// we need to create a new map and start from the scratch again.
-				charDistributionMap = new HashMap<>();
+				windowStart = previousIdx + 1;
+				substrLen = i - windowStart;
 			}
-		}
+			substrLen++;
+			charDistributionMap.put(chars[i], i);
 
-		maxLength = Integer.max(maxLength, charDistributionMap.size());
+		}
+		maxLength = Integer.max(maxLength, substrLen);
 		return maxLength;
 	}
 }
