@@ -24,18 +24,15 @@ public class ClosedIslands {
 		if (grid.length == 0)
 			return 0;
 		int islandCnt = 0;
-		final int numOfRows = grid.length;
-		final int numOfCols = grid[0].length;
-		boolean[][] discoveryMatrix = new boolean[numOfRows][numOfCols];
-		for (int i = 0; i < numOfRows; i++)
+		for (int i = 0, numOfRows = grid.length, numOfCols = grid[0].length; i < numOfRows; i++)
 			for (int j = 0; j < numOfCols; j++)
-				if (!discoveryMatrix[i][j] && grid[i][j] == 0 && doscoverIsland(grid, discoveryMatrix, new Vertex(i, j)))
+				if (grid[i][j] == 0 && doscoverIsland(grid, new Vertex(i, j)))
 					islandCnt++;
 		return islandCnt;
 	}
 
-	private static boolean doscoverIsland(int[][] map, boolean[][] discoveryMatrix, Vertex u) {
-		discoveryMatrix[u.row][u.col] = true;// vertex discovered.
+	private static boolean doscoverIsland(int[][] map, Vertex u) {
+		map[u.row][u.col] = 1;// vertex discovered.
 		final int numOfCols = map[0].length;
 		final int numOfRows = map.length;
 
@@ -46,9 +43,8 @@ public class ClosedIslands {
 		for (int[] move : MOVES) {
 			final int newRow = u.row + move[0];
 			final int newCol = u.col + move[1];
-			if ((0 <= newRow && newRow < numOfRows) && (0 <= newCol && newCol < numOfCols)
-					&& !discoveryMatrix[newRow][newCol] && map[newRow][newCol] == 0
-					&& !doscoverIsland(map, discoveryMatrix, new Vertex(newRow, newCol)))
+			if ((0 <= newRow && newRow < numOfRows) && (0 <= newCol && newCol < numOfCols) && map[newRow][newCol] == 0
+					&& !doscoverIsland(map, new Vertex(newRow, newCol)))
 				isIsland = false;
 
 		}
