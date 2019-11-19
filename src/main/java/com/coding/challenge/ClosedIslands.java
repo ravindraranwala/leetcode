@@ -40,13 +40,13 @@ public class ClosedIslands {
 
 		if (u.row == 0 || u.row == numOfRows - 1 || u.col == 0 || u.col == numOfCols - 1)
 			isIsland = false; // Not a closed island.
+
 		for (int[] move : MOVES) {
 			final int newRow = u.row + move[0];
 			final int newCol = u.col + move[1];
 			if ((0 <= newRow && newRow < numOfRows) && (0 <= newCol && newCol < numOfCols) && map[newRow][newCol] == 0
 					&& !doscoverIsland(map, new Vertex(newRow, newCol)))
 				isIsland = false;
-
 		}
 		return isIsland;
 	}
