@@ -10,10 +10,7 @@ public class NumOfIslands {
 		char[][] grid2 = new char[][] { { '1', '1', '0', '0', '0' }, { '1', '1', '0', '0', '0' },
 				{ '0', '0', '1', '0', '0' }, { '0', '0', '0', '1', '1' } };
 
-		char[][] grid3 = new char[][] { { '1', '1', '0', '0', '0' }, { '1', '1', '0', '0', '0' },
-				{ '0', '0', '1', '0', '0' }, { '0', '0', '0', '1', '1' } };
-
-		final int islandCnt = numIslands(grid3);
+		final int islandCnt = numIslands(grid2);
 		System.out.println(String.format("Number of Islands: %d", islandCnt));
 	}
 
