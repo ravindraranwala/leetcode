@@ -17,7 +17,7 @@ public class CourseSchedule {
 		int[][] edges2 = new int[][] { { 1, 0 }, { 2, 0 }, { 3, 1 }, { 3, 2 } };
 		int[][] edges3 = new int[][] { { 1, 0 }, { 0, 1 } };
 		int[][] edges4 = new int[][] { { 1, 0 }, { 2, 0 }, { 0, 1 } };
-		int[] courseOrder = findOrder(3, edges4);
+		final int[] courseOrder = findOrder(4, edges2);
 
 		System.out.println(Arrays.toString(courseOrder));
 	}
@@ -27,6 +27,7 @@ public class CourseSchedule {
 		final COLOR[] discoveryStatus = new COLOR[numCourses];
 		for (int i = 0; i < numCourses; i++)
 			discoveryStatus[i] = COLOR.WHITE;
+
 		final Map<Integer, List<Integer>> adjList = new HashMap<>();
 		for (int[] edge : prerequisites)
 			adjList.merge(edge[1], new ArrayList<>(Arrays.asList(edge[0])), (l1, l2) -> {
@@ -53,7 +54,7 @@ public class CourseSchedule {
 			final Map<Integer, List<Integer>> adjList) {
 		discoveryStatus[u] = COLOR.GRAY;
 		boolean dependencyExist = true;
-		for (Iterator<Integer> it = adjList.getOrDefault(u, Collections.emptyList()).iterator(); dependencyExist
+		for (final Iterator<Integer> it = adjList.getOrDefault(u, Collections.emptyList()).iterator(); dependencyExist
 				&& it.hasNext();) {
 			final int v = it.next();
 			if (discoveryStatus[v] == COLOR.WHITE)
