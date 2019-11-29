@@ -23,7 +23,7 @@ public class CourseSchedule {
 	}
 
 	public static int[] findOrder(int numCourses, int[][] prerequisites) {
-		final Deque<Integer> courses = new ArrayDeque<>();
+		final Deque<Integer> courses = new ArrayDeque<>(numCourses);
 		final COLOR[] discoveryStatus = new COLOR[numCourses];
 		for (int i = 0; i < numCourses; i++)
 			discoveryStatus[i] = COLOR.WHITE;
@@ -60,7 +60,7 @@ public class CourseSchedule {
 			if (discoveryStatus[v] == COLOR.WHITE)
 				dependencyExist = findDependencies(v, courses, discoveryStatus, adjList);
 			else if (discoveryStatus[v] == COLOR.GRAY)
-				// A cycle is found
+				// A cycle is detected
 				return false;
 		}
 
