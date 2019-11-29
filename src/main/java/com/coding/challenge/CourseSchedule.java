@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CourseSchedule {
-
 	public static void main(String[] args) {
 		int[][] edges = new int[][] { { 0, 1 } };
 		int[][] edges2 = new int[][] { { 1, 0 }, { 2, 0 }, { 3, 1 }, { 3, 2 } };
