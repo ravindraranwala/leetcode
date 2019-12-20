@@ -29,10 +29,7 @@ public class CourseSchedule {
 
 		final Map<Integer, List<Integer>> adjList = new HashMap<>();
 		for (int[] edge : prerequisites)
-			adjList.merge(edge[1], new ArrayList<>(Arrays.asList(edge[0])), (l1, l2) -> {
-				l1.addAll(l2);
-				return l1;
-			});
+			adjList.computeIfAbsent(edge[1], unused -> new ArrayList<>()).add(edge[0]);
 
 		for (int u = 0; u < numCourses; u++) {
 			if (discoveryStatus[u] == COLOR.WHITE) {

@@ -2,6 +2,10 @@ package com.coding.challenge.kruskal;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MSTKruskal {
 
@@ -13,6 +17,43 @@ public class MSTKruskal {
 		int cost = minCostToConnectAllNodes(n, edges, newEdges);
 
 		System.out.println(String.format("Min Cost to Connect All Nodes: %d", cost));
+
+		// Min Cost to Repair Edges (Minimum Spanning Tree II)
+		// Usecase One
+		n = 5;
+		edges = new int[][] { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 }, { 1, 5 } };
+		int[][] edgesToRepair = { { 1, 2, 12 }, { 3, 4, 30 }, { 1, 5, 8 } };
+		cost = minCostToRepairEdges(n, edges, edgesToRepair);
+		System.out.println(String.format("Min Cost to Repair Edges: %d", cost));
+
+		n = 6;
+		edges = new int[][] { { 1, 2 }, { 2, 3 }, { 4, 5 }, { 3, 5 }, { 1, 6 }, { 2, 4 } };
+		edgesToRepair = new int[][] { { 1, 6, 410 }, { 2, 4, 800 } };
+		cost = minCostToRepairEdges(n, edges, edgesToRepair);
+		System.out.println(String.format("Min Cost to Repair Edges: %d", cost));
+
+		n = 6;
+		edges = new int[][] { { 1, 2 }, { 2, 3 }, { 4, 5 }, { 5, 6 }, { 1, 5 }, { 2, 4 }, { 3, 4 } };
+		edgesToRepair = new int[][] { { 1, 5, 110 }, { 2, 4, 84 }, { 3, 4, 79 } };
+		cost = minCostToRepairEdges(n, edges, edgesToRepair);
+		System.out.println(String.format("Min Cost to Repair Edges: %d", cost));
+	}
+
+	private static int minCostToRepairEdges(int n, int[][] edges, int[][] edgesToRepair) {
+		Map<List<Integer>, Integer> edgeToWeightMap = new HashMap<>();
+		for (int[] edge : edges)
+			edgeToWeightMap.put(Arrays.asList(edge[0], edge[1]), 0);
+
+		for (int[] edgeToRepair : edgesToRepair)
+			edgeToWeightMap.put(Arrays.asList(edgeToRepair[0], edgeToRepair[1]), edgeToRepair[2]);
+
+		final int[][] weightedEdges = new int[edges.length][3];
+		int counter = 0;
+		for (Entry<List<Integer>, Integer> edgeToWeight : edgeToWeightMap.entrySet())
+			weightedEdges[counter++] = new int[] { edgeToWeight.getKey().get(0), edgeToWeight.getKey().get(1),
+					edgeToWeight.getValue() };
+
+		return mstKruskal(n, weightedEdges);
 	}
 
 	private static int minCostToConnectAllNodes(int n, int[][] edges, int[][] newEdges) {
