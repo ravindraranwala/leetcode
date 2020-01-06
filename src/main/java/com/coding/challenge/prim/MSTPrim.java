@@ -64,8 +64,8 @@ public class MSTPrim {
 				final int currentWeight = vertices[v].key;
 				if (existenceInQ[v] && newWeight < currentWeight) {
 					/*
-					 * We have found a more optimal path, so, erase the current edge from our MST and
-					 * add the newly found edge to it.
+					 * We have found a more optimal path to v from A, so, erase the current edge
+					 * from our MST and add the newly found edge (u, v) to it.
 					 */
 					if (currentWeight != Integer.MAX_VALUE)
 						cost -= currentWeight;
