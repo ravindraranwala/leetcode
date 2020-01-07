@@ -35,17 +35,16 @@ public class MSTPrim {
 	}
 
 	private static int mstPrim(int n, int[][] edges) {
-		Vertex[] vertices = new Vertex[n + 1];
-		boolean[] existenceInQ = new boolean[n + 1];
-		Queue<Vertex> q = new PriorityQueue<>(Comparator.comparingInt(v -> v.key));
-		Map<Integer, Set<Integer>> adjList = new HashMap<>();
-		Map<List<Integer>, Integer> edgeToWeight = new HashMap<>();
-
+		final Map<Integer, Set<Integer>> adjList = new HashMap<>();
+		final Map<List<Integer>, Integer> edgeToWeight = new HashMap<>();
 		for (int[] edge : edges) {
 			adjList.computeIfAbsent(edge[0], unused -> new HashSet<>()).add(edge[1]);
 			edgeToWeight.put(Arrays.asList(edge[0], edge[1]), edge[2]);
 		}
 
+		final Vertex[] vertices = new Vertex[n + 1];
+		final boolean[] existenceInQ = new boolean[n + 1];
+		final Queue<Vertex> q = new PriorityQueue<>(Comparator.comparingInt(v -> v.key));
 		for (int i = 1; i <= n; i++) {
 			final Vertex vertex = new Vertex(i);
 			vertices[i] = vertex;
