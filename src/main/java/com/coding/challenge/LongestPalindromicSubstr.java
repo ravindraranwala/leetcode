@@ -1,10 +1,10 @@
 package com.coding.challenge;
 
-public final class LongestPaliandromicSubstr {
+public final class LongestPalindromicSubstr {
 
 	public static void main(String[] args) {
 		final String input = "babadada";
-		String p = longestPalindrome(input);
+		final String p = longestPalindrome(input);
 		System.out.println(p);
 	}
 
@@ -16,15 +16,14 @@ public final class LongestPaliandromicSubstr {
 		final int[][] length = new int[n][n];
 		final int[][] start = new int[n][n];
 		for (int i = 0; i < n; i++) {
-			length[i][i] = 1;
 			start[i][i] = i;
+			length[i][i] = 1;
 		}
 
 		for (int l = 2; l <= n; l++) {
 			for (int i = 0; i < n - l + 1; i++) {
 				final int j = i + l - 1;
-				if (s.charAt(i) == s.charAt(j)
-						&& (l == 2 || (start[i + 1][j - 1] == i + 1 && length[i + 1][j - 1] == j - i - 1))) {
+				if (s.charAt(i) == s.charAt(j) && (l == 2 || length[i + 1][j - 1] == j - i - 1)) {
 					start[i][j] = i;
 					length[i][j] = length[i + 1][j - 1] + 2;
 				} else {
