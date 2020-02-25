@@ -3,7 +3,7 @@ package com.coding.challenge;
 public final class LongestPalindromicSubstr {
 
 	public static void main(String[] args) {
-		final String input = "babadada";
+		final String input = "babadbabad";
 		final String p = longestPalindrome(input);
 		System.out.println(p);
 	}
@@ -23,17 +23,16 @@ public final class LongestPalindromicSubstr {
 		for (int l = 2; l <= n; l++) {
 			for (int i = 0; i < n - l + 1; i++) {
 				final int j = i + l - 1;
-				if (s.charAt(i) == s.charAt(j) && (l == 2 || length[i + 1][j - 1] == j - i - 1)) {
+				if (s.charAt(i) == s.charAt(j) && length[i + 1][j - 1] == j - i - 1) {
 					start[i][j] = i;
 					length[i][j] = length[i + 1][j - 1] + 2;
+				}
+				else if (length[i][j - 1] >= length[i + 1][j]) {
+					length[i][j] = length[i][j - 1];
+					start[i][j] = start[i][j - 1];
 				} else {
-					if (length[i][j - 1] >= length[i + 1][j]) {
-						length[i][j] = length[i][j - 1];
-						start[i][j] = start[i][j - 1];
-					} else {
-						length[i][j] = length[i + 1][j];
-						start[i][j] = start[i + 1][j];
-					}
+					length[i][j] = length[i + 1][j];
+					start[i][j] = start[i + 1][j];
 				}
 			}
 		}
