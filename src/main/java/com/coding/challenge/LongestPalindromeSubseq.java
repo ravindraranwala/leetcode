@@ -1,6 +1,6 @@
 package com.coding.challenge;
 
-public class LongestPalindromeSubseq {
+public final class LongestPalindromeSubseq {
 
 	public static void main(String[] args) {
 		final String longestPalindSubseq = longestPalindromeSubseq("character");
@@ -47,7 +47,7 @@ public class LongestPalindromeSubseq {
 	private static String constructLongestPalindSubseq(int[][] start, int[][] end, int[][] length, int i, int j,
 			String s) {
 		if (i == j)
-			return s.charAt(start[i][j]) + "";
+			return  String.valueOf(s.charAt(start[i][j]));
 
 		final StringBuilder longestPalindSubseq = new StringBuilder();
 		final int startPos = start[i][j];
