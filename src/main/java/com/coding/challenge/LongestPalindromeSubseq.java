@@ -46,8 +46,10 @@ public final class LongestPalindromeSubseq {
 
 	private static String constructLongestPalindSubseq(int[][] start, int[][] end, int[][] length, int i, int j,
 			String s) {
+		if (i > j)
+			return "";
 		if (i == j)
-			return  String.valueOf(s.charAt(start[i][j]));
+			return String.valueOf(s.charAt(start[i][j]));
 
 		final StringBuilder longestPalindSubseq = new StringBuilder();
 		final int startPos = start[i][j];
