@@ -9,37 +9,47 @@ public final class BSTIterator {
 
 	public static void main(String[] args) {
 		// Setting up the BST first.
-//		final TreeNode rightSubtree = new TreeNode(15);
-//		rightSubtree.left = new TreeNode(9);
-//		rightSubtree.right = new TreeNode(20);
+		final TreeNode rightSubtree = new TreeNode(15);
+		rightSubtree.left = new TreeNode(9);
+		rightSubtree.right = new TreeNode(20);
+
+		final TreeNode root = new TreeNode(7);
+		root.left = new TreeNode(3);
+		root.right = rightSubtree;
+
+//		TreeNode root = new TreeNode(15);
+//		TreeNode three = new TreeNode(3);
+//		three.left = new TreeNode(2);
+//		three.right = new TreeNode(4);
 //
-//		final TreeNode root = new TreeNode(7);
-//		root.left = new TreeNode(3);
-//		root.right = rightSubtree;
+//		TreeNode six = new TreeNode(6);
+//		TreeNode seven = new TreeNode(7);
+//		TreeNode thirteen = new TreeNode(13);
+//		thirteen.left = new TreeNode(9);
+//		seven.right = thirteen;
+//		six.right = seven;
+//		six.left = three;
+//
+//		TreeNode eighteen = new TreeNode(18);
+//		eighteen.left = new TreeNode(17);
+//		eighteen.right = new TreeNode(20);
+//
+//		root.left = six;
+//		root.right = eighteen;
 
-		TreeNode root = new TreeNode(15);
-		TreeNode three = new TreeNode(3);
-		three.left = new TreeNode(2);
-		three.right = new TreeNode(4);
+		final BSTIterator iterator = new BSTIterator(root);
+//		while (iterator.hasNext())
+//			System.out.println(iterator.next());
 
-		TreeNode six = new TreeNode(6);
-		TreeNode seven = new TreeNode(7);
-		TreeNode thirteen = new TreeNode(13);
-		thirteen.left = new TreeNode(9);
-		seven.right = thirteen;
-		six.right = seven;
-		six.left = three;
-
-		TreeNode eighteen = new TreeNode(18);
-		eighteen.left = new TreeNode(17);
-		eighteen.right = new TreeNode(20);
-
-		root.left = six;
-		root.right = eighteen;
-
-		final BSTIterator bstIt = new BSTIterator(root);
-		while (bstIt.hasNext())
-			System.out.println(bstIt.next());
+		System.out.println(iterator.next()); // return 3
+		System.out.println(iterator.next()); // return 7
+		System.out.println(iterator.hasNext()); // return true
+		System.out.println(iterator.next()); // return 9
+		System.out.println(iterator.hasNext()); // return true
+		System.out.println(iterator.next()); // return 15
+		System.out.println(iterator.hasNext()); // return true
+		System.out.println(iterator.next()); // return 20
+		System.out.println(iterator.hasNext()); // return false
 
 	}
 
@@ -62,17 +72,10 @@ public final class BSTIterator {
 	public int next() {
 		final int key = next.val;
 		nodesStack.removeFirst();
-
 		if (next.right != null)
 			next = treeMinimum(next.right);
-		else {
-			TreeNode y = nodesStack.peek();
-			while (y != null && y.right == next) {
-				next = y;
-				y = nodesStack.removeFirst();
-			}
-			next = y;
-		}
+		else
+			next = nodesStack.peek();
 		return key;
 	}
 
