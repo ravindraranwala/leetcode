@@ -26,8 +26,7 @@ public final class LongestPalindromicSubstr {
 				if (s.charAt(i) == s.charAt(j) && length[i + 1][j - 1] == j - i - 1) {
 					start[i][j] = i;
 					length[i][j] = length[i + 1][j - 1] + 2;
-				}
-				else if (length[i][j - 1] >= length[i + 1][j]) {
+				} else if (length[i][j - 1] >= length[i + 1][j]) {
 					length[i][j] = length[i][j - 1];
 					start[i][j] = start[i][j - 1];
 				} else {
