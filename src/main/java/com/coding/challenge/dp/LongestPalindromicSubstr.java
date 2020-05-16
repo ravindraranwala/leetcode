@@ -1,4 +1,4 @@
-package com.coding.challenge;
+package com.coding.challenge.dp;
 
 public final class LongestPalindromicSubstr {
 
