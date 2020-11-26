@@ -1,6 +1,10 @@
 package com.coding.challenge.dp;
 
-public final class LongestPalindromicSubstr {
+public class LongestPalindromicSubstr {
+
+	private LongestPalindromicSubstr() {
+		throw new AssertionError("Non instantiable !");
+	}
 
 	public static void main(String[] args) {
 		final String input = "babadbabad";
