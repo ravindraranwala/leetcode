@@ -13,6 +13,10 @@ import java.util.Set;
 
 public class MSTPrim {
 
+	private MSTPrim() {
+		throw new AssertionError();
+	}
+
 	public static void main(String[] args) {
 		// Min Cost to Connect All Nodes (Minimum Spanning Tree I)
 		int n = 6;
@@ -77,12 +81,11 @@ public class MSTPrim {
 		return cost;
 	}
 
-	static final class Vertex {
+	static class Vertex {
 		final int id;
 		int key;
 
-		public Vertex(int id) {
-			super();
+		Vertex(int id) {
 			this.id = id;
 			this.key = Integer.MAX_VALUE;
 		}
