@@ -5,7 +5,10 @@ import java.util.Comparator;
 
 import com.coding.challenge.ArrayUtil;
 
-public final class MSTKruskal {
+public class MSTKruskal {
+	private MSTKruskal() {
+		throw new AssertionError("Non instantiable !");
+	}
 
 	public static void main(String[] args) {
 		// Min Cost to Connect All Nodes (Minimum Spanning Tree I)
@@ -103,7 +106,7 @@ public final class MSTKruskal {
 		private Node p;
 	}
 
-	static class Edge {
+	public static class Edge {
 		private final int source;
 		private final int target;
 		private final int weight;
