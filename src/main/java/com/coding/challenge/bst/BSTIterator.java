@@ -2,10 +2,11 @@ package com.coding.challenge.bst;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
-public final class BSTIterator {
-	private TreeNode next = null;
-	private final Deque<TreeNode> nodesStack = new ArrayDeque<>();
+public class BSTIterator {
+	private final Deque<TreeNode> s;
+	private TreeNode current = null;
 
 	public static void main(String[] args) {
 		// Setting up the BST first.
@@ -53,35 +54,28 @@ public final class BSTIterator {
 
 	}
 
-	public BSTIterator(TreeNode root) {
-		if (root != null)
-			next = treeMinimum(root);
-	}
-
-	private TreeNode treeMinimum(TreeNode x) {
-		while (x.left != null) {
-			nodesStack.addFirst(x);
-			x = x.left;
-		}
-
-		nodesStack.addFirst(x);
-		return x;
+	BSTIterator(TreeNode root) {
+		s = new ArrayDeque<>();
+		visitLeftSubtree(root, s);
 	}
 
 	/** @return the next smallest number */
 	public int next() {
-		final int key = next.val;
-		nodesStack.removeFirst();
-		if (next.right != null)
-			next = treeMinimum(next.right);
-		else
-			next = nodesStack.peek();
-		return key;
+		if (s.isEmpty())
+			throw new NoSuchElementException();
+		this.current = s.pop();
+		visitLeftSubtree(current.right, s);
+		return current.val;
 	}
 
 	/** @return whether we have a next smallest number */
 	public boolean hasNext() {
-		return next != null;
+		return !s.isEmpty();
+	}
+
+	private void visitLeftSubtree(TreeNode root, Deque<TreeNode> s) {
+		for (TreeNode currentNode = root; currentNode != null; currentNode = currentNode.left)
+			s.push(currentNode);
 	}
 
 	static class TreeNode {
