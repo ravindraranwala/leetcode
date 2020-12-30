@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
 
-public class BSTIterator {
+class BSTIterator {
 	private final Deque<TreeNode> s;
 	private TreeNode current = null;
 
