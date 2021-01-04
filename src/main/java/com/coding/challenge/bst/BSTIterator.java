@@ -56,26 +56,30 @@ class BSTIterator {
 
 	BSTIterator(TreeNode root) {
 		s = new ArrayDeque<>();
-		visitLeftSubtree(root, s);
+		if (root != null)
+			s.push(root);
 	}
 
 	/** @return the next smallest number */
 	public int next() {
-		if (s.isEmpty())
-			throw new NoSuchElementException();
-		this.current = s.pop();
-		visitLeftSubtree(current.right, s);
-		return current.val;
+		while (!s.isEmpty()) {
+			final TreeNode n = s.peek();
+			if (n.left != null && (current == null || n.left.val > current.val))
+				s.push(n.left);
+			else {
+				current = s.pop();
+				if (current.right != null)
+					s.push(current.right);
+
+				return current.val;
+			}
+		}
+		throw new NoSuchElementException();
 	}
 
 	/** @return whether we have a next smallest number */
 	public boolean hasNext() {
 		return !s.isEmpty();
-	}
-
-	private void visitLeftSubtree(TreeNode root, Deque<TreeNode> s) {
-		for (TreeNode currentNode = root; currentNode != null; currentNode = currentNode.left)
-			s.push(currentNode);
 	}
 
 	static class TreeNode {
