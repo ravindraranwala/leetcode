@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 class BSTIterator {
 	private final Deque<TreeNode> s;
 	private TreeNode current = null;
+	private boolean down;
 
 	public static void main(String[] args) {
 		// Setting up the BST first.
@@ -56,6 +57,7 @@ class BSTIterator {
 
 	BSTIterator(TreeNode root) {
 		s = new ArrayDeque<>();
+		down = true;
 		if (root != null)
 			s.push(root);
 	}
@@ -64,13 +66,16 @@ class BSTIterator {
 	public int next() {
 		while (!s.isEmpty()) {
 			final TreeNode n = s.peek();
-			if (n.left != null && (current == null || n.left.val > current.val))
+			if (n.left != null && down)
 				s.push(n.left);
 			else {
 				current = s.pop();
-				if (current.right != null)
+				if (current.right == null)
+					down = false;
+				else {
 					s.push(current.right);
-
+					down = true;
+				}
 				return current.val;
 			}
 		}
