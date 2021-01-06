@@ -5,9 +5,10 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 class BSTIterator {
-	private final Deque<TreeNode> s;
+	private final Deque<TreeNode> s = new ArrayDeque<>();
 	private TreeNode current = null;
-	private boolean down;
+	private TreeNode nextLeft;
+	private boolean done;
 
 	public static void main(String[] args) {
 		// Setting up the BST first.
@@ -56,26 +57,23 @@ class BSTIterator {
 	}
 
 	BSTIterator(TreeNode root) {
-		s = new ArrayDeque<>();
-		down = true;
-		if (root != null)
-			s.push(root);
+		nextLeft = root;
+		done = root == null;
 	}
 
 	/** @return the next smallest number */
 	public int next() {
-		while (!s.isEmpty()) {
-			final TreeNode n = s.peek();
-			if (n.left != null && down)
-				s.push(n.left);
-			else {
+		while (!done) {
+			if (nextLeft != null) {
+				s.push(nextLeft);
+				nextLeft = nextLeft.left;
+			} else {
 				current = s.pop();
-				if (current.right == null)
-					down = false;
-				else {
+				if (current.right != null) {
 					s.push(current.right);
-					down = true;
+					nextLeft = current.right.left;
 				}
+				done = s.isEmpty();
 				return current.val;
 			}
 		}
@@ -84,7 +82,7 @@ class BSTIterator {
 
 	/** @return whether we have a next smallest number */
 	public boolean hasNext() {
-		return !s.isEmpty();
+		return !done;
 	}
 
 	static class TreeNode {
