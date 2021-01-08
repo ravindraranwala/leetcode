@@ -2,13 +2,11 @@ package com.coding.challenge.bst;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
 
 class BSTIterator {
 	private final Deque<TreeNode> s = new ArrayDeque<>();
-	private TreeNode current = null;
-	private TreeNode nextLeft;
-	private boolean done;
+	private TreeNode r = null;
+	private TreeNode current;
 
 	public static void main(String[] args) {
 		// Setting up the BST first.
@@ -57,32 +55,27 @@ class BSTIterator {
 	}
 
 	BSTIterator(TreeNode root) {
-		nextLeft = root;
-		done = root == null;
+		current = root;
 	}
 
 	/** @return the next smallest number */
 	public int next() {
-		while (!done) {
-			if (nextLeft != null) {
-				s.push(nextLeft);
-				nextLeft = nextLeft.left;
+		while (true) {
+			if (current != null) {
+				s.push(current);
+				current = current.left;
 			} else {
-				current = s.pop();
-				if (current.right != null) {
-					s.push(current.right);
-					nextLeft = current.right.left;
-				}
-				done = s.isEmpty();
-				return current.val;
+				r = s.pop();
+				if (r.right != null)
+					current = r.right;
+				return r.val;
 			}
 		}
-		throw new NoSuchElementException();
 	}
 
 	/** @return whether we have a next smallest number */
 	public boolean hasNext() {
-		return !done;
+		return !s.isEmpty() || current != null;
 	}
 
 	static class TreeNode {
