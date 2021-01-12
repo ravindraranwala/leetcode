@@ -66,8 +66,7 @@ class BSTIterator {
 				current = current.left;
 			} else {
 				r = s.pop();
-				if (r.right != null)
-					current = r.right;
+				current = r.right;
 				return r.val;
 			}
 		}
