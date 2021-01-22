@@ -1,7 +1,10 @@
 package com.coding.challenge.bst;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
+import java.util.List;
 
 class BSTIterator {
 	private final Deque<TreeNode> s = new ArrayDeque<>();
@@ -52,6 +55,25 @@ class BSTIterator {
 		System.out.println(iterator.next()); // return 20
 		System.out.println(iterator.hasNext()); // return false
 
+		Collection<Integer> vals = inorderTraversal(root);
+		System.out.println(vals);
+	}
+
+	public static List<Integer> inorderTraversal(TreeNode root) {
+		final Deque<TreeNode> s = new ArrayDeque<>();
+		TreeNode current = root;
+		final List<Integer> vals = new ArrayList<>();
+		while (!s.isEmpty() || current != null) {
+			if (current != null) {
+				s.push(current);
+				current = current.left;
+			} else {
+				final TreeNode r = s.pop();
+				vals.add(r.val);
+				current = r.right;
+			}
+		}
+		return vals;
 	}
 
 	BSTIterator(TreeNode root) {
