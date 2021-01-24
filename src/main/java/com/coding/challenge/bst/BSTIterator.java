@@ -99,7 +99,7 @@ class BSTIterator {
 	}
 
 	static class TreeNode {
-		int val;
+		final int val;
 		TreeNode left;
 		TreeNode right;
 
