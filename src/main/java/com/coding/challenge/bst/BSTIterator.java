@@ -8,7 +8,6 @@ import java.util.List;
 
 class BSTIterator {
 	private final Deque<TreeNode> s = new ArrayDeque<>();
-	private TreeNode r = null;
 	private TreeNode current;
 
 	public static void main(String[] args) {
@@ -87,7 +86,7 @@ class BSTIterator {
 				s.push(current);
 				current = current.left;
 			} else {
-				r = s.pop();
+				final TreeNode r = s.pop();
 				current = r.right;
 				return r.val;
 			}
