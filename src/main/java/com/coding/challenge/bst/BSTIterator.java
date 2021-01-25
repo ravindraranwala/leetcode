@@ -75,6 +75,22 @@ class BSTIterator {
 		return vals;
 	}
 
+	public static List<Integer> preorderTraversal(TreeNode root) {
+		final Deque<TreeNode> s = new ArrayDeque<>();
+		if (root != null)
+			s.push(root);
+		final List<Integer> vals = new ArrayList<>();
+		while (!s.isEmpty()) {
+			final TreeNode current = s.pop();
+			vals.add(current.val);
+			if (current.right != null)
+				s.push(current.right);
+			if (current.left != null)
+				s.push(current.left);
+		}
+		return vals;
+	}
+
 	BSTIterator(TreeNode root) {
 		current = root;
 	}
