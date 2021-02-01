@@ -91,6 +91,27 @@ class BSTIterator {
 		return vals;
 	}
 
+	public static List<Integer> postorderTraversal(TreeNode root) {
+		final Deque<TreeNode> s = new ArrayDeque<>();
+		TreeNode current = root;
+		TreeNode lastRemoved = null;
+		final List<Integer> vals = new ArrayList<>();
+		while (!s.isEmpty() || current != null) {
+			if (current != null) {
+				s.push(current);
+				current = current.left;
+			} else {
+				final TreeNode head = s.peek();
+				if (head.right == null || head.right == lastRemoved) {
+					lastRemoved = s.pop();
+					vals.add(lastRemoved.val);
+				} else
+					current = head.right;
+			}
+		}
+		return vals;
+	}
+
 	BSTIterator(TreeNode root) {
 		current = root;
 	}
