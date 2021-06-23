@@ -1,4 +1,4 @@
-package com.coding.challenge;
+package com.coding.challenge.dfs;
 
 public class NumOfIslands {
 	private static final int[][] MOVES = new int[][] { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };

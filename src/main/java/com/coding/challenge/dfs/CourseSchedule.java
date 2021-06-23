@@ -1,4 +1,4 @@
-package com.coding.challenge;
+package com.coding.challenge.dfs;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

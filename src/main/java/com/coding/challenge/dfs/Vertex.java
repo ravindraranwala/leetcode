@@ -1,4 +1,4 @@
-package com.coding.challenge;
+package com.coding.challenge.dfs;
 
 class Vertex {
 	final int row;
