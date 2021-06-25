@@ -2,7 +2,7 @@ package com.coding.challenge.linked.list;
 
 class PalindromeLinkedList {
 
-	public PalindromeLinkedList() {
+	PalindromeLinkedList() {
 		throw new AssertionError();
 	}
 
