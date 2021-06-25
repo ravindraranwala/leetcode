@@ -56,6 +56,38 @@ class PalindromeLinkedList {
 		}
 		return isPalind;
 	}
+	
+	static boolean isPalindromeNoFixation(ListNode head) {
+		if (head == null)
+			throw new IllegalArgumentException("Empty list.");
+		int counter = 0;
+		for (ListNode current = head; current != null; current = current.next)
+			counter++;
+
+		if (counter == 1)
+			return true;
+		ListNode current = head;
+		ListNode next = head.next;
+		current.next = null;
+		for (int i = 1; i < counter / 2; i++) {
+			final ListNode previous = current;
+			current = next;
+			next = current.next;
+			current.next = previous;
+		}
+
+		// current pointer sets to the middle of the linkedlist now.
+		if (counter % 2 != 0)
+			next = next.next;
+
+		while (current != null && next != null) {
+			if (current.val != next.val)
+				return false;
+			next = next.next;
+			current = current.next;
+		}
+		return true;
+	}
 
 	/**
 	 * Definition for singly-linked list.
