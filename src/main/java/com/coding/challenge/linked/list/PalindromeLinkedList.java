@@ -8,12 +8,14 @@ class PalindromeLinkedList {
 
 	public static void main(String[] args) {
 		final ListNode head = new ListNode(1);
-		final ListNode n1 = new ListNode(1, null);
+		final ListNode n1 = new ListNode(2);
 		head.next = n1;
-//		final ListNode n2 = new ListNode(2);
-//		n1.next = n2;
-//		final ListNode n3 = new ListNode(1);
-//		n2.next = n3;
+		final ListNode n2 = new ListNode(3);
+		n1.next = n2;
+		final ListNode n3 = new ListNode(2);
+		n2.next = n3;
+		final ListNode n4 = new ListNode(1, null);
+		n3.next = n4;
 		System.out.println(isPalindrome(head));
 	}
 
