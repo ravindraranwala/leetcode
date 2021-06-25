@@ -56,7 +56,7 @@ class PalindromeLinkedList {
 		}
 		return isPalind;
 	}
-	
+
 	static boolean isPalindromeNoFixation(ListNode head) {
 		if (head == null)
 			throw new IllegalArgumentException("Empty list.");
