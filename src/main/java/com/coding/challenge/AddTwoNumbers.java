@@ -99,25 +99,4 @@ public class AddTwoNumbers {
 			currentNode.next = new ListNode(carryOver);
 		return dummyHead.next;
 	}
-
-	/**
-	 * Definition for singly-linked list.
-	 */
-	public static class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
-		}
-
-		@Override
-		public String toString() {
-			if (next == null)
-				return val + "";
-
-			return val + next.toString();
-		}
-
-	}
 }

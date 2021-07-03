@@ -2,7 +2,7 @@ package com.coding.challenge.linked.list;
 
 import java.util.StringJoiner;
 
-import com.coding.challenge.linked.list.PalindromeLinkedList.ListNode;
+import com.coding.challenge.ListNode;
 
 class LinkedListReverse {
 

@@ -1,5 +1,7 @@
 package com.coding.challenge.linked.list;
 
+import com.coding.challenge.ListNode;
+
 class PalindromeLinkedList {
 
 	PalindromeLinkedList() {
@@ -88,22 +90,4 @@ class PalindromeLinkedList {
 		}
 		return true;
 	}
-
-	/**
-	 * Definition for singly-linked list.
-	 */
-	static class ListNode {
-		final int val;
-		ListNode next;
-
-		ListNode(int val) {
-			this.val = val;
-		}
-
-		ListNode(int val, ListNode next) {
-			this.val = val;
-			this.next = next;
-		}
-	}
-
 }
