@@ -1,8 +1,6 @@
 package com.coding.challenge.heaps;
 
-import java.util.AbstractMap;
 import java.util.Comparator;
-import java.util.Map;
 
 import com.coding.challenge.ListNode;
 
@@ -12,26 +10,25 @@ public class K_WayMerge {
 	}
 
 	public static void main(String[] args) {
-		// TODO: add sample data and test the implementation.
+
 	}
 
 	public static <T> ListNode<T> kWayMerge(Comparator<? super T> cmp, ListNode<T>... sortedLists) {
-		final Queue<Map.Entry<T, ListNode<T>>> queue = PriorityQueue.of(Map.Entry.comparingByKey(cmp));
+		final Comparator<ListNode<T>> listNodeCmp = (o1, o2) -> cmp.compare(o1.val, o2.val);
+		final Queue<ListNode<T>> queue = PriorityQueue.of(listNodeCmp);
 		for (ListNode<T> a : sortedLists)
 			// Adding the first element of each list to the heap.
-			queue.insert(new AbstractMap.SimpleEntry<>(a.val, a.next));
+			queue.insert(a);
 
 		final ListNode<T> dummyHead = new ListNode<>(null);
 		ListNode<T> current = dummyHead;
 		while (!queue.isEmpty()) {
-			final Map.Entry<T, ListNode<T>> entry = queue.extract();
-			final T key = entry.getKey();
-			current.next = new ListNode<T>(key);
+			final ListNode<T> node = queue.extract();
+			current.next = new ListNode<T>(node.val);
 			current = current.next;
-			final ListNode<T> nextNode = entry.getValue();
+			final ListNode<T> nextNode = node.next;
 			if (nextNode != null)
-				queue.insert(new AbstractMap.SimpleEntry<>(nextNode.val, nextNode.next));
-
+				queue.insert(nextNode);
 		}
 		return dummyHead.next;
 	}
