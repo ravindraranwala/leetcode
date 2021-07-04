@@ -35,29 +35,29 @@ public class K_WayMerge {
 		System.out.println(mergedList2);
 
 		// Testcase three
-		final ListNode<Integer> mergedList3 = kWayMerge(new ListNode<>(null));
+		final ListNode[] emptyNodes = new ListNode[] { null };
+		final ListNode<Integer> mergedList3 = kWayMerge(emptyNodes);
 		System.out.println(mergedList3);
 	}
 
 	public static <T> ListNode<T> kWayMerge(Comparator<? super T> cmp, ListNode<T>... sortedLists) {
 		final Comparator<ListNode<T>> listNodeCmp = (o1, o2) -> cmp.compare(o1.val, o2.val);
-		final Queue<ListNode<T>> queue = PriorityQueue.of(listNodeCmp);
-		for (ListNode<T> a : sortedLists)
+		final Queue<ListNode<T>> queue = PriorityQueue.of(listNodeCmp, sortedLists.length);
+		for (ListNode<T> n : sortedLists)
 			// Adding the first element of each list to the heap.
-			if (a.val != null)
-				queue.insert(a);
+			if (n != null)
+				queue.insert(n);
 
 		final ListNode<T> dummyHead = new ListNode<>(null);
-		ListNode<T> current = dummyHead;
-		while (!queue.isEmpty()) {
+		for (ListNode<T> current = dummyHead; !queue.isEmpty(); current = current.next) {
 			final ListNode<T> node = queue.extract();
-			current.next = new ListNode<T>(node.val);
-			current = current.next;
+			// current.next = new ListNode<T>(node.val);
+			current.next = node;
 			final ListNode<T> nextNode = node.next;
 			if (nextNode != null)
 				queue.insert(nextNode);
 		}
-		return dummyHead.next != null ? dummyHead.next : dummyHead;
+		return dummyHead.next;
 	}
 
 	public static <T extends Comparable<? super T>> ListNode<T> kWayMerge(ListNode<T>... sortedLists) {

@@ -3,6 +3,7 @@ package com.coding.challenge.heaps;
 import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
@@ -167,6 +168,7 @@ public class PriorityQueue<E> implements Queue<E> {
 
 	@Override
 	public void insert(E elt) {
+		Objects.requireNonNull(elt);
 		ensureCapacity(size + 2);
 		a[size + 1] = elt;
 		decreaseKey(size + 1);
