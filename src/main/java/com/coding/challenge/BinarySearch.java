@@ -27,18 +27,13 @@ public class BinarySearch {
 	}
 
 	static int binarySearch(int[] nums, int target, int low, int high) {
-		// base case of the recursion
-		if (low == high) {
-			if (nums[low] == target)
-				return low;
-			else
-				return -1;
-		}
-
 		final int mid = (low + high) / 2;
-		if (target <= nums[mid])
+		if (nums[mid] == target)
+			return mid;
+		if (target < nums[mid] && low < high)
 			return binarySearch(nums, target, low, mid);
-		else
+		if (target > nums[mid] && low < high)
 			return binarySearch(nums, target, mid + 1, high);
+		return -1;
 	}
 }
