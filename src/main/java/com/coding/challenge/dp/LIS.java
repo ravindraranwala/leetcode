@@ -22,21 +22,21 @@ class LIS {
 		 * sequences.Sorting takes (n log n) time and LCS takes n^2. So, overall it
 		 * takes n^2 time.
 		 */
-		final int[] sortedDistinctNums = sortedDistinctNums(nums);
+		final int[] sortedDistinctNums = distinctNums(nums);
+		Arrays.sort(sortedDistinctNums);
 		int[][] lcsLength = lcsLength(nums, sortedDistinctNums);
 		return lcsLength[nums.length][sortedDistinctNums.length];
 	}
 
-	static int[] sortedDistinctNums(int[] nums) {
+	static int[] distinctNums(int[] nums) {
 		final Set<Integer> uniqueNums = new HashSet<>();
 		for (int n : nums)
 			uniqueNums.add(n);
-		final int[] sortedDistinctNums = new int[uniqueNums.size()];
+		final int[] distinctNums = new int[uniqueNums.size()];
 		int i = 0;
 		for (int n : uniqueNums)
-			sortedDistinctNums[i++] = n;
-		Arrays.sort(sortedDistinctNums);
-		return sortedDistinctNums;
+			distinctNums[i++] = n;
+		return distinctNums;
 	}
 
 	static int[][] lcsLength(int[] x, int[] y) {
