@@ -13,9 +13,9 @@ import com.coding.challenge.bst.TreeNode;
  * @author ravindra
  *
  */
-public class BinaryTreeLevelOrderTraversal {
+class BinaryTreeLevelOrderTraversal {
 
-	private BinaryTreeLevelOrderTraversal() {
+	BinaryTreeLevelOrderTraversal() {
 		throw new AssertionError();
 	}
 
