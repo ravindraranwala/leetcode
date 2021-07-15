@@ -1,8 +1,5 @@
 package com.coding.challenge.tree;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 import com.coding.challenge.bst.TreeNode;
 
 class BinTreeMinDepth {
@@ -41,27 +38,26 @@ class BinTreeMinDepth {
 		System.out.println(String.format("Min depth of the binary tree: %d", d));
 	}
 
+	/**
+	 * Uses a variant of Depth-First-Search to find the minimum depth of a Binary
+	 * tree. The minimum depth is the number of nodes along the shortest path from
+	 * the root node down to the nearest leaf node.Note: A leaf is a node with no
+	 * children.
+	 * 
+	 * @param root
+	 * @return
+	 */
 	static int minDepth(TreeNode root) {
 		if (root == null)
 			return 0;
-		int d = 1;
-		final Queue<TreeNode> q = new ArrayDeque<>();
-		q.offer(root);
-		while (!q.isEmpty()) {
-			final int size = q.size();
-			for (int i = 0; i < size; i++) {
-				final TreeNode n = q.poll();
-				// leaf node found
-				if (n.left == null && n.right == null)
-					return d;
-				if (n.left != null)
-					q.offer(n.left);
-				if (n.right != null)
-					q.offer(n.right);
-			}
-			// current level is complete
-			d++;
-		}
-		return d;
+		if (root.left == null && root.right == null)
+			return 1;
+		int l = Integer.MAX_VALUE;
+		int r = Integer.MAX_VALUE;
+		if (root.left != null)
+			l = minDepth(root.left);
+		if (root.right != null)
+			r = minDepth(root.right);
+		return Math.min(l, r) + 1;
 	}
 }
