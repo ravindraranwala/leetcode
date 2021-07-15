@@ -1,7 +1,7 @@
 package com.coding.challenge.dp;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 class LIS {
@@ -10,8 +10,8 @@ class LIS {
 	}
 
 	public static void main(String[] args) {
-		final int[] nums = { 0, 1, 0, 3, 2, 3 };
-		int lisLength = lengthOfLIS(nums);
+		final int[] nums = { 10, 9, 2, 5, 3, 7, 101, 18 };
+		final int lisLength = lengthOfLIS(nums);
 		System.out.println(String.format("Length of LIS: %d", lisLength));
 	}
 
@@ -29,7 +29,7 @@ class LIS {
 	}
 
 	static int[] distinctNums(int[] nums) {
-		final Set<Integer> uniqueNums = new HashSet<>();
+		final Set<Integer> uniqueNums = new LinkedHashSet<>();
 		for (int n : nums)
 			uniqueNums.add(n);
 		final int[] distinctNums = new int[uniqueNums.size()];

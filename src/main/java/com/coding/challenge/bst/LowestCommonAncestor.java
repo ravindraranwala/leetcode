@@ -1,7 +1,5 @@
 package com.coding.challenge.bst;
 
-import com.coding.challenge.bst.BSTIterator.TreeNode;
-
 class LowestCommonAncestor {
 
 	private LowestCommonAncestor() {

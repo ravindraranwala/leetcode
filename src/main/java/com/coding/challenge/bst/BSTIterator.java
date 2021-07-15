@@ -134,14 +134,4 @@ class BSTIterator {
 	public boolean hasNext() {
 		return !s.isEmpty() || current != null;
 	}
-
-	static class TreeNode {
-		final int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 }
