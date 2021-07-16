@@ -86,10 +86,8 @@ class BinTreeMinDepth {
 	static int maxDepth(TreeNode root) {
 		if (root == null)
 			return 0;
-		int l = 0;
-		int r = 0;
-		l = maxDepth(root.left);
-		r = maxDepth(root.right);
+		final int l = maxDepth(root.left);
+		final int r = maxDepth(root.right);
 		return Math.max(l, r) + 1;
 	}
 }
