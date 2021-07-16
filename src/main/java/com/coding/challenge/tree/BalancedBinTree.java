@@ -2,10 +2,10 @@ package com.coding.challenge.tree;
 
 import com.coding.challenge.bst.TreeNode;
 
-class HeightBalancedBinTree {
+class BalancedBinTree {
 	private static int dh = 0;
 
-	HeightBalancedBinTree() {
+	BalancedBinTree() {
 		throw new AssertionError();
 	}
 
