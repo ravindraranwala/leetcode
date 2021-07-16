@@ -36,6 +36,26 @@ class BinTreeMinDepth {
 
 		d = minDepth(two);
 		System.out.println(String.format("Min depth of the binary tree: %d", d));
+
+		// Usecase 1 max depth.
+		d = maxDepth(three);
+		System.out.println(String.format("Min depth of the binary tree: %d", d));
+
+		// Usecase 2 max depth.
+		final TreeNode one = new TreeNode(1);
+		final TreeNode two2 = new TreeNode(2);
+		one.right = two2;
+		d = maxDepth(one);
+		System.out.println(String.format("Min depth of the binary tree: %d", d));
+
+		// Usecase 3 max depth.
+		d = maxDepth(null);
+		System.out.println(String.format("Min depth of the binary tree: %d", d));
+
+		// Usecase 4 max depth.
+		final TreeNode zero = new TreeNode(0);
+		d = maxDepth(zero);
+		System.out.println(String.format("Min depth of the binary tree: %d", d));
 	}
 
 	/**
@@ -50,8 +70,10 @@ class BinTreeMinDepth {
 	static int minDepth(TreeNode root) {
 		if (root == null)
 			return 0;
+		// leaf node found
 		if (root.left == null && root.right == null)
 			return 1;
+		// non-leaf node can have one or two children
 		int l = Integer.MAX_VALUE;
 		int r = Integer.MAX_VALUE;
 		if (root.left != null)
@@ -59,5 +81,15 @@ class BinTreeMinDepth {
 		if (root.right != null)
 			r = minDepth(root.right);
 		return Math.min(l, r) + 1;
+	}
+
+	static int maxDepth(TreeNode root) {
+		if (root == null)
+			return 0;
+		int l = 0;
+		int r = 0;
+		l = maxDepth(root.left);
+		r = maxDepth(root.right);
+		return Math.max(l, r) + 1;
 	}
 }
