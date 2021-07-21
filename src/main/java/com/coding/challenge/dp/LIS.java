@@ -1,6 +1,8 @@
 package com.coding.challenge.dp;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 class LIS {
 	private LIS() {
@@ -20,10 +22,21 @@ class LIS {
 		 * sequences.Sorting takes (n log n) time and LCS takes n^2. So, overall it
 		 * takes n^2 time.
 		 */
-		final int[] sortedNums = Arrays.copyOf(nums, nums.length);
-		Arrays.sort(sortedNums);
-		int[][] lcsLength = lcsLength(nums, sortedNums);
-		return lcsLength[nums.length][sortedNums.length];
+		final int[] sortedDistinctNums = distinctNums(nums);
+		Arrays.sort(sortedDistinctNums);
+		int[][] lcsLength = lcsLength(nums, sortedDistinctNums);
+		return lcsLength[nums.length][sortedDistinctNums.length];
+	}
+
+	static int[] distinctNums(int[] nums) {
+		final Set<Integer> uniqueNums = new LinkedHashSet<>();
+		for (int n : nums)
+			uniqueNums.add(n);
+		final int[] distinctNums = new int[uniqueNums.size()];
+		int i = 0;
+		for (int n : uniqueNums)
+			distinctNums[i++] = n;
+		return distinctNums;
 	}
 
 	static int[][] lcsLength(int[] x, int[] y) {
@@ -38,7 +51,7 @@ class LIS {
 
 		for (int i = 1; i <= m; i++) {
 			for (int j = 1; j <= n; j++) {
-				if (x[i - 1] == y[j - 1] && (j < 2 || y[j - 2] != y[j - 1]))
+				if (x[i - 1] == y[j - 1])
 					c[i][j] = c[i - 1][j - 1] + 1;
 				else if (c[i - 1][j] >= c[i][j - 1])
 					c[i][j] = c[i - 1][j];
