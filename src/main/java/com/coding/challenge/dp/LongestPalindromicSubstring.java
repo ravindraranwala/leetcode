@@ -24,7 +24,7 @@ class LongestPalindromicSubstring {
 		for (int len = 2; len <= n; len++) {
 			for (int i = 0; i < n - len + 1; i++) {
 				final int j = i + len - 1;
-				if (s.charAt(i) == s.charAt(j) && (len == 2 || l[i + 1][j - 1] == len - 2)) {
+				if (s.charAt(i) == s.charAt(j) && l[i + 1][j - 1] == len - 2) {
 					l[i][j] = len;
 					start = i;
 				} else
