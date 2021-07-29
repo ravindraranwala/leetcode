@@ -16,21 +16,23 @@ class LongestPalindromicSubstring {
 			return s;
 
 		final int n = s.length();
-		final int[][] l = new int[n][n];
-		int start = 0;
+		final boolean[][] p = new boolean[n][n];
 		for (int i = 0; i < n; i++)
-			l[i][i] = 1;
+			p[i][i] = true;
 
+		int l = 1;
+		int start = 0;
 		for (int len = 2; len <= n; len++) {
 			for (int i = 0; i < n - len + 1; i++) {
 				final int j = i + len - 1;
-				if (s.charAt(i) == s.charAt(j) && l[i + 1][j - 1] == len - 2) {
-					l[i][j] = len;
+				if (s.charAt(i) == s.charAt(j) && (len == 2 || p[i + 1][j - 1])) {
+					p[i][j] = true;
 					start = i;
+					l = len;
 				} else
-					l[i][j] = Math.max(l[i][j - 1], l[i + 1][j]);
+					p[i][j] = false;
 			}
 		}
-		return s.substring(start, start + l[0][n - 1]);
+		return s.substring(start, start + l);
 	}
 }
