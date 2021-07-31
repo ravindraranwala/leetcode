@@ -32,45 +32,35 @@ class LinkedListReverse {
 //		System.out.println(listAsString(reverseList(null)));
 
 		// Testing the recursive implementation.
-		System.out.println(listAsString(reverseLinkedList(head)));
-		System.out.println(listAsString(reverseLinkedList(head2)));
-		System.out.println(listAsString(reverseLinkedList(null)));
+		System.out.println(listAsString(reverseList(head)));
+		System.out.println(listAsString(reverseList(head2)));
+		System.out.println(listAsString(reverseList(null)));
 
 		final ListNode<Integer> head3 = new ListNode<>(1);
 		final ListNode<Integer> n5 = new ListNode<>(2, null);
 		head3.next = n5;
-		System.out.println(listAsString(reverseLinkedList(head3)));
+		System.out.println(listAsString(reverseList(head3)));
 	}
 
 	static <T> ListNode<T> reverseList(ListNode<T> head) {
-		if (head == null)
-			return head;
-		ListNode<T> current = head;
-		ListNode<T> next = head.next;
-		current.next = null;
-		while (next != null) {
-			final ListNode<T> previous = current;
-			current = next;
-			next = current.next;
-			current.next = previous;
+		ListNode<T> curr = head;
+		ListNode<T> prev = null;
+		while(curr != null) {
+			final ListNode<T> nxt = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = nxt;
 		}
-		return current;
+		return prev;
 	}
-
-	static <T> ListNode<T> reverseListRec(ListNode<T> node) {
-		if (node.next == null)
+	
+	static <T> ListNode<T> reverseLinkedList(ListNode<T> node) {
+		if (node == null || node.next == null)
 			return node;
-		final ListNode<T> head = reverseListRec(node.next);
+		final ListNode<T> head = reverseLinkedList(node.next);
 		node.next.next = node;
+		node.next = null;
 		return head;
-	}
-
-	static <T> ListNode<T> reverseLinkedList(ListNode<T> head) {
-		if (head == null)
-			return head;
-		final ListNode<T> h = reverseListRec(head);
-		head.next = null;
-		return h;
 	}
 
 	/**
