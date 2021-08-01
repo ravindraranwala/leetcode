@@ -24,7 +24,7 @@ class RemoveNthNodeFromEndOfList {
 
 		head = removeNthFromEnd(new ListNode<>(1), 1);
 		System.out.println(head);
-		
+
 		final ListNode<Integer> one2 = new ListNode<>(1);
 		one2.next = new ListNode<>(2);
 		head = removeNthFromEnd(one2, 1);
@@ -32,13 +32,14 @@ class RemoveNthNodeFromEndOfList {
 	}
 
 	static <T> ListNode<T> removeNthFromEnd(ListNode<T> head, int n) {
-		ListNode<T> dummy = new ListNode<>(null, head);
+		final ListNode<T> dummy = new ListNode<>(null, head);
 		ListNode<T> nDelay = dummy;
-		int counter = 0;
-		for (ListNode<T> curr = head; curr != null; curr = curr.next) {
-			counter++;
-			if (counter > n)
-				nDelay = nDelay.next;
+		ListNode<T> curr = head;
+		for (int count = 1; count < n; count++)
+			curr = curr.next;
+		while (curr.next != null) {
+			curr = curr.next;
+			nDelay = nDelay.next;
 		}
 		nDelay.next = nDelay.next.next;
 		return dummy.next;
