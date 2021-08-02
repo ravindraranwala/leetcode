@@ -63,19 +63,13 @@ class PathSum {
 	 *         <code>false</code> otherwise.
 	 */
 	public static boolean hasPathSum(TreeNode root, int targetSum) {
-		return pathSum(root, targetSum, 0);
-	}
-
-	private static boolean pathSum(TreeNode root, int targetSum, int currSum) {
 		if (root == null)
 			return false;
-		final int v = root.val + currSum;
 		// leaf node found !
 		if (root.left == null && root.right == null)
-			return v == targetSum;
-		boolean found = pathSum(root.left, targetSum, v);
-		if (!found)
-			found = pathSum(root.right, targetSum, v);
-		return found;
+			return root.val == targetSum;
+		final boolean l = hasPathSum(root.left, targetSum - root.val);
+		final boolean r = hasPathSum(root.right, targetSum - root.val);
+		return l || r;
 	}
 }
