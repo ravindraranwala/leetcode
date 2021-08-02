@@ -3,7 +3,7 @@ package com.coding.challenge.tree;
 import com.coding.challenge.bst.TreeNode;
 
 class BalancedBinTree {
-	private static int dh = 0;
+	private static boolean balanced = false;
 
 	BalancedBinTree() {
 		throw new AssertionError();
@@ -62,19 +62,17 @@ class BalancedBinTree {
 	}
 
 	static boolean isBalanced(TreeNode root) {
-		dh = 0;
-		height(root);
-		return dh < 2;
+		balanced = true;
+		balancedTree(root);
+		return balanced;
 	}
 
-	static int height(TreeNode root) {
+	static int balancedTree(TreeNode root) {
 		if (root == null)
-			return -1;
-		final int l = height(root.left);
-		final int r = height(root.right);
-		final int deltaHeight = Math.abs(l - r);
-		if (deltaHeight > dh)
-			dh = deltaHeight;
+			return 0;
+		final int l = balancedTree(root.left);
+		final int r = balancedTree(root.right);
+		balanced = balanced && Math.abs(l - r) < 2;
 		return Math.max(l, r) + 1;
 	}
 }
