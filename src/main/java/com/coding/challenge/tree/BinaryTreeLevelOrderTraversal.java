@@ -50,8 +50,8 @@ class BinaryTreeLevelOrderTraversal {
 		if (root != null)
 			q.offer(root);
 		while (!q.isEmpty()) {
-			final List<Integer> l = new ArrayList<>();
 			final int size = q.size();
+			final List<Integer> l = new ArrayList<>(size);
 			for (int i = 0; i < size; i++) {
 				// remove the nodes belong to the current level of the tree.
 				final TreeNode n = q.poll();
