@@ -3,7 +3,6 @@ package com.coding.challenge.linked.list;
 import com.coding.challenge.ListNode;
 
 class PalindromeLinkedList {
-	private static ListNode<?> head = null;
 	PalindromeLinkedList() {
 		throw new AssertionError();
 	}
@@ -20,7 +19,7 @@ class PalindromeLinkedList {
 		final ListNode<Integer> n4 = new ListNode<>(1, null);
 		n3.next = n4;
 		System.out.println(isPalindrome(head));
-		
+
 		// Usecase 2.
 		final ListNode<Integer> one = new ListNode<>(1);
 		final ListNode<Integer> two = new ListNode<>(2);
@@ -30,7 +29,7 @@ class PalindromeLinkedList {
 		final ListNode<Integer> one2 = new ListNode<>(1);
 		two2.next = one2;
 		System.out.println(isPalindrome(one));
-		
+
 		// Usecase 3.
 		final ListNode<Integer> one3 = new ListNode<>(1);
 		one3.next = new ListNode<>(2);
@@ -38,18 +37,25 @@ class PalindromeLinkedList {
 	}
 
 	static <T> boolean isPalindrome(ListNode<T> head) {
-		PalindromeLinkedList.head = head;
-		return palindromeLinkedList(head);
-	}
-
-	static <T> boolean palindromeLinkedList(ListNode<T> current) {
-		// base case of the recursion
-		if (current == null)
-			return true;
-		boolean p = palindromeLinkedList(current.next);
-		p = p && head.val.equals(current.val);
-		// advance the pointers to the next level
-		head = head.next;
-		return p;
+		int l = 0;
+		for (ListNode<T> node = head; node != null; node = node.next)
+			l = l + 1;
+		ListNode<T> high = head;
+		ListNode<T> low = null;
+		for (int i = 0; i < l / 2; i++) {
+			final ListNode<T> next = high.next;
+			high.next = low;
+			low = high;
+			high = next;
+		}
+		if (l % 2 == 1)
+			high = high.next;
+		while (low != null && high != null) {
+			if (!low.val.equals(high.val))
+				return false;
+			low = low.next;
+			high = high.next;
+		}
+		return true;
 	}
 }
