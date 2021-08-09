@@ -30,15 +30,13 @@ public class MaxSubArray {
 	}
 
 	static int maxSubArray(int[] nums) {
-		int cf = 0;
-		int maxSum = Integer.MIN_VALUE;
-		for (int i = 0; i < nums.length; i++) {
-			if (nums[i] >= cf + nums[i])
+		int cf = nums[0];
+		int maxSum = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			cf = cf + nums[i];
+			if (nums[i] > cf)
 				cf = nums[i];
-			else
-				cf += nums[i];
-
-			if (maxSum < cf)
+			if (cf > maxSum)
 				maxSum = cf;
 		}
 		return maxSum;
