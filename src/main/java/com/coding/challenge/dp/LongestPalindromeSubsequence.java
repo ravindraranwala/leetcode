@@ -10,8 +10,9 @@ class LongestPalindromeSubsequence {
 		final String s = "character";
 		final int[][] p = longestPalindromeSubsequence(s);
 		System.out.println(String.format("Length of the longest palindrome subsequence is: %d", p[0][s.length() - 1]));
-		final String lp = constructLongestPalindromeSubsequence(p, s);
-		System.out.println("One possible longest palindromic subsequence is: " + lp);
+		final StringBuilder sb = new StringBuilder();
+		constructLongestPalindromeSubsequence(p, s, 0, s.length() - 1, sb);
+		System.out.println("One possible longest palindromic subsequence is: " + sb.toString());
 	}
 
 	static int[][] longestPalindromeSubsequence(String s) {
@@ -31,26 +32,18 @@ class LongestPalindromeSubsequence {
 		return p;
 	}
 
-	static String constructLongestPalindromeSubsequence(int[][] p, String s) {
-		int idx = 0;
-		int i = 0;
-		int j = s.length() - 1;
-		final int n = p[i][j];
-		final char[] c = new char[n];
-		while (j > i) {
-			if (s.charAt(i) == s.charAt(j)) {
-				c[idx] = s.charAt(i);
-				c[n - idx - 1] = s.charAt(i);
-				i = i + 1;
-				j = j - 1;
-				idx = idx + 1;
-			} else if (p[i][j] == p[i][j - 1])
-				j = j - 1;
-			else
-				i = i + 1;
-		}
+	static void constructLongestPalindromeSubsequence(int[][] p, String s, int i, int j, StringBuilder sb) {
 		if (i == j)
-			c[idx] = s.charAt(i);
-		return new String(c);
+			sb.append(s.charAt(i));
+		if (j > i) {
+			if (s.charAt(i) == s.charAt(j)) {
+				sb.append(s.charAt(i));
+				constructLongestPalindromeSubsequence(p, s, i + 1, j - 1, sb);
+				sb.append(s.charAt(j));
+			} else if (p[i][j] == p[i][j - 1])
+				constructLongestPalindromeSubsequence(p, s, i, j - 1, sb);
+			else
+				constructLongestPalindromeSubsequence(p, s, i + 1, j, sb);
+		}
 	}
 }
