@@ -23,17 +23,18 @@ public class BinarySearch {
 	 * @return index of the target if it exists in the array. Otherwise, return -1
 	 */
 	public static int search(int[] nums, int target) {
-		return binarySearch(nums, target, 0, nums.length - 1);
-	}
-
-	static int binarySearch(int[] nums, int target, int low, int high) {
-		final int mid = (low + high) / 2;
-		if (nums[mid] == target)
-			return mid;
-		if (target < nums[mid] && low < high)
-			return binarySearch(nums, target, low, mid);
-		if (target > nums[mid] && low < high)
-			return binarySearch(nums, target, mid + 1, high);
+		int l = 0;
+		int r = nums.length - 1;
+		while (l <= r) {
+			final int m = (l + r) / 2;
+			if (nums[m] < target)
+				l = m + 1;
+			else if (nums[m] > target)
+				r = m - 1;
+			else
+				return m;
+		}
 		return -1;
 	}
+
 }
