@@ -2,7 +2,7 @@ package com.coding.challenge.dp;
 
 import com.coding.challenge.BinarySearch;
 
-public class LIS2 {
+class LIS2 {
 
 	private LIS2() {
 		throw new AssertionError();
