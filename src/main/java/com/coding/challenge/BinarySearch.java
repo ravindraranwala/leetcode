@@ -11,6 +11,8 @@ public class BinarySearch {
 		final int target = 9;
 		final int idx = search(nums, target);
 		System.out.println(idx);
+		int i = successor(nums, 1);
+		System.out.println(nums[i]);
 	}
 
 	/**
@@ -37,4 +39,20 @@ public class BinarySearch {
 		return -1;
 	}
 
+	public static int successor(int[] nums, int target) {
+		return successor(nums, target, 0, nums.length - 1);
+	}
+
+	public static int successor(int[] nums, int target, int i, int j) {
+		int l = i;
+		int r = j;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (nums[mid] > target)
+				r = mid;
+			else
+				l = mid + 1;
+		}
+		return r;
+	}
 }
