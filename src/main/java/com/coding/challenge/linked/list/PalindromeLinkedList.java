@@ -40,10 +40,18 @@ class PalindromeLinkedList {
 		int count = 0;
 		for (ListNode<T> curr = head; curr != null; curr = curr.next)
 			count = count + 1;
-		// let's use n-delay to demarcate the mid of the list
-		final int n = count / 2;
-		final ListNode<T> middle = LinkedListUtil.getNthFromEnd(head, n);
-		ListNode<T> r = LinkedListReverse.reverseList(middle);
+		final int n = count / 2 + 1;
+
+		ListNode<T> curr = head;
+		for (int i = 1; i <= n; i++)
+			curr = curr.next;
+		ListNode<T> mid = head;
+		while (curr != null) {
+			curr = curr.next;
+			mid = mid.next;
+		}
+
+		ListNode<T> r = LinkedListReverse.reverseList(mid);
 		ListNode<T> l = head;
 		while (l != null) {
 			if (!l.val.equals(r.val))
