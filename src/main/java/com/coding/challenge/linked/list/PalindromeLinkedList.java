@@ -37,24 +37,19 @@ class PalindromeLinkedList {
 	}
 
 	static <T> boolean isPalindrome(ListNode<T> head) {
-		int l = 0;
-		for (ListNode<T> node = head; node != null; node = node.next)
-			l = l + 1;
-		ListNode<T> high = head;
-		ListNode<T> low = null;
-		for (int i = 0; i < l / 2; i++) {
-			final ListNode<T> next = high.next;
-			high.next = low;
-			low = high;
-			high = next;
-		}
-		if (l % 2 == 1)
-			high = high.next;
-		while (low != null && high != null) {
-			if (!low.val.equals(high.val))
+		int count = 0;
+		for (ListNode<T> curr = head; curr != null; curr = curr.next)
+			count = count + 1;
+		// let's use n-delay to demarcate the mid of the list
+		final int n = count / 2;
+		final ListNode<T> middle = LinkedListUtil.getNthFromEnd(head, n);
+		ListNode<T> r = LinkedListReverse.reverseList(middle);
+		ListNode<T> l = head;
+		while (l != null) {
+			if (!l.val.equals(r.val))
 				return false;
-			low = low.next;
-			high = high.next;
+			l = l.next;
+			r = r.next;
 		}
 		return true;
 	}
