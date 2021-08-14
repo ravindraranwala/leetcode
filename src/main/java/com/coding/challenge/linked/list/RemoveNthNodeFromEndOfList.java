@@ -33,15 +33,15 @@ class RemoveNthNodeFromEndOfList {
 
 	static <T> ListNode<T> removeNthFromEnd(ListNode<T> head, int n) {
 		final ListNode<T> dummy = new ListNode<>(null, head);
-		ListNode<T> nDelay = dummy;
 		ListNode<T> curr = head;
-		for (int count = 1; count < n; count++)
+		ListNode<T> prev = dummy;
+		for (int i = 1; i <= n; i++)
 			curr = curr.next;
-		while (curr.next != null) {
+		while(curr != null) {
 			curr = curr.next;
-			nDelay = nDelay.next;
+			prev = prev.next;
 		}
-		nDelay.next = nDelay.next.next;
+		prev.next = prev.next.next;
 		return dummy.next;
 	}
 }
