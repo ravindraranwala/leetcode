@@ -45,7 +45,7 @@ public class BinarySearch {
 
 	public static int successor(int[] nums, int target, int i, int j) {
 		int l = i;
-		int r = j;
+		int r = j + 1;
 		while (l < r) {
 			final int mid = (l + r) / 2;
 			if (nums[mid] > target)

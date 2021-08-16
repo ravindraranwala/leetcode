@@ -34,10 +34,11 @@ class LIS2 {
 	}
 
 	static int lengthOfLIS(int[] nums) {
-		final int[] a = new int[nums.length];
+		final int n = nums.length;
+		final int[] a = new int[n];
 		int l = 1;
 		a[0] = nums[0];
-		for (int i = 1; i < nums.length; i++) {
+		for (int i = 1; i < n; i++) {
 			if (a[l - 1] < nums[i]) {
 				a[l] = nums[i];
 				l = l + 1;
