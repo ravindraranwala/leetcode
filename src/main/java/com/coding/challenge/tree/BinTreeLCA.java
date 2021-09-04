@@ -2,9 +2,9 @@ package com.coding.challenge.tree;
 
 import com.coding.challenge.bst.TreeNode;
 
-class BinTreeLowestCommonAncestor {
+class BinTreeLCA {
 
-	BinTreeLowestCommonAncestor() {
+	BinTreeLCA() {
 		throw new AssertionError();
 	}
 
