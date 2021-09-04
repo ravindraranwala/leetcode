@@ -39,11 +39,11 @@ class BinTreeLCA {
 		final TreeNode r = lowestCommonAncestor(root.right, p, q);
 		if (root.val == p.val || root.val == q.val)
 			return root;
-		else if (l != null && r != null)
-			return root;
-		else if (l != null)
+		else if (l == null)
+			return r;
+		else if (r == null)
 			return l;
 		else
-			return r;
+			return root;
 	}
 }
