@@ -1,10 +1,11 @@
 package com.coding.challenge.tree;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import com.coding.challenge.bst.TreeNode;
 
 class FlattenToLinkedList {
-	private static TreeNode curr = new TreeNode(-1);
-
 	FlattenToLinkedList() {
 		throw new AssertionError();
 	}
@@ -31,18 +32,19 @@ class FlattenToLinkedList {
 	}
 
 	static void flatten(TreeNode root) {
-		curr = new TreeNode(-1);
-		flattenRec(root);
-	}
-
-	static void flattenRec(TreeNode root) {
-		if (root == null)
-			return;
-		final TreeNode rs = root.right;
-		curr.right = root;
-		curr = curr.right;
-		flattenRec(root.left);
-		root.left = null;
-		flattenRec(rs);
+		TreeNode tail = new TreeNode(-1);
+		TreeNode curr = root;
+		final Deque<TreeNode> s = new ArrayDeque<>();
+		while (!s.isEmpty() || curr != null) {
+			if (curr != null) {
+				tail.right = curr;
+				if (curr.right != null)
+					s.push(curr.right);
+				curr = curr.left;
+				tail.left = null;
+				tail = tail.right;
+			} else
+				curr = s.pop();
+		}
 	}
 }
