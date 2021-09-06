@@ -41,8 +41,8 @@ class FlattenToLinkedList {
 				if (curr.right != null)
 					s.push(curr.right);
 				curr = curr.left;
-				tail.left = null;
 				tail = tail.right;
+				tail.left = null;
 			} else
 				curr = s.pop();
 		}
