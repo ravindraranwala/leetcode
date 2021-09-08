@@ -1,8 +1,5 @@
 package com.coding.challenge.tree;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 import com.coding.challenge.bst.TreeNode;
 
 class FlattenToLinkedList {
@@ -32,19 +29,18 @@ class FlattenToLinkedList {
 	}
 
 	static void flatten(TreeNode root) {
-		TreeNode tail = new TreeNode(-1);
 		TreeNode curr = root;
-		final Deque<TreeNode> s = new ArrayDeque<>();
-		while (!s.isEmpty() || curr != null) {
-			if (curr != null) {
-				tail.right = curr;
-				if (curr.right != null)
-					s.push(curr.right);
-				curr = curr.left;
-				tail = tail.right;
-				tail.left = null;
-			} else
-				curr = s.pop();
+		while (curr != null) {
+			if (curr.left != null) {
+				TreeNode pre = curr.left;
+				while (pre.right != null)
+					pre = pre.right;
+
+				pre.right = curr.right;
+				curr.right = curr.left;
+				curr.left = null;
+			}
+			curr = curr.right;
 		}
 	}
 }
