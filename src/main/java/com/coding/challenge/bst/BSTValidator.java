@@ -1,9 +1,8 @@
 package com.coding.challenge.bst;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 class BSTValidator {
+	private static double v = Double.NEGATIVE_INFINITY;
+	private static boolean s = true;
 
 	BSTValidator() {
 		throw new AssertionError();
@@ -34,23 +33,28 @@ class BSTValidator {
 		five2.right = six;
 		v = isValidBST(five2);
 		System.out.println(v);
+
+		isValidBST(new TreeNode(0));
+		System.out.println(s);
+
 	}
 
-	static boolean isValidBST(TreeNode node) {
-		final Deque<TreeNode> s = new ArrayDeque<>();
-		TreeNode prev = null;
-		while (node != null || !s.isEmpty()) {
-			if (node != null) {
-				s.push(node);
-				node = node.left;
-			} else {
-				final TreeNode n = s.pop();
-				if (prev != null && prev.val >= n.val)
-					return false;
-				prev = n;
-				node = n.right;
+	static boolean isValidBST(TreeNode root) {
+		v = Double.NEGATIVE_INFINITY;
+		s = true;
+		isValidBSTRec(root);
+		return s;
+	}
+
+	static void isValidBSTRec(TreeNode root) {
+		if (root != null) {
+			isValidBSTRec(root.left);
+			if (v >= root.val) {
+				s = false;
+				return;
 			}
+			v = root.val;
+			isValidBSTRec(root.right);
 		}
-		return true;
 	}
 }
