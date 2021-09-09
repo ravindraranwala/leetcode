@@ -22,29 +22,29 @@ class PreOrderTraversal {
 		one.right = two;
 		final List<Integer> preOrder1 = preorderTraversal(one);
 		System.out.println(preOrder1);
-		
+
 		// Usecase 2.
 		final List<Integer> preOrder2 = preorderTraversal(null);
 		System.out.println(preOrder2);
-		
+
 		// Usecase 3.
 		final List<Integer> preOrder3 = preorderTraversal(new TreeNode(1));
 		System.out.println(preOrder3);
-		
+
 		// Usecase 4.
 		final TreeNode one1 = new TreeNode(1);
 		final TreeNode two1 = new TreeNode(2);
 		one1.left = two1;
 		List<Integer> preOrder4 = preorderTraversal(one1);
 		System.out.println(preOrder4);
-		
+
 		// Usecase 5.
 		final TreeNode one2 = new TreeNode(1);
 		final TreeNode two2 = new TreeNode(2);
 		one2.right = two2;
 		List<Integer> preOrder5 = preorderTraversal(one2);
 		System.out.println(preOrder5);
-		
+
 		// Usecase 6.
 		final TreeNode one3 = new TreeNode(1);
 		final TreeNode two3 = new TreeNode(2, new TreeNode(4), new TreeNode(5));
@@ -56,16 +56,25 @@ class PreOrderTraversal {
 
 	static List<Integer> preorderTraversal(TreeNode root) {
 		final List<Integer> l = new ArrayList<>();
-		final Deque<TreeNode> s = new ArrayDeque<>();
-		if (root != null)
-			s.push(root);
-		while (!s.isEmpty()) {
-			final TreeNode node = s.pop();
-			l.add(node.val);
-			if (node.right != null)
-				s.push(node.right);
-			if (node.left != null)
-				s.push(node.left);
+		TreeNode curr = root;
+		while (curr != null) {
+			if (curr.left == null) {
+				l.add(curr.val);
+				curr = curr.right;
+			} else {
+				TreeNode pre = curr.left;
+				while (pre.right != null && pre.right != curr)
+					pre = pre.right;
+
+				if (pre.right == null) {
+					pre.right = curr;
+					l.add(curr.val);
+					curr = curr.left;
+				} else {
+					pre.right = null;
+					curr = curr.right;
+				}
+			}
 		}
 		return l;
 	}
