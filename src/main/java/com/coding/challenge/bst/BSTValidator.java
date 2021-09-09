@@ -4,6 +4,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 class BSTValidator {
+	private static double pre = Double.NEGATIVE_INFINITY;
+
 	BSTValidator() {
 		throw new AssertionError();
 	}
@@ -12,7 +14,7 @@ class BSTValidator {
 		final TreeNode two = new TreeNode(2);
 		two.left = new TreeNode(1);
 		two.right = new TreeNode(3);
-		boolean v = isValidBST(two);
+		boolean v = isValidBST2(two);
 		System.out.println(v);
 
 		final TreeNode five = new TreeNode(5);
@@ -21,7 +23,7 @@ class BSTValidator {
 		four.left = new TreeNode(3);
 		four.right = new TreeNode(6);
 		five.right = four;
-		v = isValidBST(five);
+		v = isValidBST2(five);
 		System.out.println(v);
 
 		// Usecase 3.
@@ -31,13 +33,13 @@ class BSTValidator {
 		six.left = new TreeNode(3);
 		six.right = new TreeNode(7);
 		five2.right = six;
-		v = isValidBST(five2);
+		v = isValidBST2(five2);
 		System.out.println(v);
 
-		v = isValidBST(new TreeNode(0));
+		v = isValidBST2(new TreeNode(0));
 		System.out.println(v);
 
-		v = isValidBST(new TreeNode(1, new TreeNode(1), null));
+		v = isValidBST2(new TreeNode(1, new TreeNode(1), null));
 		System.out.println(v);
 	}
 
@@ -58,5 +60,22 @@ class BSTValidator {
 			}
 		}
 		return true;
+	}
+
+	static boolean isValidBST2(TreeNode root) {
+		pre = Double.NEGATIVE_INFINITY;
+		return isValidBSTRec(root);
+	}
+
+	static boolean isValidBSTRec(TreeNode root) {
+		if (root == null)
+			return true;
+		final boolean l = isValidBSTRec(root.left);
+		if (!l)
+			return l;
+		if (root.val <= pre)
+			return false;
+		pre = root.val;
+		return isValidBSTRec(root.right);
 	}
 }
