@@ -64,7 +64,6 @@ class FlattenMultiLevelList {
 	static Node flattenRec(Node head) {
 		Node prev = null;
 		for (; head != null; head = head.next) {
-			prev = head;
 			if (head.child != null) {
 				final Node t = flattenRec(head.child);
 				t.next = head.next;
@@ -73,9 +72,9 @@ class FlattenMultiLevelList {
 				head.next = head.child;
 				head.child.prev = head;
 				head.child = null;
-				prev = t;
 				head = t;
 			}
+			prev = head;
 		}
 		return prev;
 	}
