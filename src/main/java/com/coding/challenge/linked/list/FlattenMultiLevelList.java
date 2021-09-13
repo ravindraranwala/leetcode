@@ -79,12 +79,12 @@ class FlattenMultiLevelList {
 	}
 
 	static class Node {
-		public int val;
-		public Node prev;
-		public Node next;
-		public Node child;
+		int val;
+		Node prev;
+		Node next;
+		Node child;
 
-		public Node(int val) {
+		Node(int val) {
 			this.val = val;
 		}
 
