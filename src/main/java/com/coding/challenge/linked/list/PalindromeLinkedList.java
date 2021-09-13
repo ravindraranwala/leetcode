@@ -19,6 +19,7 @@ class PalindromeLinkedList {
 		final ListNode<Integer> n4 = new ListNode<>(1, null);
 		n3.next = n4;
 		System.out.println(isPalindrome(head));
+		System.out.println(head);
 
 		// Usecase 2.
 		final ListNode<Integer> one = new ListNode<>(1);
@@ -29,36 +30,41 @@ class PalindromeLinkedList {
 		final ListNode<Integer> one2 = new ListNode<>(1);
 		two2.next = one2;
 		System.out.println(isPalindrome(one));
+		System.out.println(one);
 
 		// Usecase 3.
 		final ListNode<Integer> one3 = new ListNode<>(1);
 		one3.next = new ListNode<>(2);
 		System.out.println(isPalindrome(one3));
+		System.out.println(one3);
 	}
 
 	static <T> boolean isPalindrome(ListNode<T> head) {
-		int count = 0;
+		int c = 0;
 		for (ListNode<T> curr = head; curr != null; curr = curr.next)
-			count = count + 1;
-		final int n = count / 2 + 1;
-
-		ListNode<T> curr = head;
-		for (int i = 1; i <= n; i++)
-			curr = curr.next;
-		ListNode<T> mid = head;
-		while (curr != null) {
-			curr = curr.next;
-			mid = mid.next;
-		}
-
-		ListNode<T> r = LinkedListReverse.reverseList(mid);
+			c = c + 1;
+		final int mid = (c + 1) / 2;
 		ListNode<T> l = head;
-		while (l != null) {
-			if (!l.val.equals(r.val))
-				return false;
-			l = l.next;
+		ListNode<T> r = head;
+		for (int i = 1; i < mid; i++)
 			r = r.next;
+		ListNode<T> nxt = r.next;
+		while (nxt != null) {
+			final ListNode<T> tmp = nxt.next;
+			nxt.next = r;
+			r = nxt;
+			nxt = tmp;
 		}
-		return true;
+		boolean p = true;
+		for (int i = 1; i <= mid; i++) {
+			if (l.val != r.val)
+				p = false;
+			l = l.next;
+			final ListNode<T> tmp = r.next;
+			r.next = nxt;
+			nxt = r;
+			r = tmp;
+		}
+		return p;
 	}
 }
