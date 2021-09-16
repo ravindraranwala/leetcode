@@ -8,11 +8,16 @@ public class BinarySearch {
 
 	public static void main(String[] args) {
 		final int[] nums = { -1, 0, 3, 5, 9, 12 };
-		final int target = 9;
-		final int idx = search(nums, target);
+		int target = 9;
+		int idx = search(nums, target);
 		System.out.println(idx);
 		int i = successor(nums, 1);
 		System.out.println(nums[i]);
+
+		final int[] a = { 1, 2, 3, 4, 7, 8, 10, 11, 13, 14, 15 };
+		target = 5;
+		idx = predecessor(a, target);
+		System.out.println(String.format("%d is the predecessor of %d", a[idx], target));
 	}
 
 	/**
@@ -54,5 +59,18 @@ public class BinarySearch {
 				l = mid + 1;
 		}
 		return r;
+	}
+
+	public static int predecessor(int[] a, int target) {
+		int l = 0;
+		int r = a.length;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (a[mid] < target)
+				l = mid + 1;
+			else
+				r = mid;
+		}
+		return l - 1;
 	}
 }
