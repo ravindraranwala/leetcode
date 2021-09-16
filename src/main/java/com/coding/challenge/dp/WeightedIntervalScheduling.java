@@ -5,9 +5,9 @@ import java.util.Comparator;
 
 import com.coding.challenge.BinarySearch;
 
-class WeightedActivityScheduling {
+class WeightedIntervalScheduling {
 
-	WeightedActivityScheduling() {
+	WeightedIntervalScheduling() {
 		throw new AssertionError();
 	}
 
@@ -57,9 +57,9 @@ class WeightedActivityScheduling {
 				// Note that we need a closed interval here.
 				final int c = BinarySearch.predecessor(endTime, startTime[k] + 1);
 				int cv = 0;
-				if (c > -1)
+				if (-1 < c)
 					cv = p[c];
-				if (cv + profit[k] > p[k - 1]) {
+				if (p[k - 1] < cv + profit[k]) {
 					p[k] = cv + profit[k];
 					l = k;
 				} else
