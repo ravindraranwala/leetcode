@@ -18,11 +18,11 @@ class LongestPalindromicSubstring {
 		int start = 0;
 		for (int i = 0; i < n; i++)
 			p[i][i] = true;
-		for (int i = 1; i < n; i++) {
-			p[i - 1][i] = s.charAt(i - 1) == s.charAt(i);
-			if (p[i - 1][i]) {
+		for (int i = 0; i < n - 1; i++) {
+			p[i][i + 1] = s.charAt(i) == s.charAt(i + 1);
+			if (p[i][i + 1]) {
 				l = 2;
-				start = i - 1;
+				start = i;
 			}
 		}
 		for (int len = 3; len <= n; len++) {
