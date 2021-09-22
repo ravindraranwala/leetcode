@@ -1,7 +1,6 @@
 package com.coding.challenge.greedy;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 class NonOverlappingIntervals {
 
@@ -28,15 +27,15 @@ class NonOverlappingIntervals {
 
 	static int eraseOverlapIntervals(int[][] intervals) {
 		final int n = intervals.length;
-		Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
-		int c = 1;
+		Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+		int c = 0;
 		int k = 0;
 		for (int i = 1; i < n; i++) {
-			if (intervals[k][1] <= intervals[i][0]) {
-				c = c + 1;
+			if (intervals[k][1] <= intervals[i][0])
 				k = i;
-			}
+			else
+				c = c + 1;
 		}
-		return n - c;
+		return c;
 	}
 }
