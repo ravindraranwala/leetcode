@@ -1,7 +1,6 @@
 package com.coding.challenge.dp;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 import com.coding.challenge.BinarySearch;
 
@@ -39,7 +38,7 @@ class WeightedIntervalScheduling {
 		final Activity[] a = new Activity[n];
 		for (int i = 0; i < n; i++)
 			a[i] = new Activity(startTime[i], endTime[i], profit[i]);
-		Arrays.sort(a, Comparator.comparingInt(ac -> ac.f));
+		Arrays.sort(a, (a1, a2) -> Integer.compare(a1.f, a2.f));
 		for (int i = 0; i < n; i++) {
 			startTime[i] = a[i].s;
 			endTime[i] = a[i].f;
