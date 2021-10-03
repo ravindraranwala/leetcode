@@ -58,25 +58,18 @@ class GasStation {
 
 	static int canCompleteCircuit(int[] gas, int[] cost) {
 		final int n = gas.length;
-		int s = 0;
-		int max = gas[0] - cost[0];
-		int sum = max;
-		final int[] delta = new int[n];
-		delta[0] = sum;
-		for (int i = 1; i < n; i++) {
+		int sum = 0;
+		int min = Integer.MAX_VALUE;
+		int s = -1;
+		for (int i = 0; i < n; i++) {
 			sum = sum + gas[i] - cost[i];
-			delta[i] = sum;
-		}
-
-		if (sum < 0)
-			return -1;
-		int min = delta[0];
-		for (int j = 1; j < n; j++) {
-			if (delta[j] < min) {
-				min = delta[j];
-				s = j;
+			if (sum < min) {
+				min = sum;
+				s = i;
 			}
 		}
+		if (sum < 0)
+			return -1;
 		return (s + 1) % n;
 	}
 }
