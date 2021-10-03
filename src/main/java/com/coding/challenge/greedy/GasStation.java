@@ -61,18 +61,22 @@ class GasStation {
 		int s = 0;
 		int max = gas[0] - cost[0];
 		int sum = max;
+		final int[] delta = new int[n];
+		delta[0] = sum;
 		for (int i = 1; i < n; i++) {
-			final int v = gas[i] - cost[i];
-			sum = sum + v;
-			if (max < v) {
-				max = v;
-				s = i;
-			}
-			if (0 < v)
-				max = max + v;
+			sum = sum + gas[i] - cost[i];
+			delta[i] = sum;
 		}
+
 		if (sum < 0)
 			return -1;
-		return s;
+		int min = delta[0];
+		for (int j = 1; j < n; j++) {
+			if (delta[j] < min) {
+				min = delta[j];
+				s = j;
+			}
+		}
+		return (s + 1) % n;
 	}
 }
