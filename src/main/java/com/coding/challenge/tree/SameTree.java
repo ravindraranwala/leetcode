@@ -28,7 +28,7 @@ class SameTree {
 		// Usecase 4.
 		same = isSameTree(null, null);
 		System.out.println(same);
-		
+
 		// Usecase 5.
 		same = isSameTree(new TreeNode(1), new TreeNode(1, null, new TreeNode(2)));
 		System.out.println(same);
@@ -37,7 +37,10 @@ class SameTree {
 	static boolean isSameTree(TreeNode p, TreeNode q) {
 		final ArrayDeque<TreeNode> s1 = new ArrayDeque<>();
 		final ArrayDeque<TreeNode> s2 = new ArrayDeque<>();
-		while (p != null || q != null || !s1.isEmpty() || !s2.isEmpty()) {
+		final TreeNode d = new TreeNode(-1);
+		s1.push(d);
+		s2.push(d);
+		while (!s1.isEmpty() || !s2.isEmpty()) {
 			if (p != null && q != null) {
 				if (p.val != q.val)
 					return false;
