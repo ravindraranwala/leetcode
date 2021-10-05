@@ -53,10 +53,7 @@ class WeightedIntervalScheduling {
 			int cv = 0;
 			if (-1 < c)
 				cv = p[c];
-			if (p[k - 1] < cv + profit[k])
-				p[k] = cv + profit[k];
-			else
-				p[k] = p[k - 1];
+			p[k] = Math.max(p[k - 1], cv + profit[k]);
 		}
 		return p[n - 1];
 	}
