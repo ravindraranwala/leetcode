@@ -48,19 +48,15 @@ class WeightedIntervalScheduling {
 		final int[] p = new int[n];
 		p[0] = profit[0];
 		for (int k = 1; k < n; k++) {
-			if (endTime[k - 1] <= startTime[k])
-				p[k] = p[k - 1] + profit[k];
-			else {
-				// Note that we need a closed interval here.
-				final int c = BinarySearch.predecessor(endTime, startTime[k] + 1);
-				int cv = 0;
-				if (-1 < c)
-					cv = p[c];
-				if (p[k - 1] < cv + profit[k])
-					p[k] = cv + profit[k];
-				else
-					p[k] = p[k - 1];
-			}
+			// Note that we need a closed interval here.
+			final int c = BinarySearch.predecessor(endTime, startTime[k] + 1);
+			int cv = 0;
+			if (-1 < c)
+				cv = p[c];
+			if (p[k - 1] < cv + profit[k])
+				p[k] = cv + profit[k];
+			else
+				p[k] = p[k - 1];
 		}
 		return p[n - 1];
 	}
