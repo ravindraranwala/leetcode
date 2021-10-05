@@ -1,5 +1,7 @@
 package com.coding.challenge.dp;
 
+import java.util.Arrays;
+
 class MaxEvents {
 	MaxEvents() {
 		throw new AssertionError();
@@ -32,7 +34,24 @@ class MaxEvents {
 	}
 
 	static int maxValue(int[][] events, int k) {
-		throw new UnsupportedOperationException();
+		final int n = events.length;
+		Arrays.sort(events, (e1, e2) -> Integer.compare(e1[1], e2[1]));
+		final int[][] p = new int[k][n];
+		for (int i = 0; i < k; i++)
+			p[i][0] = events[0][2];
+		for (int j = 1; j < n; j++)
+			p[0][j] = Math.max(p[0][j - 1], events[j][2]);
+
+		for (int i = 1; i < k; i++) {
+			for (int j = 1; j < n; j++) {
+				final int c = predecessor(events, events[j][0]);
+				int cv = 0;
+				if (-1 < c)
+					cv = p[i - 1][c];
+				p[i][j] = Math.max(p[i][j - 1], cv + events[j][2]);
+			}
+		}
+		return p[k - 1][n - 1];
 	}
 
 	static int predecessor(int[][] a, int target) {
