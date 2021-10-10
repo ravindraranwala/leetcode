@@ -55,15 +55,11 @@ class MaxEvents {
 			for (int j = 1; j < n; j++) {
 				final int r = i % 2;
 				final int b = (r + 1) % 2;
-				if (events[j - 1][1] < events[j][0])
-					p[r][j] = Math.max(p[r][j - 1], p[b][j - 1] + events[j][2]);
-				else {
-					final int c = predecessor(events, events[j][0]);
-					int cv = 0;
-					if (-1 < c)
-						cv = p[b][c];
-					p[r][j] = Math.max(p[r][j - 1], cv + events[j][2]);
-				}
+				final int c = predecessor(events, events[j][0]);
+				int cv = 0;
+				if (-1 < c)
+					cv = p[b][c];
+				p[r][j] = Math.max(p[r][j - 1], cv + events[j][2]);
 			}
 		}
 		return p[(k + 1) % 2][n - 1];
