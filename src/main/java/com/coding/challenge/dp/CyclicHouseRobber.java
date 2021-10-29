@@ -46,11 +46,9 @@ class CyclicHouseRobber {
 	}
 
 	static int rob(int[] nums, int s, int e) {
-		int p1 = nums[s];
-		int p2 = p1;
-		if (0 < e - s)
-			p2 = Math.max(p1, nums[s + 1]);
-		for (int i = s + 2; i <= e; i++) {
+		int p1 = 0;
+		int p2 = 0;
+		for (int i = s; i <= e; i++) {
 			final int tmp = p1 + nums[i];
 			p1 = p2;
 			p2 = Math.max(tmp, p2);
