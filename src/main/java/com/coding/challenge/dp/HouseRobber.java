@@ -33,12 +33,10 @@ class HouseRobber {
 	}
 
 	static int rob(int[] nums) {
-		int p1 = nums[0];
-		int p2 = p1;
+		int p1 = 0;
+		int p2 = 0;
 		final int n = nums.length;
-		if (1 < n)
-			p2 = Math.max(p1, nums[1]);
-		for (int i = 2; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			final int tmp = p1 + nums[i];
 			p1 = p2;
 			p2 = Math.max(tmp, p2);
