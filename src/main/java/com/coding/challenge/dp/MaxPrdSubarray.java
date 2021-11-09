@@ -43,36 +43,19 @@ class MaxPrdSubarray {
 	static int maxProduct(int[] nums) {
 		final int n = nums.length;
 		int mp = Integer.MIN_VALUE;
-		int curr = Integer.MIN_VALUE;
-		int np = Integer.MIN_VALUE;
-		int ns = Integer.MIN_VALUE;
-		boolean nf = false;
+		int fp = Integer.MIN_VALUE;
+		int bp = Integer.MIN_VALUE;
 		for (int i = 0; i < n; i++) {
-			if (nums[i] == 0) {
-				mp = Math.max(Math.max(mp, 0), Math.max(np, ns));
-				np = Integer.MIN_VALUE;
-				ns = Integer.MIN_VALUE;
-				curr = Integer.MIN_VALUE;
-				nf = false;
-			} else {
-				if (nf) {
-					if (ns == Integer.MIN_VALUE)
-						ns = nums[i];
-					else
-						ns = ns * nums[i];
-				}
-				if (nums[i] < 0) {
-					np = curr;
-					nf = true;
-				}
-				if (curr == Integer.MIN_VALUE)
-					curr = nums[i];
-				else
-					curr = curr * nums[i];
-				mp = Math.max(mp, Math.max(curr, nums[i]));
-			}
+			if (fp == Integer.MIN_VALUE || fp == 0)
+				fp = nums[i];
+			else
+				fp = fp * nums[i];
+			if (bp == Integer.MIN_VALUE || bp == 0)
+				bp = nums[n - i - 1];
+			else
+				bp = bp * nums[n - i - 1];
+			mp = Math.max(Math.max(mp, nums[i]), Math.max(fp, bp));
 		}
-		mp = Math.max(mp, Math.max(np, ns));
 		return mp;
 	}
 }
