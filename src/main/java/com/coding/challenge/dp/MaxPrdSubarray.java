@@ -50,15 +50,13 @@ class MaxPrdSubarray {
 		int fp = 1;
 		int bp = 1;
 		for (int i = 0; i < n; i++) {
-			if (fp == 0)
-				fp = nums[i];
-			else
-				fp = fp * nums[i];
-			if (bp == 0)
-				bp = nums[n - i - 1];
-			else
-				bp = bp * nums[n - i - 1];
+			fp = fp * nums[i];
+			bp = bp * nums[n - i - 1];
 			mp = Math.max(Math.max(mp, nums[i]), Math.max(fp, bp));
+			if (fp == 0)
+				fp = 1;
+			if (bp == 0)
+				bp = 1;
 		}
 		return mp;
 	}
