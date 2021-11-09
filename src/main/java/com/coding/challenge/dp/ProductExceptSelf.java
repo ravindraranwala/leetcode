@@ -12,17 +12,14 @@ class ProductExceptSelf {
 		final int[] nums1 = { 1, 2, 3, 4 };
 		int[] prd = productExceptSelf(nums1);
 		assert Arrays.toString(prd).equals("[24, 12, 8, 6]");
-		System.out.println(Arrays.toString(prd));
 
 		final int[] nums2 = { -1, 1, 0, -3, 3 };
 		prd = productExceptSelf(nums2);
 		assert Arrays.toString(prd).equals("[0, 0, 9, 0, 0]");
-		System.out.println(Arrays.toString(prd));
 		
 		final int[] nums3 = {-1, 5};
 		prd = productExceptSelf(nums3);
 		assert Arrays.toString(prd).equals("[5, -1]");
-		System.out.println(Arrays.toString(prd));
 	}
 
 	static int[] productExceptSelf(int[] nums) {
