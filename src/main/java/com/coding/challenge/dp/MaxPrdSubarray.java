@@ -46,18 +46,18 @@ class MaxPrdSubarray {
 
 	static int maxProduct(int[] nums) {
 		final int n = nums.length;
-		int mp = nums[0];
+		int ans = Integer.MIN_VALUE;
 		int fp = 1;
 		int bp = 1;
 		for (int i = 0; i < n; i++) {
 			fp = fp * nums[i];
 			bp = bp * nums[n - i - 1];
-			mp = Math.max(Math.max(mp, nums[i]), Math.max(fp, bp));
+			ans = Math.max(ans, Math.max(fp, bp));
 			if (fp == 0)
 				fp = 1;
 			if (bp == 0)
 				bp = 1;
 		}
-		return mp;
+		return ans;
 	}
 }
