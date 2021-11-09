@@ -38,19 +38,23 @@ class MaxPrdSubarray {
 		final int[] nums8 = { -2 };
 		p = maxProduct(nums8);
 		System.out.println(p);
+
+		final int[] nums9 = { -2, 0, -1, -4, 0, 2 };
+		p = maxProduct(nums9);
+		System.out.println(p);
 	}
 
 	static int maxProduct(int[] nums) {
 		final int n = nums.length;
-		int mp = Integer.MIN_VALUE;
-		int fp = Integer.MIN_VALUE;
-		int bp = Integer.MIN_VALUE;
+		int mp = nums[0];
+		int fp = 1;
+		int bp = 1;
 		for (int i = 0; i < n; i++) {
-			if (fp == Integer.MIN_VALUE || fp == 0)
+			if (fp == 0)
 				fp = nums[i];
 			else
 				fp = fp * nums[i];
-			if (bp == Integer.MIN_VALUE || bp == 0)
+			if (bp == 0)
 				bp = nums[n - i - 1];
 			else
 				bp = bp * nums[n - i - 1];
