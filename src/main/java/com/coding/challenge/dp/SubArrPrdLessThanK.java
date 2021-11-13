@@ -24,9 +24,14 @@ class SubArrPrdLessThanK {
 		final int[] nums4 = { 10, 5, 2, 75 };
 		c = numSubarrayProductLessThanK(nums4, k1);
 		System.out.println(c);
-		
+
 		final int[] nums5 = { 10, 5, 2, 100 };
 		c = numSubarrayProductLessThanK(nums5, k1);
+		System.out.println(c);
+
+		final int[] nums6 = { 1, 1, 1 };
+		final int k3 = 1;
+		c = numSubarrayProductLessThanK(nums6, k3);
 		System.out.println(c);
 	}
 
@@ -37,12 +42,11 @@ class SubArrPrdLessThanK {
 		int p = 1;
 		for (int i = 0; i < n; i++) {
 			p = p * nums[i];
-			while (k <= p && s < i) {
+			while (k <= p && s <= i) {
 				p = p / nums[s];
 				s = s + 1;
 			}
-			if (p < k)
-				c = c + i - s + 1;
+			c = c + i - s + 1;
 		}
 		return c;
 	}
