@@ -1,4 +1,4 @@
-package com.coding.challenge.dp;
+package com.coding.challenge.sliding.window;
 
 class SubArrPrdLessThanK {
 
