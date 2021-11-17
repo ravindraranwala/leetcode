@@ -50,12 +50,11 @@ class SubArrSumEqK {
 	static int subarraySum(int[] nums, int k) {
 		final int n = nums.length;
 		final Map<Integer, Integer> m = new HashMap<>();
+		m.put(0, 1);
 		int sum = 0;
 		int c = 0;
 		for (int i = 0; i < n; i++) {
 			sum = sum + nums[i];
-			if (sum == k)
-				c = c + 1;
 			if (m.containsKey(sum - k))
 				c = c + m.getOrDefault(sum - k, 0);
 			m.merge(sum, 1, Integer::sum);
