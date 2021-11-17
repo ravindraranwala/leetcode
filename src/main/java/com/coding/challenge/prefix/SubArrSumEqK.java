@@ -58,7 +58,7 @@ class SubArrSumEqK {
 				c = c + 1;
 			if (m.containsKey(sum - k))
 				c = c + m.getOrDefault(sum - k, 0);
-			m.merge(sum, 1, (a, b) -> a + b);
+			m.merge(sum, 1, Integer::sum);
 		}
 		return c;
 	}
