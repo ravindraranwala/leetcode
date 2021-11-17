@@ -30,18 +30,16 @@ class ContinuousSubArrSum {
 	}
 
 	static boolean checkSubarraySum(int[] nums, int k) {
-		int p = 0;
-		int sum = nums[0];
+		int sum = 0;
 		final int n = nums.length;
 		final Set<Integer> s = new HashSet<>();
-		s.add(0);
-		for (int i = 1; i < n; i++) {
-			p = sum;
+		for (int i = 0; i < n; i++) {
 			sum = sum + nums[i];
 			final int r = sum % k;
 			if (s.contains(r))
 				return true;
-			s.add(p % k);
+			// Mind the operator precedence here !
+			s.add((sum - nums[i]) % k);
 		}
 		return false;
 	}
