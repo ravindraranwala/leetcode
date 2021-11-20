@@ -35,17 +35,15 @@ class LIS2 {
 
 	static int lengthOfLIS(int[] nums) {
 		final int n = nums.length;
-		final int[] a = new int[n];
-		int l = 1;
-		a[0] = nums[0];
-		for (int i = 1; i < n; i++) {
-			if (a[l - 1] < nums[i]) {
-				a[l] = nums[i];
+		final int[] m = new int[n];
+		int l = 0;
+		for (int i = 0; i < n; i++) {
+			final int s = BinarySearch.successor(m, nums[i] - 1, 0, l - 1);
+			if (s < l)
+				m[s] = nums[i];
+			else {
+				m[l] = nums[i];
 				l = l + 1;
-			} else {
-				final int j = BinarySearch.successor(a, nums[i], 0, l - 1);
-				if (j == 0 || a[j - 1] != nums[i])
-					a[j] = nums[i];
 			}
 		}
 		return l;
