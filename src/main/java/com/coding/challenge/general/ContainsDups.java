@@ -23,10 +23,9 @@ public class ContainsDups {
 	}
 
 	static boolean containsDuplicate(int[] nums) {
-		final int n = nums.length;
 		final Set<Integer> s = new HashSet<>();
-		for (int i = 0; i < n; i++) {
-			if (!s.add(nums[i]))
+		for (int num : nums) {
+			if (!s.add(num))
 				return true;
 		}
 		return false;
