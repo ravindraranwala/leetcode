@@ -70,16 +70,18 @@ class MinSubarray {
 		if (r == 0)
 			return r;
 		final Map<Integer, Integer> m = new HashMap<>();
+		// This is required if we remove the first part of the array, starting from the
+		// first element.
 		m.put(0, 0);
-		int l = Integer.MAX_VALUE;
+		int l = n;
 		for (int i = 0; i < n; i++) {
 			s = s + nums[i];
-			final int rem = (int) ((s - r) % p);
-			if (m.containsKey(rem))
-				l = Math.min(l, i + 1 - m.get(rem));
+			final int pr = (int) ((s - r) % p);
+			if (m.containsKey(pr))
+				l = Math.min(l, i + 1 - m.get(pr));
 			m.put((int) (s % p), i + 1);
 		}
-		if (l == Integer.MAX_VALUE || l == n)
+		if (l == n)
 			return -1;
 		return l;
 	}
