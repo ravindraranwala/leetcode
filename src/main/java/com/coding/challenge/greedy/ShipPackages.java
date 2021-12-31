@@ -44,22 +44,19 @@ class ShipPackages {
 		final int n = w.length;
 		int s = 0;
 		int t = 0;
-		int ls = -1;
 		for (int i = 0; i < n; i++) {
 			if (w[i] > c)
 				return false;
 			if (s + w[i] > c) {
 				t = t + 1;
 				s = w[i];
-				ls = i - 1;
 			} else if (s + w[i] == c) {
 				t = t + 1;
 				s = 0;
-				ls = i;
 			} else
 				s = s + w[i];
 		}
-		if (ls != n - 1)
+		if (s != 0)
 			t = t + 1;
 		return t <= d;
 	}
