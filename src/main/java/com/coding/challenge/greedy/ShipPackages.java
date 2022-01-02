@@ -20,44 +20,49 @@ class ShipPackages {
 		final int d3 = 4;
 		c = shipWithinDays(w3, d3);
 		System.out.println(c);
+
+		final int[] w4 = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+		final int d4 = 8;
+		c = shipWithinDays(w4, d4);
+		System.out.println(c);
+
+		c = shipWithinDays(w3, 1);
+		System.out.println(c);
 	}
 
 	static int shipWithinDays(int[] weights, int days) {
 		final int n = weights.length;
 		int l = 0;
-		int h = 0;
-		for (int i = 0; i < n; i++)
-			h = h + weights[i];
+		int s = 0;
+		for (int i = 0; i < n; i++) {
+			s = s + weights[i];
+			l = Math.max(l, weights[i]);
+		}
+		int h = (int) Math.ceil((double) n / days) * l;
+		l = (int) Math.max(l, Math.ceil((double) s / n));
 		int c = 0;
 		while (l <= h) {
 			final int m = (l + h) / 2;
 			if (possibleCap(weights, m, days)) {
 				h = m - 1;
 				c = m;
-			} else 
-				l = m + 1;	
+			} else
+				l = m + 1;
 		}
 		return c;
 	}
-	
+
 	static boolean possibleCap(int[] w, int c, int d) {
 		final int n = w.length;
 		int s = 0;
-		int t = 0;
 		for (int i = 0; i < n; i++) {
-			if (w[i] > c)
-				return false;
 			if (s + w[i] > c) {
-				t = t + 1;
+				d = d - 1;
 				s = w[i];
-			} else if (s + w[i] == c) {
-				t = t + 1;
-				s = 0;
 			} else
 				s = s + w[i];
 		}
-		if (s != 0)
-			t = t + 1;
-		return t <= d;
+		d = d - 1;
+		return d >= 0;
 	}
 }
