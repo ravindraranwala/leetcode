@@ -1,6 +1,9 @@
 package com.coding.challenge.greedy;
 
-public class SplitArrLargestSum {
+class SplitArrLargestSum {
+	SplitArrLargestSum() {
+		throw new AssertionError();
+	}
 
 	public static void main(String[] args) {
 		final int[] nums1 = { 7, 2, 5, 10, 8 };
@@ -12,8 +15,8 @@ public class SplitArrLargestSum {
 		final int m2 = 2;
 		ls = splitArray(nums2, m2);
 		System.out.println(ls);
-		
-		final int[] nums3 = {1,4,4};
+
+		final int[] nums3 = { 1, 4, 4 };
 		final int m3 = 3;
 		ls = splitArray(nums3, m3);
 		System.out.println(ls);
