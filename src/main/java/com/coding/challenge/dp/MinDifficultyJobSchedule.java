@@ -48,7 +48,6 @@ class MinDifficultyJobSchedule {
 				}
 			}
 		}
-		// System.out.println(Arrays.deepToString(md));
 		return md[d][0];
 	}
 }
