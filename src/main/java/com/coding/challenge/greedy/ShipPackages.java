@@ -32,14 +32,14 @@ class ShipPackages {
 
 	static int shipWithinDays(int[] weights, int days) {
 		final int n = weights.length;
-		int l = 0;
+		int mw = 0;
 		int s = 0;
 		for (int i = 0; i < n; i++) {
 			s = s + weights[i];
-			l = Math.max(l, weights[i]);
+			mw = Math.max(mw, weights[i]);
 		}
-		int h = (int) Math.ceil((double) n / days) * l;
-		l = (int) Math.max(l, Math.ceil((double) s / n));
+		int h = (int) Math.ceil((double) n / days) * mw;
+		int l = (int) Math.max(mw, Math.ceil((double) s / days));
 		int c = 0;
 		while (l <= h) {
 			final int m = (l + h) / 2;
