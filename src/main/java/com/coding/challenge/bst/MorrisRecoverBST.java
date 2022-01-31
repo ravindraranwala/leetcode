@@ -1,10 +1,7 @@
 package com.coding.challenge.bst;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-class RecoverBST {
-	RecoverBST() {
+class MorrisRecoverBST {
+	MorrisRecoverBST() {
 		throw new AssertionError();
 	}
 
@@ -35,32 +32,47 @@ class RecoverBST {
 		System.out.println(t5);
 		recoverTree(t5);
 		System.out.println(t5);
-
+		
 		final TreeNode t6 = new TreeNode(2, new TreeNode(1, null, new TreeNode(3)), null);
 		System.out.println(t6);
 		recoverTree(t6);
 		System.out.println(t6);
+
 	}
 
 	static void recoverTree(TreeNode root) {
 		TreeNode curr = root;
-		final Deque<TreeNode> s = new ArrayDeque<>();
 		TreeNode p = new TreeNode(Integer.MIN_VALUE);
 		TreeNode s1 = null;
 		TreeNode s2 = null;
-		while (curr != null || !s.isEmpty()) {
-			if (curr != null) {
-				s.push(curr);
-				curr = curr.left;
-			} else {
-				final TreeNode n = s.pop();
-				if (p.val > n.val) {
+
+		while (curr != null) {
+			if (curr.left == null) {
+				if (p.val > curr.val) {
 					if (s1 == null)
 						s1 = p;
-					s2 = n;
+					s2 = curr;
 				}
-				curr = n.right;
-				p = n;
+				p = curr;
+				curr = curr.right;
+			} else {
+				// find the inorder predecesor of the current node.
+				TreeNode pred = curr.left;
+				while (pred.right != null && pred.right != curr)
+					pred = pred.right;
+				if (pred.right == null) {
+					pred.right = curr;
+					curr = curr.left;
+				} else {
+					pred.right = null;
+					if (p.val > curr.val) {
+						if (s1 == null)
+							s1 = p;
+						s2 = curr;
+					}
+					p = curr;
+					curr = curr.right;
+				}
 			}
 		}
 		// swap it
