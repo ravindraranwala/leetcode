@@ -9,6 +9,9 @@ import java.util.Map;
 import static com.coding.challenge.graph.CourseSchedule.Color.*;
 
 class CourseSchedule {
+	CourseSchedule() {
+		throw new AssertionError();
+	}
 
 	public static void main(String[] args) {
 		final int[][] p1 = { { 1, 0 } };
