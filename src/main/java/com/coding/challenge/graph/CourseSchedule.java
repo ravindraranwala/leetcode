@@ -25,31 +25,31 @@ class CourseSchedule {
 
 	static boolean canFinish(int numCourses, int[][] prerequisites) {
 		final Map<Integer, Collection<Integer>> adjList = new HashMap<>();
-		final Map<Integer, Color> cTab = new HashMap<>();
-		for (int[] p : prerequisites) {
-			adjList.computeIfAbsent(p[0], unused -> new ArrayList<>()).add(p[1]);
-			cTab.put(p[0], WHITE);
-			cTab.put(p[1], WHITE);
+		final Color[] c = new Color[numCourses];
+		for (int[] e : prerequisites) {
+			adjList.computeIfAbsent(e[0], unused -> new ArrayList<>()).add(e[1]);
+			c[e[0]] = WHITE;
+			c[e[1]] = WHITE;
 		}
 		boolean r = true;
 		for (int u : adjList.keySet()) {
-			if (cTab.get(u) == WHITE)
-				r = r && detectCycles(adjList, cTab, u);
+			if (c[u] == WHITE)
+				r = r && canFinishVisit(adjList, c, u);
 		}
 		return r;
 	}
 
-	static boolean detectCycles(Map<Integer, Collection<Integer>> adjList, Map<Integer, Color> cTab, int u) {
-		cTab.put(u, GRAY);
+	static boolean canFinishVisit(Map<Integer, Collection<Integer>> adjList, Color[] c, int u) {
+		c[u] = GRAY;
 		boolean r = true;
 		for (int v : adjList.getOrDefault(u, Collections.emptyList())) {
-			if (cTab.get(v) == WHITE)
-				r = r && detectCycles(adjList, cTab, v);
-			if (cTab.get(v) == GRAY)
+			if (c[v] == WHITE)
+				r = r && canFinishVisit(adjList, c, v);
+			if (c[v] == GRAY)
 				// back edge detected.
 				return false;
 		}
-		cTab.put(u, BLACK);
+		c[u] = BLACK;
 		return r;
 	}
 
