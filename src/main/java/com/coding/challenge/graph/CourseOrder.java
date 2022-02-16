@@ -46,7 +46,7 @@ class CourseOrder {
 		for (int i = 0; i < numCourses; i++)
 			c[i] = WHITE;
 
-		final List<Integer> l = new ArrayList<>();
+		final List<Integer> l = new ArrayList<>(numCourses);
 		for (int u = 0; u < numCourses; u++) {
 			if (c[u] == WHITE) {
 				final boolean r = findOrderVisit(adjList, c, u, l);
