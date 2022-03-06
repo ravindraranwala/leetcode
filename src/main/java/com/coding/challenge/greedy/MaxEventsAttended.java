@@ -1,7 +1,6 @@
 package com.coding.challenge.greedy;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -34,7 +33,7 @@ class MaxEventsAttended {
 	static int maxEvents(int[][] events) {
 		final int n = events.length;
 		final Queue<Integer> h = new PriorityQueue<>(Integer::compare);
-		Arrays.sort(events, Comparator.<int[]>comparingInt(e -> e[0]).thenComparingInt(e -> e[1]));
+		Arrays.sort(events, (a, b) -> Integer.compare(a[0], b[0]));
 		int c = 0;
 		int s = events[0][0];
 		int e = 0;
