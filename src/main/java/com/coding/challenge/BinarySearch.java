@@ -1,5 +1,7 @@
 package com.coding.challenge;
 
+import java.util.function.ToIntFunction;
+
 public class BinarySearch {
 
 	BinarySearch() {
@@ -67,6 +69,19 @@ public class BinarySearch {
 		while (l < r) {
 			final int mid = (l + r) / 2;
 			if (a[mid] < target)
+				l = mid + 1;
+			else
+				r = mid;
+		}
+		return l - 1;
+	}
+
+	public static int predecessor(int[][] a, int target, ToIntFunction<int[]> extractor) {
+		int l = 0;
+		int r = a.length;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (extractor.applyAsInt(a[mid]) < target)
 				l = mid + 1;
 			else
 				r = mid;
