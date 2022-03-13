@@ -2,6 +2,8 @@ package com.coding.challenge.dp;
 
 import java.util.Arrays;
 
+import org.junit.Assert;
+
 import com.coding.challenge.BinarySearch;
 
 class WeightedIntervalScheduling {
@@ -16,21 +18,21 @@ class WeightedIntervalScheduling {
 		final int[] f = { 3, 4, 5, 6 };
 		final int[] v = { 50, 10, 40, 70 };
 		int p = jobScheduling(s, f, v);
-		System.out.println(p);
+		Assert.assertEquals(120, p);
 
 		// Usecase 2.
 		final int[] s1 = { 1, 2, 3, 4, 6 };
 		final int[] f1 = { 3, 5, 10, 6, 9 };
 		final int[] v1 = { 20, 20, 100, 70, 60 };
 		p = jobScheduling(s1, f1, v1);
-		System.out.println(p);
+		Assert.assertEquals(150, p);
 
 		// Usecase 3.
 		final int[] s2 = { 1, 1, 1 };
 		final int[] f2 = { 2, 3, 4 };
 		final int[] v2 = { 5, 6, 4 };
 		p = jobScheduling(s2, f2, v2);
-		System.out.println(p);
+		Assert.assertEquals(6, p);
 	}
 
 	static int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
@@ -51,7 +53,7 @@ class WeightedIntervalScheduling {
 			// Note that we need a closed interval here.
 			final int c = BinarySearch.predecessor(endTime, startTime[k] + 1);
 			int cv = 0;
-			if (-1 < c)
+			if (c >= 0)
 				cv = p[c];
 			p[k] = Math.max(p[k - 1], cv + profit[k]);
 		}
