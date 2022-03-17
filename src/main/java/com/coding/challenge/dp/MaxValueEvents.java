@@ -50,7 +50,7 @@ class MaxValueEvents {
 		final int n = events.length;
 		Arrays.sort(events, (a, b) -> Integer.compare(a[1], b[1]));
 		final int[][] p = new int[n + 1][k + 1];
-		// trivial case of out recursion where the solution is known.
+		// trivial case of our recursion where the solution is known.
 		for (int i = 0; i <= n; i++)
 			p[i][0] = 0;
 		for (int j = 1; j <= k; j++)
