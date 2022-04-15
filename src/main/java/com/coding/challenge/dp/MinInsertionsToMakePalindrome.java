@@ -1,7 +1,5 @@
 package com.coding.challenge.dp;
 
-import org.junit.Assert;
-
 class MinInsertionsToMakePalindrome {
 	MinInsertionsToMakePalindrome() {
 		throw new AssertionError();
@@ -10,19 +8,19 @@ class MinInsertionsToMakePalindrome {
 	public static void main(String[] args) {
 		final String s1 = "zzazz";
 		int minIns = minInsertions(s1);
-		Assert.assertEquals(0, minIns);
+		assert minIns == 0;
 
 		final String s2 = "mbadm";
 		minIns = minInsertions(s2);
-		Assert.assertEquals(2, minIns);
-		
+		assert minIns == 2;
+
 		final String s3 = "leetcode";
 		minIns = minInsertions(s3);
-		Assert.assertEquals(5, minIns);
-		
+		assert minIns == 5;
+
 		final String s4 = "ab";
 		minIns = minInsertions(s4);
-		Assert.assertEquals(1, minIns);
+		assert minIns == 1;
 	}
 
 	static int minInsertions(String s) {
