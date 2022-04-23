@@ -38,7 +38,7 @@ class IslandCount {
 		return k;
 	}
 
-	static void numIslandsVisit(char[][] grid, boolean[][] d, int i, int j) {
+	private static void numIslandsVisit(char[][] grid, boolean[][] d, int i, int j) {
 		d[i][j] = true;
 		for (int[] m : MOVES) {
 			final int r = i + m[0];
