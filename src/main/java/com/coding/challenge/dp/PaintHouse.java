@@ -11,11 +11,6 @@ class PaintHouse {
 		int pc = minCost(houses1, cost1, 3);
 		assert pc == 9;
 
-//		final int[] houses2 = { 0 };
-//		final int[][] cost2 = { { 15, 10 } };
-//		int pc = minCost(houses2, cost2, 1);
-//		System.out.println(pc);
-
 		final int[] houses2 = { 0, 2, 1, 2, 0 };
 		final int[][] cost2 = { { 1, 10 }, { 10, 1 }, { 10, 1 }, { 1, 10 }, { 5, 1 } };
 		pc = minCost(houses2, cost2, 3);
@@ -30,6 +25,11 @@ class PaintHouse {
 		final int[][] cost4 = { { 15, 10 } };
 		pc = minCost(houses4, cost4, 1);
 		assert pc == 0;
+		
+		final int[] houses5 = { 0 };
+		final int[][] cost5 = { { 15, 10 } };
+		pc = minCost(houses5, cost5, 1);
+		assert pc == 10;
 	}
 
 	static int minCost(int[] houses, int[][] cost, int target) {
