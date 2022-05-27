@@ -9,45 +9,51 @@ class MinDifficultyJobSchedule {
 		final int[] jd1 = { 6, 5, 4, 3, 2, 1 };
 		final int d1 = 2;
 		int md = minDifficulty(jd1, d1);
-		System.out.println(md);
+		assert md == 7;
 
 		md = minDifficulty(jd1, 3);
-		System.out.println(md);
+		assert md == 9;
 
 		final int[] jd2 = { 9, 9, 9 };
 		final int d2 = 4;
 		md = minDifficulty(jd2, d2);
-		System.out.println(md);
+		assert md == -1;
 
 		final int[] jd3 = { 1, 1, 1 };
 		final int d3 = 3;
 		md = minDifficulty(jd3, d3);
-		System.out.println(md);
+		assert md == 3;
+
+		final int[] jd4 = { 11, 111, 22, 222, 33, 333, 44, 444 };
+		final int d4 = 6;
+		md = minDifficulty(jd4, d4);
+		assert md == 843;
 	}
 
 	static int minDifficulty(int[] jobDifficulty, int d) {
 		final int n = jobDifficulty.length;
 		if (d > n)
 			return -1;
-		final int[][] md = new int[d + 1][n];
-		// trivial case of our recursion.
-		md[1][n - 1] = jobDifficulty[n - 1];
-		for (int j = n - 2; j >= 0; j--)
-			md[1][j] = Math.max(jobDifficulty[j], md[1][j + 1]);
 
-		// Non-trivial case of the recursion.
+		final int[][] md = new int[d + 1][n + 1];
+
+		// trivial case of the recursion
+		md[1][1] = jobDifficulty[0];
+		for (int i = 2; i <= n; i++)
+			md[1][i] = Math.max(md[1][i - 1], jobDifficulty[i - 1]);
+
+		// non-trivial case of the recursion
 		for (int i = 2; i <= d; i++) {
-			for (int j = 0; j < n; j++) {
-				int mx = jobDifficulty[j];
+			for (int j = i; j <= n; j++) {
 				md[i][j] = Integer.MAX_VALUE;
-				// splitting at every possible k
-				for (int k = j; k < n - i + 1; k++) {
-					mx = Math.max(mx, jobDifficulty[k]);
-					if (md[i][j] > mx + md[i - 1][k + 1])
-						md[i][j] = mx + md[i - 1][k + 1];
+				int jd = Integer.MIN_VALUE;
+				for (int k = j - 1; k >= i - 1; k--) {
+					jd = Math.max(jd, jobDifficulty[k]);
+					md[i][j] = Math.min(md[i][j], md[i - 1][k] + jd);
 				}
 			}
 		}
-		return md[d][0];
+
+		return md[d][n];
 	}
 }
