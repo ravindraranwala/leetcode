@@ -8,7 +8,6 @@ class VowelsOfAllSubstrings {
 	public static void main(String[] args) {
 		final String w1 = "aba";
 		long vowelCnt = countVowels(w1);
-		System.out.println(vowelCnt);
 		assert vowelCnt == 6;
 
 		final String w2 = "abc";
@@ -29,17 +28,17 @@ class VowelsOfAllSubstrings {
 
 	static long countVowels(String word) {
 		final int n = word.length();
-		final long[] s = new long[n + 1];
-		long c = 0;
-		// trivial case of the recursion, if there's only one letter in the word.
-		s[0] = 0;
-		for (int i = 1; i <= n; i++) {
-			s[i] = n + s[i - 1] - 2 * i + 2;
-			if (isVowel(word.charAt(i - 1)))
-				c = c + s[i];
-		}
+		int delta = n + 2;
+		long vowelsCnt = 0;
+		long subStrCnt = 0;
 
-		return c;
+		for (int i = 0; i < n; i++) {
+			delta = delta - 2;
+			subStrCnt = subStrCnt + delta;
+			if (isVowel(word.charAt(i)))
+				vowelsCnt = vowelsCnt + subStrCnt;
+		}
+		return vowelsCnt;
 	}
 
 	static boolean isVowel(char ch) {
