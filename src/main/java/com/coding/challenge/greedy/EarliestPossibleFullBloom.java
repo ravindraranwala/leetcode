@@ -11,17 +11,17 @@ class EarliestPossibleFullBloom {
 		final int[] plantTimeOne = { 1, 4, 3 };
 		final int[] growTimeOne = { 2, 3, 1 };
 		int b = earliestFullBloom(plantTimeOne, growTimeOne);
-		System.out.println(b);
+		assert b == 9;
 
 		final int[] plantTimeTwo = { 1, 2, 3, 2 };
 		final int[] growTimeTwo = { 2, 1, 2, 1 };
 		b = earliestFullBloom(plantTimeTwo, growTimeTwo);
-		System.out.println(b);
+		assert b == 9;
 
 		final int[] plantTimeThree = { 1 };
 		final int[] growTimeThree = { 1 };
 		b = earliestFullBloom(plantTimeThree, growTimeThree);
-		System.out.println(b);
+		assert b == 2;
 	}
 
 	static int earliestFullBloom(int[] plantTime, int[] growTime) {
