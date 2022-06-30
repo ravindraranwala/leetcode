@@ -35,21 +35,11 @@ class SubstrsContainingAllChars {
 				i = i + 1;
 			} else if (j < n) {
 				final char ch = s.charAt(j);
-				p[encode(ch)] = j;
+				p[ch - 'a'] = j;
 				j = j + 1;
 			} else
 				i = i + 1;
 		}
 		return c;
-	}
-
-	static int encode(char ch) {
-		if (ch == 'a')
-			return 0;
-		if (ch == 'b')
-			return 1;
-		if (ch == 'c')
-			return 2;
-		throw new IllegalArgumentException();
 	}
 }
