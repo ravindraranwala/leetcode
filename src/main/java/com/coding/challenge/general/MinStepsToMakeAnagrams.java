@@ -22,14 +22,14 @@ public class MinStepsToMakeAnagrams {
 	}
 
 	static int minSteps(String s, String t) {
-		final Map<Character, Integer> charCnt = new HashMap<>();
+		final Map<Character, Integer> f = new HashMap<>();
 		for (char ch : s.toCharArray())
-			charCnt.merge(ch, 1, Integer::sum);
+			f.merge(ch, 1, Integer::sum);
 
 		int steps = 0;
 		for (char ch : t.toCharArray()) {
-			if (charCnt.getOrDefault(ch, 0) > 0)
-				charCnt.put(ch, charCnt.get(ch) - 1);
+			if (f.getOrDefault(ch, 0) > 0)
+				f.put(ch, f.get(ch) - 1);
 			else
 				steps = steps + 1;
 		}
@@ -38,16 +38,16 @@ public class MinStepsToMakeAnagrams {
 	}
 
 	static int minStepsV2(String s, String t) {
-		final int[] charCnt = new int[ALPHABET_SIZE];
+		final int[] f = new int[ALPHABET_SIZE];
 		for (int i = 0; i < ALPHABET_SIZE; i++)
-			charCnt[i] = 0;
+			f[i] = 0;
 		for (char ch : s.toCharArray())
-			charCnt[ch - 'a'] = charCnt[ch - 'a'] + 1;
+			f[ch - 'a'] = f[ch - 'a'] + 1;
 
 		int steps = 0;
 		for (char ch : t.toCharArray()) {
-			if (charCnt[ch - 'a'] > 0)
-				charCnt[ch - 'a'] = charCnt[ch - 'a'] - 1;
+			if (f[ch - 'a'] > 0)
+				f[ch - 'a'] = f[ch - 'a'] - 1;
 			else
 				steps = steps + 1;
 		}
