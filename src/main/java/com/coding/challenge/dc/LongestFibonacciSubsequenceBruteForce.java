@@ -56,4 +56,31 @@ public class LongestFibonacciSubsequenceBruteForce {
 
 		return len + 1;
 	}
+
+	static int lenLongestFibSubseqIt(int[] arr) {
+		final int n = arr.length;
+		final Set<Integer> s = new HashSet<>();
+		for (int i = 0; i < n; i++)
+			s.add(arr[i]);
+
+		int l = 0;
+		for (int i = 2; i < n; i++) {
+			for (int j = 0; j < n && arr[j] < Math.ceil(arr[i] / 2.0); j++) {
+				int n1 = arr[j];
+				int n2 = arr[i] - arr[j];
+				int n3 = arr[i];
+				int len = 0;
+				if (s.contains(n2)) {
+					while (n1 < n2 && s.contains(n1)) {
+						len = len == 0 ? 3 : len + 1;
+						n3 = n2;
+						n2 = n1;
+						n1 = n3 - n2;
+					}
+				}
+				l = Math.max(l, len);
+			}
+		}
+		return l;
+	}
 }
