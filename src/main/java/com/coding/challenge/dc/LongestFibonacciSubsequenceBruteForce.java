@@ -21,66 +21,25 @@ public class LongestFibonacciSubsequenceBruteForce {
 
 	static int lenLongestFibSubseq(int[] arr) {
 		final int n = arr.length;
-		// Must have at least 3 items.
-		if (n < 3)
-			return 0;
-
 		final Set<Integer> s = new HashSet<>();
 		for (int i = 0; i < n; i++)
 			s.add(arr[i]);
 
 		int l = 0;
 		for (int i = 2; i < n; i++) {
-			for (int j = 0; j < n && arr[j] < Math.ceil(arr[i] / 2.0); j++) {
-				int len = 0;
-				if (s.contains(arr[i] - arr[j]))
-					len = lenLongestFibSubseqRec(s, arr[j], arr[i] - arr[j], arr[i]);
-				l = Math.max(l, len);
-			}
-		}
-		return l;
-	}
-
-	static int lenLongestFibSubseqRec(Set<Integer> s, int n1, int n2, int n3) {
-		// base case of our recursion
-		// n2 should be coming after the predecessor n1. Otherwise, it's not a fibonacci
-		// sequence.
-		if (n1 >= n2)
-			return 0;
-		if (!s.contains(n1))
-			return 0;
-
-		final int len = lenLongestFibSubseqRec(s, n2 - n1, n1, n2);
-		if (len == 0)
-			return 3;
-
-		return len + 1;
-	}
-
-	static int lenLongestFibSubseqIt(int[] arr) {
-		final int n = arr.length;
-		final Set<Integer> s = new HashSet<>();
-		for (int i = 0; i < n; i++)
-			s.add(arr[i]);
-
-		int l = 0;
-		for (int i = 2; i < n; i++) {
-			for (int j = 0; j < n && arr[j] < Math.ceil(arr[i] / 2.0); j++) {
-				int n1 = arr[j];
-				int n2 = arr[i] - arr[j];
-				int n3 = arr[i];
-				int len = 0;
-				if (s.contains(n2)) {
-					while (n1 < n2 && s.contains(n1)) {
-						len = len == 0 ? 3 : len + 1;
-						n3 = n2;
-						n2 = n1;
-						n1 = n3 - n2;
-					}
+			for (int j = i - 1; j > 0 && arr[j] > arr[i] / 2; j--) {
+				int n1 = arr[i] - arr[j];
+				int n2 = arr[j];
+				int len = 2;
+				while (n1 < n2 && s.contains(n1)) {
+					len = len + 1;
+					final int tmp = n2;
+					n2 = n1;
+					n1 = tmp - n1;
 				}
 				l = Math.max(l, len);
 			}
 		}
-		return l;
+		return l > 2 ? l : 0;
 	}
 }
