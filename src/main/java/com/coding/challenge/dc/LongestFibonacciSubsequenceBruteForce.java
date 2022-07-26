@@ -4,19 +4,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LongestFibonacciSubsequenceBruteForce {
+	LongestFibonacciSubsequenceBruteForce() {
+		throw new AssertionError();
+	}
 
 	public static void main(String[] args) {
 		final int[] a1 = { 1, 2, 3, 4, 5, 6, 7, 8 };
 		int len = lenLongestFibSubseq(a1);
-		System.out.println(len);
+		assert len == 5;
 
 		final int[] a2 = { 1, 3, 7, 11, 12, 14, 18 };
 		len = lenLongestFibSubseq(a2);
-		System.out.println(len);
+		assert len == 3;
 
 		final int[] a3 = { 1, 2, 3 };
 		len = lenLongestFibSubseq(a3);
-		System.out.println(len);
+		assert len == 3;
 	}
 
 	static int lenLongestFibSubseq(int[] arr) {
