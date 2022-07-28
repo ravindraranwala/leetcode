@@ -3,7 +3,7 @@ package com.coding.challenge.dc;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LongestFibonacciSubsequenceBruteForce {
+class LongestFibonacciSubsequenceBruteForce {
 	LongestFibonacciSubsequenceBruteForce() {
 		throw new AssertionError();
 	}
