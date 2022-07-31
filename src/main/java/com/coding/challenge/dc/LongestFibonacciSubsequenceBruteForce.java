@@ -29,16 +29,16 @@ class LongestFibonacciSubsequenceBruteForce {
 			s.add(arr[i]);
 
 		int l = 0;
-		for (int i = 2; i < n; i++) {
-			for (int j = i - 1; j > 0 && arr[j] > arr[i] / 2; j--) {
-				int n1 = arr[i] - arr[j];
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) {
+				int n1 = arr[i];
 				int n2 = arr[j];
 				int len = 2;
-				while (n1 < n2 && s.contains(n1)) {
+				while (s.contains(n1 + n2)) {
 					len = len + 1;
-					final int tmp = n2;
-					n2 = n1;
-					n1 = tmp - n1;
+					final int tmp = n1;
+					n1 = n2;
+					n2 = tmp + n2;
 				}
 				l = Math.max(l, len);
 			}
