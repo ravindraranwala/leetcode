@@ -24,20 +24,17 @@ class LongestFibonacciSubsequence {
 
 	static int lenLongestFibSubseq(int[] arr) {
 		final int n = arr.length;
-		final Map<Integer, Integer> idx = new HashMap<>();
+		final Map<Integer, Integer> p = new HashMap<>();
 		for (int i = 0; i < n; i++)
-			idx.put(arr[i], i);
+			p.put(arr[i], i);
 
 		final Map<Integer, Integer> t = new HashMap<>();
 		int l = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < i; j++) {
-				final int a = arr[i] - arr[j];
-
-				final int aIdx = idx.getOrDefault(a, -1);
-
-				if (aIdx >= 0 && aIdx < j) {
-					final int len = t.getOrDefault(aIdx * n + j, 2) + 1;
+				final int idx = p.getOrDefault(arr[i] - arr[j], -1);
+				if (idx >= 0 && idx < j) {
+					final int len = t.getOrDefault(idx * n + j, 2) + 1;
 					t.put(j * n + i, len);
 					l = Math.max(l, len);
 				}
