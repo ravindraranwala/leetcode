@@ -31,7 +31,7 @@ class IslandMaxArea {
 		int maxArea = 0;
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				if (grid[i][j] == 1 && !d[i][j]) {
+				if (!d[i][j]) {
 					final int area = visitIsland(grid, d, i, j);
 					maxArea = Math.max(maxArea, area);
 				}
