@@ -12,11 +12,11 @@ class IslandMaxArea {
 				{ 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 } };
 		int maxArea = maxAreaOfIsland(gridOne);
-		System.out.println(maxArea);
+		assert maxArea == 6;
 
 		final int[][] gridTwo = { { 0, 0, 0, 0, 0, 0, 0, 0 } };
 		maxArea = maxAreaOfIsland(gridTwo);
-		System.out.println(maxArea);
+		assert maxArea == 0;
 	}
 
 	static int maxAreaOfIsland(int[][] grid) {
