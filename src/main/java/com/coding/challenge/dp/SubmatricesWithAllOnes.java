@@ -6,24 +6,24 @@ class SubmatricesWithAllOnes {
 	}
 
 	public static void main(String[] args) {
-//		final int[][] m1 = { { 1, 0, 1 }, { 1, 1, 0 }, { 1, 1, 0 } };
-//		int cnt = numSubmat(m1);
-//		assert cnt == 13;
-//
-//		final int[][] m2 = { { 0, 1, 1, 0 }, { 0, 1, 1, 1 }, { 1, 1, 1, 0 } };
-//		cnt = numSubmat(m2);
-//		assert cnt == 24;
-//
-//		final int[][] m3 = { { 1, 1, 1, 1, 1, 1 } };
-//		cnt = numSubmat(m3);
-//		assert cnt == 21;
-//
-//		final int[][] m4 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 1, 1, 0 }, { 0, 1, 1 } };
-//		cnt = numSubmat(m4);
-//		assert cnt == 12;
+		final int[][] m1 = { { 1, 0, 1 }, { 1, 1, 0 }, { 1, 1, 0 } };
+		int cnt = numSubmat(m1);
+		assert cnt == 13;
+
+		final int[][] m2 = { { 0, 1, 1, 0 }, { 0, 1, 1, 1 }, { 1, 1, 1, 0 } };
+		cnt = numSubmat(m2);
+		assert cnt == 24;
+
+		final int[][] m3 = { { 1, 1, 1, 1, 1, 1 } };
+		cnt = numSubmat(m3);
+		assert cnt == 21;
+
+		final int[][] m4 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 1, 1, 0 }, { 0, 1, 1 } };
+		cnt = numSubmat(m4);
+		assert cnt == 12;
 
 		final int[][] m5 = { { 1, 1, 1, 1, 0 }, { 1, 0, 0, 1, 0 }, { 0, 0, 1, 0, 1 }, { 0, 1, 0, 0, 0 } };
-		int cnt = numSubmat(m5);
+		cnt = numSubmat(m5);
 		assert cnt == 17;
 	}
 
@@ -52,7 +52,7 @@ class SubmatricesWithAllOnes {
 				int s = 0;
 				// rows
 				for (int k = 0; k < m; k++) {
-					if (t[k][i] != 0 && (t[k][i] - t[k][j]) % (i - j) == 0) {
+					if (t[k][i] - t[k][j] == i - j) {
 						s = s + t[k][i] - t[k][j];
 						ans = ans + s / (i - j);
 					} else
