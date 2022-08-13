@@ -49,14 +49,14 @@ class SubmatricesWithAllOnes {
 		for (int i = 1; i < n + 1; i++) {
 			// other cols before it
 			for (int j = 0; j < i; j++) {
-				int s = 0;
+				int c = 0;
 				// rows
 				for (int k = 0; k < m; k++) {
 					if (t[k][i] - t[k][j] == i - j) {
-						s = s + t[k][i] - t[k][j];
-						ans = ans + s / (i - j);
+						c = c + 1;
+						ans = ans + c;
 					} else
-						s = 0;
+						c = 0;
 				}
 			}
 		}
