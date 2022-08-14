@@ -35,14 +35,9 @@ class SubmatricesWithAllOnes {
 		for (int i = 0; i < m; i++)
 			t[i][0] = 0;
 
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (mat[i][j] == 0)
-					t[i][j + 1] = 0;
-				else
-					t[i][j + 1] = t[i][j] + 1;
-			}
-		}
+		for (int i = 0; i < m; i++)
+			for (int j = 0; j < n; j++)
+				t[i][j + 1] = mat[i][j] == 0 ? 0 : t[i][j] + 1;
 
 		int ans = 0;
 		// current col
