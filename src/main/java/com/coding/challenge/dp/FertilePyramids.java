@@ -26,6 +26,7 @@ class FertilePyramids {
 		final int[][] p = new int[m][n];
 		final int[][] q = new int[m][n]; // inverse pyramids.
 
+		// base case of the recursion
 		for (int i = 0; i < m; i++) {
 			p[i][0] = 0;
 			p[i][n - 1] = 0;
