@@ -34,7 +34,7 @@ class SlidingWindowMax {
 		// j is our window starting position.
 		for (int j = 1; j <= n - k; j++) {
 			// remove the 1st element of the previous window if it is not already removed
-			if (q.element() == nums[j - 1])
+			if (q.peek() == nums[j - 1])
 				q.remove();
 
 			while (!q.isEmpty() && q.peekLast() < nums[j + k - 1])
