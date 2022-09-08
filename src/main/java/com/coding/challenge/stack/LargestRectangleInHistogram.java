@@ -46,8 +46,7 @@ class LargestRectangleInHistogram {
 		while (!s.isEmpty()) {
 			p.pop();
 			final int k = p.peek();
-			final int ans = (n - k - 1) * s.pop();
-			r = Math.max(r, ans);
+			r = Math.max(r, (n - k - 1) * s.pop());
 		}
 		return r;
 	}
