@@ -3,7 +3,7 @@ package com.coding.challenge.stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class LargestRectangleInHistogram {
+public class LargestRectangleInHistogram {
 	LargestRectangleInHistogram() {
 		throw new IllegalArgumentException();
 	}
@@ -22,7 +22,7 @@ class LargestRectangleInHistogram {
 		assert largestRectangleArea(heightFour) == 12;
 	}
 
-	static int largestRectangleArea(int[] heights) {
+	public static int largestRectangleArea(int[] heights) {
 		final int n = heights.length;
 		// monotonically increasing stack
 		final Deque<Integer> s = new ArrayDeque<>();
