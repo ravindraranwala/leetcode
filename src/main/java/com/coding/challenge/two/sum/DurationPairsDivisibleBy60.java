@@ -10,10 +10,10 @@ class DurationPairsDivisibleBy60 {
 
 	public static void main(String[] args) {
 		final int[] timeOne = { 30, 20, 150, 100, 40 };
-		System.out.println(numPairsDivisibleBy60(timeOne));
+		assert numPairsDivisibleBy60(timeOne) == 3;
 
 		final int[] timeTwo = { 60, 60, 60 };
-		System.out.println(numPairsDivisibleBy60(timeTwo));
+		assert numPairsDivisibleBy60(timeTwo) == 3;
 	}
 
 	static int numPairsDivisibleBy60(int[] time) {
