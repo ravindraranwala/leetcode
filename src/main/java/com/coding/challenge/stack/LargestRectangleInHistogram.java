@@ -26,27 +26,25 @@ public class LargestRectangleInHistogram {
 		final int n = heights.length;
 		// monotonically increasing stack
 		final Deque<Integer> s = new ArrayDeque<>();
-		final Deque<Integer> p = new ArrayDeque<>();
 		// a default value avoids additional conditional if check.
-		p.push(-1);
+		s.push(-1);
 		int r = 0;
 
 		for (int i = 0; i < n; i++) {
-			while (!s.isEmpty() && s.peek() >= heights[i]) {
-				p.pop();
-				final int k = p.peek();
-				r = Math.max(r, (i - k - 1) * s.pop());
+			while (s.peek() != -1 && heights[s.peek()] >= heights[i]) {
+				final int j = s.pop();
+				final int k = s.peek();
+				r = Math.max(r, (i - k - 1) * heights[j]);
 			}
-			s.push(heights[i]);
-			p.push(i);
+			s.push(i);
 		}
 
 		// Now we have to take the remaining elements into account.
 		// the stack should have the last element at the top now
-		while (!s.isEmpty()) {
-			p.pop();
-			final int k = p.peek();
-			r = Math.max(r, (n - k - 1) * s.pop());
+		while (s.peek() != -1) {
+			final int j = s.pop();
+			final int k = s.peek();
+			r = Math.max(r, (n - k - 1) * heights[j]);
 		}
 		return r;
 	}
