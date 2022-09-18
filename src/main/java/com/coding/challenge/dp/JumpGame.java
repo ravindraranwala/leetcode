@@ -7,13 +7,16 @@ class JumpGame {
 
 	public static void main(String[] args) {
 		final int[] numsOne = { 2, 3, 1, 1, 4 };
-		System.out.println(canJump(numsOne));
+		assert canJump(numsOne);
 
 		final int[] numsTwo = { 3, 2, 1, 0, 4 };
-		System.out.println(canJump(numsTwo));
+		assert !canJump(numsTwo);
 	}
 
-	static boolean canJump(int[] nums) {
+	/*
+	 * Sub-optimal dynamic programming solution.
+	 */
+	static boolean canJumpV1(int[] nums) {
 		final int n = nums.length;
 		final boolean[] r = new boolean[n];
 		for (int i = 0; i < n; i++)
@@ -26,5 +29,19 @@ class JumpGame {
 				r[i] = r[i] || r[j];
 		}
 		return r[0];
+	}
+
+	/*
+	 * Optimal greedy solution.
+	 */
+	static boolean canJump(int[] nums) {
+		final int n = nums.length;
+		int j = n - 1;
+
+		for (int i = n - 2; i >= 0; i--) {
+			if (i + nums[i] >= j)
+				j = i;
+		}
+		return j == 0;
 	}
 }
