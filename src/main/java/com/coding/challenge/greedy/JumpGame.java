@@ -1,4 +1,4 @@
-package com.coding.challenge.dp;
+package com.coding.challenge.greedy;
 
 class JumpGame {
 	JumpGame() {
@@ -11,24 +11,6 @@ class JumpGame {
 
 		final int[] numsTwo = { 3, 2, 1, 0, 4 };
 		assert !canJump(numsTwo);
-	}
-
-	/*
-	 * Sub-optimal dynamic programming solution.
-	 */
-	static boolean canJumpV1(int[] nums) {
-		final int n = nums.length;
-		final boolean[] r = new boolean[n];
-		for (int i = 0; i < n; i++)
-			r[i] = false;
-		r[n - 1] = true;
-
-		for (int i = n - 2; i >= 0; i--) {
-			final int f = Math.min(i + nums[i], n - 1);
-			for (int j = i + 1; j <= f; j++)
-				r[i] = r[i] || r[j];
-		}
-		return r[0];
 	}
 
 	/*
