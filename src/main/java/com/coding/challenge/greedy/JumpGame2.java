@@ -1,6 +1,6 @@
 package com.coding.challenge.greedy;
 
-public class JumpGame2 {
+class JumpGame2 {
 	JumpGame2() {
 		throw new AssertionError();
 	}
