@@ -33,10 +33,10 @@ class JumpGame2 {
 		int j = 0;
 		int k = i + 1;
 		while (i + nums[i] < n - 1) {
-			// position of the optimal solution
+			// local optimal solution
 			int p = k;
 			while (k <= i + nums[i]) {
-				if (k + nums[k] >= n - 1 || p + nums[p] < k + nums[k])
+				if (p + nums[p] < k + nums[k])
 					p = k;
 				k = k + 1;
 			}
