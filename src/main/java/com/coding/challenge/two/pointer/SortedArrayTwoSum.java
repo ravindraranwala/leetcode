@@ -10,13 +10,13 @@ class SortedArrayTwoSum {
 
 	public static void main(String[] args) {
 		final int[] numsOne = { 2, 7, 11, 15 };
-		System.out.println(Arrays.toString(twoSum(numsOne, 9)));
+		assert Arrays.equals(twoSum(numsOne, 9), new int[] { 1, 2 });
 
 		final int[] numsTwo = { 2, 3, 4 };
-		System.out.println(Arrays.toString(twoSum(numsTwo, 6)));
+		assert Arrays.equals(twoSum(numsTwo, 6), new int[] { 1, 3 });
 
 		final int[] numsThree = { -1, 0 };
-		System.out.println(Arrays.toString(twoSum(numsThree, -1)));
+		assert Arrays.equals(twoSum(numsThree, -1), new int[] { 1, 2 });
 	}
 
 	static int[] twoSum(int[] numbers, int target) {
