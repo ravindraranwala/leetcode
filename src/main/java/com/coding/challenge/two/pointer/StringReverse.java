@@ -19,7 +19,7 @@ class StringReverse {
 
 	static void reverseString(char[] s) {
 		final int n = s.length;
-		final int m = (int) Math.ceil(n / 2.0);
+		final int m = n / 2;
 		// implicit two pointer approach, the second pointer is a derived one.
 		for (int i = 0; i < m; i++) {
 			// exchange
