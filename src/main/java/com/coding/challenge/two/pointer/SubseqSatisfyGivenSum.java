@@ -9,19 +9,19 @@ class SubseqSatisfyGivenSum {
 	}
 
 	public static void main(String[] args) {
-//		final int[] numsOne = { 3, 5, 6, 7 };
-//		System.out.println(numSubseq(numsOne, 9));
-//
-//		final int[] numsTwo = { 3, 3, 6, 8 };
-//		System.out.println(numSubseq(numsTwo, 10));
-//
-//		final int[] numsThree = { 2, 3, 3, 4, 6, 7 };
-//		System.out.println(numSubseq(numsThree, 12));
-//
-//		final int[] numsFour = { 27, 21, 14, 2, 15, 1, 19, 8, 12, 24, 21, 8, 12, 10, 11, 30, 15, 18, 28, 14, 26, 9, 2,
-//				24, 23, 11, 7, 12, 9, 17, 30, 9, 28, 2, 14, 22, 19, 19, 27, 6, 15, 12, 29, 2, 30, 11, 20, 30, 21, 20, 2,
-//				22, 6, 14, 13, 19, 21, 10, 18, 30, 2, 20, 28, 22 };
-//		System.out.println(numSubseq(numsFour, 31));
+		final int[] numsOne = { 3, 5, 6, 7 };
+		assert numSubseq(numsOne, 9) == 4;
+
+		final int[] numsTwo = { 3, 3, 6, 8 };
+		assert numSubseq(numsTwo, 10) == 6;
+
+		final int[] numsThree = { 2, 3, 3, 4, 6, 7 };
+		assert numSubseq(numsThree, 12) == 61;
+
+		final int[] numsFour = { 27, 21, 14, 2, 15, 1, 19, 8, 12, 24, 21, 8, 12, 10, 11, 30, 15, 18, 28, 14, 26, 9, 2,
+				24, 23, 11, 7, 12, 9, 17, 30, 9, 28, 2, 14, 22, 19, 19, 27, 6, 15, 12, 29, 2, 30, 11, 20, 30, 21, 20, 2,
+				22, 6, 14, 13, 19, 21, 10, 18, 30, 2, 20, 28, 22 };
+		assert numSubseq(numsFour, 31) == 688052206;
 
 		final int[] numsFive = { 120, 410, 959, 493, 70, 622, 299, 306, 591, 346, 150, 115, 291, 376, 917, 960, 910,
 				958, 121, 801, 257, 114, 109, 591, 749, 134, 665, 76, 656, 230, 504, 369, 263, 490, 166, 143, 981, 64,
@@ -190,7 +190,8 @@ class SubseqSatisfyGivenSum {
 				478, 748, 911, 830, 69, 508, 156, 437, 395, 246, 693, 785, 781, 384, 52, 486, 537, 262, 408, 764, 138,
 				866, 458, 889, 817, 512, 860, 628, 221, 166, 464, 559, 171, 770, 719, 217, 283, 178, 658, 691, 494, 808,
 				235, 321, 876, 670, 968, 564, 781, 341, 762, 934, 744, 195, 418, 138 };
-		System.out.println(numSubseq(numsFive, 579));
+
+		assert numSubseq(numsFive, 579) == 182321077;
 	}
 
 	static int numSubseq(int[] nums, int target) {
@@ -198,13 +199,15 @@ class SubseqSatisfyGivenSum {
 		int j = nums.length - 1;
 		int s = 0;
 		Arrays.sort(nums);
-		final long mod = 1000000007l;
-		// final long h = (long) Math.pow(2, 30);
+		final int m = (int) (1e9 + 7);
 
 		while (i <= j) {
 			if (nums[i] + nums[j] <= target) {
-				final int c = pow(2, j - i, (int) mod);
-				s = (int) ((s + c) % mod);
+				// know and use the libraries - EJ item.
+//				final int c = BigInteger.valueOf(2).modPow(BigInteger.valueOf(j - i), BigInteger.valueOf(mod))
+//						.intValue();
+				final long c = modExp(2, j - i, m);
+				s = (int) ((s + c) % m);
 				i = i + 1;
 			} else
 				j = j - 1;
@@ -213,11 +216,15 @@ class SubseqSatisfyGivenSum {
 		return s;
 	}
 
-	static int pow(int b, int e, int mod) {
-		// 1 is the identity element for multiplication.
-		int ans = 1;
-		for (int i = 0; i < e; i++)
-			ans = ans * 2 % mod;
-		return ans;
+	// Implementation of fast modular exponentiation algorithm.
+	static long modExp(int b, int e, int mod) {
+		if (e == 0)
+			return 1;
+		else if (e % 2 == 1)
+			return modExp(b, e - 1, mod) * b % mod;
+		else {
+			final long n = modExp(b, e / 2, mod);
+			return n * n % mod;
+		}
 	}
 }
