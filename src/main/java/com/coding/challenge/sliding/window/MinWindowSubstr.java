@@ -46,7 +46,7 @@ class MinWindowSubstr {
 		int c = 0;
 
 		// loop-invariant: the window does not contain substring t. It's char count is
-		// one less than that of t.
+		// less than that of t.
 		for (int k = 0, l = 0; l < n; l++) {
 			final char ch = s.charAt(l);
 			if (tm.containsKey(ch)) {
