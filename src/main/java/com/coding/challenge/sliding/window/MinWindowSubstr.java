@@ -69,10 +69,7 @@ class MinWindowSubstr {
 				}
 			}
 		}
-		// no such substring.
-		if (j == n)
-			return "";
 
-		return s.substring(i, j + 1);
+		return j == n ? "" : s.substring(i, j + 1);
 	}
 }
