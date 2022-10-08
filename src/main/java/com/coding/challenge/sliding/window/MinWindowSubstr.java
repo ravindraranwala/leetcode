@@ -51,21 +51,21 @@ class MinWindowSubstr {
 			final char ch = s.charAt(l);
 			if (tm.containsKey(ch)) {
 				wm.merge(ch, 1, Integer::sum);
-				if (tm.get(ch).equals(wm.get(ch)))
+				if (tm.get(ch).equals(wm.get(ch))) {
 					c = c + 1;
-
-				while (c == distCharCnt) {
-					if (tm.containsKey(s.charAt(k))) {
-						if (j - i > l - k) {
-							i = k;
-							j = l;
+					while (c == distCharCnt) {
+						if (tm.containsKey(s.charAt(k))) {
+							if (j - i > l - k) {
+								i = k;
+								j = l;
+							}
+							// slide the lower end of the window by one more element.
+							wm.put(s.charAt(k), wm.get(s.charAt(k)) - 1);
+							if (wm.get(s.charAt(k)) < tm.get(s.charAt(k)))
+								c = c - 1;
 						}
-						// slide the lower end of the window by one more element.
-						wm.put(s.charAt(k), wm.get(s.charAt(k)) - 1);
-						if (wm.get(s.charAt(k)) < tm.get(s.charAt(k)))
-							c = c - 1;
+						k = k + 1;
 					}
-					k = k + 1;
 				}
 			}
 		}
