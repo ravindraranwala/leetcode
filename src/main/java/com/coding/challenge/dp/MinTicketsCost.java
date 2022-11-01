@@ -27,11 +27,10 @@ class MinTicketsCost {
 		final int n = days.length;
 		final int[] t = new int[n + 1];
 		t[0] = 0;
+		// trivial case of the recursion.
 		t[1] = Math.min(costs[0], Math.min(costs[1], costs[2]));
-		int i = 0;
-		int j = 0;
 
-		for (int k = 1; k < n; k++) {
+		for (int k = 1, i = 0, j = 0; k < n; k++) {
 			final int p1 = t[k] + costs[0];
 			// sliding the 7-days window.
 			while (days[k] - days[i] >= 7)
