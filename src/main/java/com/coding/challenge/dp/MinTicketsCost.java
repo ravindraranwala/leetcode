@@ -33,19 +33,15 @@ class MinTicketsCost {
 
 		for (int k = 1; k < n; k++) {
 			final int p1 = t[k] + costs[0];
-			int p2 = t[k] + costs[1];
 			// sliding the 7-days window.
 			while (days[k] - days[i] >= 7)
 				i = i + 1;
-			if (i < k)
-				p2 = t[i] + costs[1];
+			final int p2 = t[i] + costs[1];
 
-			int p3 = t[k] + costs[2];
 			// sliding the 30-days window.
 			while (days[k] - days[j] >= 30)
 				j = j + 1;
-			if (j < k)
-				p3 = t[j] + costs[2];
+			final int p3 = t[j] + costs[2];
 			t[k + 1] = Math.min(p1, Math.min(p2, p3));
 		}
 		return t[n];
