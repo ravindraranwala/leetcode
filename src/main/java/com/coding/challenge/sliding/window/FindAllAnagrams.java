@@ -33,6 +33,7 @@ class FindAllAnagrams {
 
 	static List<Integer> findAnagrams(String s, String p) {
 		final int n = s.length();
+		final int m = p.length();
 		final Map<Character, Integer> pf = new HashMap<>();
 		for (char ch : p.toCharArray())
 			pf.merge(ch, 1, Integer::sum);
@@ -40,23 +41,21 @@ class FindAllAnagrams {
 		final Map<Character, Integer> wf = new HashMap<>();
 		final List<Integer> l = new ArrayList<>();
 		int c = 0;
-		int i = 0;
 
-		for (int j = 0; j < n; j++) {
-			final char jCh = s.charAt(j);
-			wf.merge(jCh, 1, Integer::sum);
-			if (wf.get(jCh).equals(pf.get(jCh)))
+		for (int i = 0; i < n; i++) {
+			final char endCh = s.charAt(i);
+			wf.merge(endCh, 1, Integer::sum);
+			if (wf.get(endCh).equals(pf.get(endCh)))
 				c = c + 1;
 			// fixed window size.
-			if (p.length() == j - i + 1) {
+			if (i >= m - 1) {
 				if (c == pf.size())
-					l.add(i);
-				final char iCh = s.charAt(i);
-				if (wf.get(iCh).equals(pf.get(iCh)))
+					l.add(i - m + 1);
+				final char startCh = s.charAt(i - m + 1);
+				if (wf.get(startCh).equals(pf.get(startCh)))
 					c = c - 1;
-				wf.put(iCh, wf.get(iCh) - 1);
 				// maintains our loop-invariant of window size <= length of p.
-				i = i + 1;
+				wf.put(startCh, wf.get(startCh) - 1);
 			}
 		}
 
