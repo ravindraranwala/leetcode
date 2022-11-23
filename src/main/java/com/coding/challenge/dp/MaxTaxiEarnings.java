@@ -2,8 +2,6 @@ package com.coding.challenge.dp;
 
 import java.util.Arrays;
 
-import org.junit.Assert;
-
 import com.coding.challenge.BinarySearch;
 
 class MaxTaxiEarnings {
@@ -13,17 +11,14 @@ class MaxTaxiEarnings {
 
 	public static void main(String[] args) {
 		final int[][] rides1 = { { 2, 5, 4 }, { 1, 5, 1 } };
-		long e = maxTaxiEarnings(rides1);
-		Assert.assertEquals(7, e);
+		assert maxTaxiEarnings(rides1) == 7;
 
 		final int[][] rides2 = { { 1, 6, 1 }, { 3, 10, 2 }, { 10, 12, 3 }, { 11, 12, 2 }, { 12, 15, 2 },
 				{ 13, 18, 1 } };
-		e = maxTaxiEarnings(rides2);
-		Assert.assertEquals(20, e);
+		assert maxTaxiEarnings(rides2) == 20;
 
 		final int[][] rides3 = { { 2, 3, 4 }, { 4, 5, 1 } };
-		e = maxTaxiEarnings(rides3);
-		Assert.assertEquals(7, e);
+		assert maxTaxiEarnings(rides3) == 7;
 	}
 
 	static long maxTaxiEarnings(int[][] rides) {

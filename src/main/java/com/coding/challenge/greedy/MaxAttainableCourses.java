@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import org.junit.Assert;
-
 class MaxAttainableCourses {
 
 	MaxAttainableCourses() {
@@ -14,26 +12,19 @@ class MaxAttainableCourses {
 
 	public static void main(String[] args) {
 		final int[][] courses1 = { { 100, 200 }, { 200, 1300 }, { 1000, 1250 }, { 2000, 3200 } };
-		int n = scheduleCourse(courses1);
-		System.out.println(n);
+		assert scheduleCourse(courses1) == 3;
 
 		final int[][] courses2 = { { 1, 2 } };
-		n = scheduleCourse(courses2);
-		System.out.println(n);
+		assert scheduleCourse(courses2) == 1;
 
 		final int[][] courses3 = { { 3, 2 }, { 4, 3 } };
-		n = scheduleCourse(courses3);
-		System.out.println(n);
+		assert scheduleCourse(courses3) == 0;
 
 		final int[][] courses4 = { { 5, 5 }, { 4, 6 }, { 2, 6 } };
-		n = scheduleCourse(courses4);
-		System.out.println(n);
-		Assert.assertEquals(2, n);
+		assert scheduleCourse(courses4) == 2;
 
 		final int[][] courses5 = { { 7, 17 }, { 3, 12 }, { 10, 20 }, { 9, 10 }, { 5, 20 }, { 10, 19 }, { 4, 18 } };
-		n = scheduleCourse(courses5);
-		System.out.println(n);
-		Assert.assertEquals(4, n);
+		assert scheduleCourse(courses5) == 4;
 	}
 
 	static int scheduleCourse(int[][] courses) {
