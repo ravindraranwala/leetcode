@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import org.junit.Assert;
-
 class MaxEventsAttended {
 	MaxEventsAttended() {
 		throw new AssertionError();
@@ -15,19 +13,13 @@ class MaxEventsAttended {
 		final int[][] events = { { 27, 27 }, { 8, 10 }, { 9, 11 }, { 20, 21 }, { 25, 29 }, { 17, 20 }, { 12, 12 },
 				{ 12, 12 }, { 10, 14 }, { 7, 7 }, { 6, 10 }, { 7, 7 }, { 4, 8 }, { 30, 31 }, { 23, 25 }, { 4, 6 },
 				{ 17, 17 }, { 13, 14 }, { 6, 9 }, { 13, 14 } };
-		int m = maxEvents(events);
-		Assert.assertEquals(18, m);
-		System.out.println(m);
+		assert maxEvents(events) == 18;
 
 		final int[][] events2 = { { 1, 2 }, { 1, 2 }, { 3, 3 }, { 1, 5 }, { 1, 5 } };
-		m = maxEvents(events2);
-		Assert.assertEquals(5, m);
-		System.out.println(m);
+		assert maxEvents(events2) == 5;
 
 		final int[][] events3 = { { 1, 5 }, { 1, 5 }, { 1, 5 }, { 2, 3 }, { 2, 3 } };
-		m = maxEvents(events3);
-		System.out.println(m);
-		Assert.assertEquals(5, m);
+		assert maxEvents(events3) == 5;
 	}
 
 	static int maxEvents(int[][] events) {
