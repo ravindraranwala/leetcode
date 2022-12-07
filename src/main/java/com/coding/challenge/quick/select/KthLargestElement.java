@@ -1,4 +1,4 @@
-package com.coding.challenge.random;
+package com.coding.challenge.quick.select;
 
 import java.util.concurrent.ThreadLocalRandom;
 
