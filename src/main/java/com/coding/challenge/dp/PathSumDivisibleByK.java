@@ -1,10 +1,5 @@
 package com.coding.challenge.dp;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 class PathSumDivisibleByK {
 	private static final int MOD = 1000000007;
 
@@ -26,31 +21,26 @@ class PathSumDivisibleByK {
 	static int numberOfPaths(int[][] grid, int k) {
 		final int m = grid.length;
 		final int n = grid[0].length;
-		final Map<Integer, Integer>[][] p = new Map[m][n];
+		final int[][][] p = new int[m][n][k];
 		// base case of the recurrence
-		p[m - 1][n - 1] = Collections.singletonMap(grid[m - 1][n - 1] % k, 1);
-		for (int i = m - 2; i >= 0; i--) {
-			final Entry<Integer, Integer> e = p[i + 1][n - 1].entrySet().iterator().next();
-			p[i][n - 1] = Collections.singletonMap((e.getKey() + grid[i][n - 1]) % k, e.getValue());
+		p[m - 1][n - 1][grid[m - 1][n - 1] % k] = 1;
+		for (int i = m - 2; i >= 0; i--)
+			for (int l = 0; l < k; l++)
+				p[i][n - 1][(l + grid[i][n - 1]) % k] = p[i + 1][n - 1][l];
 
-		}
-
-		for (int j = n - 2; j >= 0; j--) {
-			final Entry<Integer, Integer> e = p[m - 1][j + 1].entrySet().iterator().next();
-			p[m - 1][j] = Collections.singletonMap((e.getKey() + grid[m - 1][j]) % k, e.getValue());
-		}
+		for (int j = n - 2; j >= 0; j--)
+			for (int l = 0; l < k; l++)
+				p[m - 1][j][(l + grid[m - 1][j]) % k] = p[m - 1][j + 1][l];
 
 		// recursive step.
 		for (int i = m - 2; i >= 0; i--) {
 			for (int j = n - 2; j >= 0; j--) {
-				p[i][j] = new HashMap<>();
-				for (Entry<Integer, Integer> e : p[i][j + 1].entrySet())
-					p[i][j].merge((e.getKey() + grid[i][j]) % k, e.getValue(), (a, b) -> (a + b) % MOD);
-
-				for (Entry<Integer, Integer> e : p[i + 1][j].entrySet())
-					p[i][j].merge((e.getKey() + grid[i][j]) % k, e.getValue(), (a, b) -> (a + b) % MOD);
+				for (int l = 0; l < k; l++) {
+					p[i][j][(l + grid[i][j]) % k] = (p[i][j][(l + grid[i][j]) % k] + p[i][j + 1][l]) % MOD;
+					p[i][j][(l + grid[i][j]) % k] = (p[i][j][(l + grid[i][j]) % k] + p[i + 1][j][l]) % MOD;
+				}
 			}
 		}
-		return p[0][0].getOrDefault(0, 0);
+		return p[0][0][0];
 	}
 }
