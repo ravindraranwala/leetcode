@@ -33,14 +33,11 @@ class PathSumDivisibleByK {
 				p[m - 1][j][(l + grid[m - 1][j]) % k] = p[m - 1][j + 1][l];
 
 		// recursive step.
-		for (int i = m - 2; i >= 0; i--) {
-			for (int j = n - 2; j >= 0; j--) {
-				for (int l = 0; l < k; l++) {
-					p[i][j][(l + grid[i][j]) % k] = (p[i][j][(l + grid[i][j]) % k] + p[i][j + 1][l]) % MOD;
-					p[i][j][(l + grid[i][j]) % k] = (p[i][j][(l + grid[i][j]) % k] + p[i + 1][j][l]) % MOD;
-				}
-			}
-		}
+		for (int i = m - 2; i >= 0; i--)
+			for (int j = n - 2; j >= 0; j--)
+				for (int l = 0; l < k; l++)
+					p[i][j][(l + grid[i][j]) % k] = (p[i + 1][j][l] + p[i][j + 1][l]) % MOD;
+
 		return p[0][0][0];
 	}
 }
