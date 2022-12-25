@@ -7,16 +7,13 @@ class DungeonGame {
 
 	public static void main(String[] args) {
 		final int[][] dungeonOne = { { -2, -3, 3 }, { -5, -10, 1 }, { 10, 30, -5 } };
-		int minHp = calculateMinimumHP(dungeonOne);
-		System.out.println(minHp);
+		assert calculateMinimumHP(dungeonOne) == 7;
 
 		final int[][] dungeonTwo = { { 0 } };
-		minHp = calculateMinimumHP(dungeonTwo);
-		System.out.println(minHp);
+		assert calculateMinimumHP(dungeonTwo) == 1;
 
 		final int[][] dungeonThree = { { 1, -3, 3 }, { 0, -2, 0 }, { -3, -3, -3 } };
-		minHp = calculateMinimumHP(dungeonThree);
-		System.out.println(minHp);
+		assert calculateMinimumHP(dungeonThree) == 3;
 	}
 
 	static int calculateMinimumHP(int[][] dungeon) {
