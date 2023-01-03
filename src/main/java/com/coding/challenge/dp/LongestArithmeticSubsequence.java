@@ -67,9 +67,9 @@ class LongestArithmeticSubsequence {
 			for (int j = 0; j < i; j++) {
 				final int d = nums[i] - nums[j];
 				final int encodedKey = d <= 0 ? Math.abs(d) : d + 500;
-				final int currentLength = t[j][encodedKey] == 0 ? 2 : t[j][encodedKey] + 1;
-				t[i][encodedKey] = Math.max(currentLength, t[i][encodedKey]);
-				maxLength = Math.max(maxLength, currentLength);
+				// the one comes later will always be the highest length in case of dups.
+				t[i][encodedKey] = t[j][encodedKey] == 0 ? 2 : t[j][encodedKey] + 1;
+				maxLength = Math.max(maxLength, t[i][encodedKey]);
 			}
 		}
 		return maxLength;
