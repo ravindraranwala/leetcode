@@ -15,19 +15,15 @@ class MinimumFallingPathSum {
 
 	static int minFallingPathSum(int[][] matrix) {
 		final int n = matrix.length;
-		final int[][] f = new int[n][n + 2];
+		final int[][] f = new int[n + 1][n + 2];
 
 		for (int i = 0; i < n; i++) {
 			f[i][0] = Integer.MAX_VALUE;
 			f[i][n + 1] = Integer.MAX_VALUE;
 		}
 
-		// trivial case of the recursion.
-		for (int j = 1; j <= n; j++)
-			f[n - 1][j] = matrix[n - 1][j - 1];
-
 		// recursive step.
-		for (int i = n - 2; i >= 0; i--)
+		for (int i = n - 1; i >= 0; i--)
 			for (int j = 1; j <= n; j++)
 				f[i][j] = Math.min(Math.min(f[i + 1][j - 1], f[i + 1][j]), f[i + 1][j + 1]) + matrix[i][j - 1];
 
