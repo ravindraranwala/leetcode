@@ -1,7 +1,7 @@
 package com.coding.challenge.dp;
 
 class MinSwapsToMakeIncreasing {
-	public MinSwapsToMakeIncreasing() {
+	MinSwapsToMakeIncreasing() {
 		throw new AssertionError();
 	}
 
@@ -22,17 +22,44 @@ class MinSwapsToMakeIncreasing {
 		final int[] numsEight = { 2, 3, 7, 5, 6 };
 		assert minSwap(numsSeven, numsEight) == 1;
 
-		// in this case you can swap either i = 0 or 1 in both the arrays.
-		// You need to keep both the subproblem solutions and see what gives the optimal
-		// solution.
 		final int[] numsNine = { 3, 3, 8, 9, 10 };
 		final int[] numsTen = { 1, 7, 4, 6, 8 };
 		assert minSwap(numsNine, numsTen) == 1;
 
-		// all gives answer = 1.
+		final int[] numsEleven = { 0, 1, 4, 6, 8 };
+		final int[] numsTwelve = { 1, 2, 2, 7, 10 };
+		assert minSwap(numsEleven, numsTwelve) == 1;
 	}
 
 	static int minSwap(int[] nums1, int[] nums2) {
-		throw new UnsupportedOperationException();
+		final int n = nums1.length;
+		int prevUc = 0;
+		int prevSc = 1;
+		for (int i = 1; i < n; i++) {
+			int currUc = 100001;
+			// first consider unswapped case.
+			// unswapped to unswapped
+			if (nums1[i - 1] < nums1[i] && nums2[i - 1] < nums2[i])
+				currUc = prevUc;
+			// swapped to unswapped
+			if (nums2[i - 1] < nums1[i] && nums1[i - 1] < nums2[i])
+				currUc = Math.min(currUc, prevSc);
+
+			// then consider the swapped case.
+			int currSc = 100001;
+			// unswap to swap
+			// + 1 attributes to the current swap.
+			if (nums1[i - 1] < nums2[i] && nums2[i - 1] < nums1[i])
+				currSc = prevUc + 1;
+			// swap to swap
+			if (nums2[i - 1] < nums2[i] && nums1[i - 1] < nums1[i])
+				currSc = Math.min(currSc, prevSc + 1);
+
+			// moving to the next step.
+			prevUc = currUc;
+			prevSc = currSc;
+		}
+
+		return Math.min(prevUc, prevSc);
 	}
 }
