@@ -36,7 +36,7 @@ class MinSwapsToMakeIncreasing {
 		int prevUc = 0;
 		int prevSc = 1;
 		for (int i = 1; i < n; i++) {
-			int currUc = 100001;
+			int currUc = Integer.MAX_VALUE;
 			// first consider unswapped case.
 			// unswapped to unswapped
 			if (nums1[i - 1] < nums1[i] && nums2[i - 1] < nums2[i])
@@ -46,7 +46,7 @@ class MinSwapsToMakeIncreasing {
 				currUc = Math.min(currUc, prevSc);
 
 			// then consider the swapped case.
-			int currSc = 100001;
+			int currSc = Integer.MAX_VALUE;
 			// unswap to swap
 			// + 1 attributes to the current swap.
 			if (nums1[i - 1] < nums2[i] && nums2[i - 1] < nums1[i])
