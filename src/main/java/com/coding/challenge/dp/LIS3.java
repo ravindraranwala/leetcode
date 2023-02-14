@@ -9,13 +9,13 @@ class LIS3 {
 
 	public static void main(String[] args) {
 		final int[] numsOne = { 10, 9, 2, 5, 3, 7, 101, 18 };
-		System.out.println(lengthOfLIS(numsOne));
+		assert lengthOfLIS(numsOne) == 4;
 
 		final int[] numsTwo = { 0, 1, 0, 3, 2, 3 };
-		System.out.println(lengthOfLIS(numsTwo));
+		assert lengthOfLIS(numsTwo) == 4;
 
 		final int[] numsThree = { 7, 7, 7, 7, 7, 7, 7 };
-		System.out.println(lengthOfLIS(numsThree));
+		assert lengthOfLIS(numsThree) == 1;
 	}
 
 	static int lengthOfLIS(int[] nums) {
