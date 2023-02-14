@@ -45,7 +45,7 @@ class RussianDollEnvelopes {
 			} else {
 				final int[] target = { envelopes[i][0] - 1, envelopes[i][1] - 1 };
 				final int j = BinarySearch.successor(e, target[1], 0, l - 1, a -> a[1]);
-				e[j] = new int[] { envelopes[i][0], envelopes[i][1] };
+				e[j] = envelopes[i].clone();
 			}
 		}
 		return l;
