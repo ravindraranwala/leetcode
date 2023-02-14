@@ -88,4 +88,17 @@ public class BinarySearch {
 		}
 		return l - 1;
 	}
+
+	public static int successor(int[][] a, int target, int i, int j, ToIntFunction<int[]> extractor) {
+		int l = i;
+		int r = j + 1;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (extractor.applyAsInt(a[mid]) > target)
+				r = mid;
+			else
+				l = mid + 1;
+		}
+		return r;
+	}
 }
