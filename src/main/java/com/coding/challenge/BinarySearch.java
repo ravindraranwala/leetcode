@@ -1,6 +1,6 @@
 package com.coding.challenge;
 
-import java.util.function.ToIntFunction;
+import java.util.Comparator;
 
 public class BinarySearch {
 
@@ -76,12 +76,23 @@ public class BinarySearch {
 		return l - 1;
 	}
 
-	public static int predecessor(int[][] a, int target, ToIntFunction<int[]> extractor) {
+	/**
+	 * Finds the position of the element in the input array that appears before the
+	 * target.
+	 * 
+	 * @param a      input array, this should be a sorted array.
+	 * @param target search key.
+	 * @param cmp    Comparator for comparing array elements against the target.
+	 *               When constructing a comparator, make sure you pass the target
+	 *               as the second argument.
+	 * @return position of the predecessor of the target in the input array.
+	 */
+	public static int predecessor(int[][] a, int[] target, Comparator<int[]> cmp) {
 		int l = 0;
 		int r = a.length;
 		while (l < r) {
 			final int mid = (l + r) / 2;
-			if (extractor.applyAsInt(a[mid]) < target)
+			if (cmp.compare(a[mid], target) < 0)
 				l = mid + 1;
 			else
 				r = mid;
@@ -89,12 +100,25 @@ public class BinarySearch {
 		return l - 1;
 	}
 
-	public static int successor(int[][] a, int target, int i, int j, ToIntFunction<int[]> extractor) {
+	/**
+	 * Finds the position of the element in the input array that appears after the
+	 * target.
+	 * 
+	 * @param a      input array, this should be a sorted array.
+	 * @param target search key.
+	 * @param i      lower bound in the input array to search
+	 * @param j      upper bound of the input array to search
+	 * @param cmp    Comparator for comparing array elements against the target.
+	 *               When constructing a comparator, make sure you pass the target
+	 *               as the second argument.
+	 * @return position of the successor of the target in the input array.
+	 */
+	public static int successor(int[][] a, int[] target, int i, int j, Comparator<int[]> cmp) {
 		int l = i;
 		int r = j + 1;
 		while (l < r) {
 			final int mid = (l + r) / 2;
-			if (extractor.applyAsInt(a[mid]) > target)
+			if (cmp.compare(a[mid], target) > 0)
 				r = mid;
 			else
 				l = mid + 1;
