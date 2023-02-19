@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.coding.challenge.BinarySearch;
 
+// 1751. Maximum Number of Events That Can Be Attended II
 class MaxValueEvents {
 	MaxValueEvents() {
 		throw new AssertionError();
@@ -45,7 +46,7 @@ class MaxValueEvents {
 			p[0][j] = 0;
 
 		for (int i = 1; i <= n; i++) {
-			final int c = BinarySearch.predecessor(events, events[i - 1][0], e -> e[1]);
+			final int c = BinarySearch.predecessor(events, events[i - 1], (a, b) -> Integer.compare(a[1], b[0]));
 			for (int j = 1; j <= k; j++) {
 				int v = 0;
 				if (c >= 0)

@@ -28,7 +28,7 @@ class MaxTaxiEarnings {
 		p[0] = rides[0][1] - rides[0][0] + rides[0][2];
 		for (int i = 1; i < s; i++) {
 			// Note that we need a closed interval here.
-			final int c = BinarySearch.predecessor(rides, rides[i][0] + 1, a -> a[1]);
+			final int c = BinarySearch.predecessor(rides, rides[i], (a, b) -> Integer.compare(a[1], b[0] + 1));
 			long v = 0;
 			if (c >= 0)
 				v = p[c];
