@@ -26,6 +26,7 @@ class MinCostTreeFromLeafValues {
 	}
 
 	static int mctFromLeafValues(int[] arr) {
+		// Greedy solution.
 		final Deque<Integer> s = new ArrayDeque<>();
 		int cost = 0;
 		final int n = arr.length;
