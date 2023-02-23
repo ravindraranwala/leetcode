@@ -7,10 +7,20 @@ class MinimumCostTreeFromLeafValues {
 
 	public static void main(String[] args) {
 		final int[] treeOne = { 6, 2, 4 };
-		System.out.println(mctFromLeafValues(treeOne));
+		assert mctFromLeafValues(treeOne) == 32;
 
 		final int[] treeTwo = { 4, 11 };
-		System.out.println(mctFromLeafValues(treeTwo));
+		assert mctFromLeafValues(treeTwo) == 44;
+		
+
+		final int[] treeThree = { 5, 4, 1, 3, 2 };
+		assert mctFromLeafValues(treeThree) == 41;
+
+		final int[] treeFour = { 1, 2, 3, 4, 5 };
+		assert mctFromLeafValues(treeFour) == 40;
+
+		final int[] treeFive = { 15, 13, 5, 3, 15 };
+		assert mctFromLeafValues(treeFive) == 500;
 	}
 
 	static int mctFromLeafValues(int[] arr) {
