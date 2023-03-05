@@ -26,8 +26,7 @@ class LongestRepeatingCharacterReplacement {
 		// only upper case English letters are allowed.
 		final int[] charFreq = new int[26];
 		int l = 0;
-		int maxFreq = 0;
-		for (int j = 0, i = 0; j < n; j++) {
+		for (int j = 0, i = 0, maxFreq = 0; j < n; j++) {
 			charFreq[s.charAt(j) - FIRST_LETTER] = charFreq[s.charAt(j) - FIRST_LETTER] + 1;
 			// if there exists a more optimal solution, then it should have a higher max
 			// frequency that what we have now.
