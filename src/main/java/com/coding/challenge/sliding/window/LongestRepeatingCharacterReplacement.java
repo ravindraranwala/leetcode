@@ -23,12 +23,21 @@ class LongestRepeatingCharacterReplacement {
 
 	static int characterReplacement(String s, int k) {
 		final int n = s.length();
-		// only upper case english letters are allowed.
+		// only upper case English letters are allowed.
 		final int[] charFreq = new int[26];
 		int l = 0;
+		int maxFreq = 0;
 		for (int j = 0, i = 0; j < n; j++) {
 			charFreq[s.charAt(j) - FIRST_LETTER] = charFreq[s.charAt(j) - FIRST_LETTER] + 1;
-			while (j - i + 1 - largest(charFreq) > k) {
+			// if there exists a more optimal solution, then it should have a higher max
+			// frequency that what we have now.
+			maxFreq = Math.max(maxFreq, charFreq[s.charAt(j) - FIRST_LETTER]);
+			while (j - i + 1 - maxFreq > k) {
+				// No need to update the max frequency as the window shrinks, as it only leads
+				// to sub-optimal solutions.
+				// Although we skip some of the subproblems, it's still ok as none of them lead
+				// to an optimal
+				// solution. Thus, it donesn't affect the correctness of our final solution.
 				charFreq[s.charAt(i) - FIRST_LETTER] = charFreq[s.charAt(i) - FIRST_LETTER] - 1;
 				i = i + 1;
 			}
@@ -36,12 +45,4 @@ class LongestRepeatingCharacterReplacement {
 		}
 		return l;
 	}
-
-	private static int largest(int[] a) {
-		int maxVal = 0;
-		for (int i = 0; i < 26; i++)
-			maxVal = Math.max(maxVal, a[i]);
-		return maxVal;
-	}
-
 }
