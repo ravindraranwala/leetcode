@@ -10,10 +10,10 @@ class DistinctSubarrayMaxSum {
 
 	public static void main(String[] args) {
 		final int[] nums = { 1, 5, 4, 2, 9, 9, 9 };
-		System.out.println(maximumSubarraySum(nums, 3));
+		assert maximumSubarraySum(nums, 3) == 15;
 
 		final int[] numsTwo = { 4, 4, 4 };
-		System.out.println(maximumSubarraySum(numsTwo, 3));
+		assert maximumSubarraySum(numsTwo, 3) == 0;
 	}
 
 	static long maximumSubarraySum(int[] nums, int k) {
