@@ -86,6 +86,11 @@ class SumOfSubarrayRanges {
 	}
 
 	static long subArrayRanges(int[] nums) {
+		/*
+		 * Since addition and subtraction are commutative and associative operators, we
+		 * can perform the operations in any order and regroup them too without
+		 * affecting the final result.
+		 */
 		return sumSubarrayMaxs(nums) - sumSubarrayMins(nums);
 	}
 
