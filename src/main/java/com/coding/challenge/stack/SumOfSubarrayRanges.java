@@ -96,19 +96,19 @@ class SumOfSubarrayRanges {
 
 	static long sumSubarrayMins(int[] arr) {
 		final int n = arr.length;
-		final long[] minSum = new long[n];
+		long last = 0;
 		// monotonically increasing stack.
 		final Deque<Integer> s = new ArrayDeque<>();
+		s.push(-1);
 		long sum = 0;
 		for (int i = 0; i < n; i++) {
-			while (!s.isEmpty() && arr[s.peek()] > arr[i])
-				s.pop();
-			if (s.isEmpty())
-				minSum[i] = (long) arr[i] * (i + 1);
-			else
-				minSum[i] = minSum[s.peek()] + (i - s.peek()) * (long) arr[i];
+			while (s.size() > 1 && arr[s.peek()] > arr[i]) {
+				final int j = s.pop();
+				last = last - (long) arr[j] * (j - s.peek());
+			}
 
-			sum = sum + minSum[i];
+			last = last + (i - s.peek()) * (long) arr[i];
+			sum = sum + last;
 			s.push(i);
 		}
 		return sum;
@@ -116,19 +116,18 @@ class SumOfSubarrayRanges {
 
 	static long sumSubarrayMaxs(int[] arr) {
 		final int n = arr.length;
-		final long[] maxSum = new long[n];
+		long last = 0;
 		// monotonically decreasing stack.
 		final Deque<Integer> s = new ArrayDeque<>();
+		s.push(-1);
 		long sum = 0;
 		for (int i = 0; i < n; i++) {
-			while (!s.isEmpty() && arr[s.peek()] < arr[i])
-				s.pop();
-			if (s.isEmpty())
-				maxSum[i] = (long) arr[i] * (i + 1);
-			else
-				maxSum[i] = maxSum[s.peek()] + (i - s.peek()) * (long) arr[i];
-
-			sum = sum + maxSum[i];
+			while (s.size() > 1 && arr[s.peek()] < arr[i]) {
+				final int j = s.pop();
+				last = last - (long) arr[j] * (j - s.peek());
+			}
+			last = last + (i - s.peek()) * (long) arr[i];
+			sum = sum + last;
 			s.push(i);
 		}
 		return sum;
