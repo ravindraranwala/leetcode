@@ -104,8 +104,9 @@ class SumOfSubarrayRanges {
 		for (int i = 0; i < n; i++) {
 			while (s.size() > 1 && arr[s.peek()] > arr[i]) {
 				final int j = s.pop();
-				last = last - (long) (arr[j] - arr[i]) * (j - s.peek());
+				last = last - (long) arr[j] * (j - s.peek());
 			}
+			last = last + (long) arr[i] * (i - s.peek());
 			sum = sum + last;
 			s.push(i);
 		}
@@ -122,8 +123,9 @@ class SumOfSubarrayRanges {
 		for (int i = 0; i < n; i++) {
 			while (s.size() > 1 && arr[s.peek()] < arr[i]) {
 				final int j = s.pop();
-				last = last - (long) (arr[j] - arr[i]) * (j - s.peek());
+				last = last - (long) arr[j] * (j - s.peek());
 			}
+			last = last + (long) arr[i] * (i - s.peek());
 			sum = sum + last;
 			s.push(i);
 		}
