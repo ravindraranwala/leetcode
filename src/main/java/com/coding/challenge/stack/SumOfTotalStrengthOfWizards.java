@@ -258,11 +258,12 @@ class SumOfTotalStrengthOfWizards {
 		preSum[0] = strength[0];
 		final long[] subArrSum = new long[n];
 		subArrSum[0] = strength[0];
-		final long[] strengthAt = new long[n];
-		strengthAt[0] = ((long) strength[0]) * strength[0] % MOD;
+		// defines total strength of all subarrays ending at i for some 0 <= i < n
+		final long[] totalStrengthAt = new long[n];
+		totalStrengthAt[0] = ((long) strength[0]) * strength[0] % MOD;
 		final long[] stackRunningSum = new long[n];
 		stackRunningSum[0] = strength[0];
-		int ans = (int) strengthAt[0];
+		int ans = (int) totalStrengthAt[0];
 		for (int i = 1; i < n; i++) {
 			preSum[i] = preSum[i - 1] + strength[i];
 			subArrSum[i] = subArrSum[i - 1] + (i + 1l) * strength[i];
@@ -270,19 +271,19 @@ class SumOfTotalStrengthOfWizards {
 				s.pop();
 
 			if (s.isEmpty()) {
-				strengthAt[i] = ((subArrSum[i] % MOD) * (strength[i] % MOD)) % MOD;
+				totalStrengthAt[i] = ((subArrSum[i] % MOD) * (strength[i] % MOD)) % MOD;
 				stackRunningSum[i] = (i + 1l) * strength[i];
 			} else {
 				final int leftSmaller = s.peek();
 				final long deltaPreSum = (preSum[i] - preSum[leftSmaller]);
-				final long val1 = (strengthAt[leftSmaller]
+				final long val1 = (totalStrengthAt[leftSmaller]
 						+ ((deltaPreSum % MOD) * (stackRunningSum[leftSmaller] % MOD) % MOD)) % MOD;
 				final long val2 = (((subArrSum[i] - (subArrSum[leftSmaller] + deltaPreSum * (leftSmaller + 1))) % MOD)
 						* (strength[i] % MOD)) % MOD;
-				strengthAt[i] = (val1 + val2) % MOD;
+				totalStrengthAt[i] = (val1 + val2) % MOD;
 				stackRunningSum[i] = stackRunningSum[leftSmaller] + ((long) i - leftSmaller) * strength[i];
 			}
-			ans = (int) (ans + strengthAt[i]) % MOD;
+			ans = (int) (ans + totalStrengthAt[i]) % MOD;
 			s.push(i);
 		}
 		return ans;
