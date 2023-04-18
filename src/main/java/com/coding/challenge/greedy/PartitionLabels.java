@@ -28,14 +28,14 @@ class PartitionLabels {
 			charFreq[ch - FIRST_LETTER] = charFreq[ch - FIRST_LETTER] + 1;
 
 		final List<Integer> ans = new ArrayList<>();
-		final Set<Character> window = new HashSet<>();
-		for (int i = 0, j = 0, ties = 0; j < n; j++) {
-			window.add(s.charAt(j));
+		final Set<Character> part = new HashSet<>();
+		for (int i = 0, j = 0, letters = 0; j < n; j++) {
+			part.add(s.charAt(j));
 			charFreq[s.charAt(j) - FIRST_LETTER] = charFreq[s.charAt(j) - FIRST_LETTER] - 1;
 			if (charFreq[s.charAt(j) - FIRST_LETTER] == 0)
-				ties = ties + 1;
+				letters = letters + 1;
 
-			if (window.size() == ties) {
+			if (part.size() == letters) {
 				ans.add(j - i + 1);
 				i = j + 1;
 			}
