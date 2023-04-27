@@ -17,12 +17,11 @@ class RemoveStones {
 	}
 
 	static int minStoneSum(int[] piles, int k) {
-		final int n = piles.length;
 		final Queue<Integer> h = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
 		int sum = 0;
-		for (int i = 0; i < n; i++) {
-			sum = sum + piles[i];
-			h.add(piles[i]);
+		for (int val: piles) {
+			sum = sum + val;
+			h.add(val);
 		}
 
 		int c = 0;
