@@ -1,8 +1,6 @@
 package com.coding.challenge.quick.select;
 
 import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 class MiceAndCheese {
 	MiceAndCheese() {
@@ -13,7 +11,6 @@ class MiceAndCheese {
 		final int[] rewardsOne = { 1, 1, 3, 4 };
 		final int[] rewardsTwo = { 4, 4, 1, 1 };
 		assert miceAndCheese(rewardsOne, rewardsTwo, 2) == 15;
-		System.out.println(miceAndCheese(rewardsOne, rewardsTwo, 2));
 
 		final int[] rewardsThree = { 1, 1 };
 		final int[] rewardsFour = { 1, 1 };
