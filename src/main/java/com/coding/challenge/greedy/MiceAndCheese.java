@@ -1,4 +1,4 @@
-package com.coding.challenge.quick.select;
+package com.coding.challenge.greedy;
 
 import java.util.Arrays;
 
