@@ -21,7 +21,7 @@ class LongestArithmeticSubseqOfGivenDiff {
 
 	static int longestSubsequence(int[] arr, int difference) {
 		final Map<Integer, Integer> t = new HashMap<>();
-		int maxLen = 1;
+		int maxLen = 0;
 
 		for (int num : arr) {
 			final int currLen = t.getOrDefault(num - difference, 0) + 1;
