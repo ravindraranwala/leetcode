@@ -20,13 +20,12 @@ class LongestArithmeticSubseqOfGivenDiff {
 	}
 
 	static int longestSubsequence(int[] arr, int difference) {
-		final int n = arr.length;
 		final Map<Integer, Integer> t = new HashMap<>();
 		int maxLen = 1;
 
-		for (int i = 0; i < n; i++) {
-			final int currLen = t.getOrDefault(arr[i] - difference, 0) + 1;
-			t.put(arr[i], currLen);
+		for (int num : arr) {
+			final int currLen = t.getOrDefault(num - difference, 0) + 1;
+			t.put(num, currLen);
 			maxLen = Math.max(maxLen, currLen);
 		}
 
