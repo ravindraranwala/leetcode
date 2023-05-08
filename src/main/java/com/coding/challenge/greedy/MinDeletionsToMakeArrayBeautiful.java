@@ -16,10 +16,10 @@ class MinDeletionsToMakeArrayBeautiful {
 	static int minDeletion(int[] nums) {
 		final int n = nums.length;
 		int d = 0;
-		for (int i = 0; i < n - 1; i++) {
+		for (int i = 0; i < n - 1; i++)
 			if ((i - d) % 2 == 0 && nums[i] == nums[i + 1])
 				d = d + 1;
-		}
+
 		if ((n - d) % 2 == 1)
 			d = d + 1;
 
