@@ -18,17 +18,16 @@ class MatchingPlayersWithTrainers {
 	}
 
 	static int matchPlayersAndTrainers(int[] players, int[] trainers) {
-		final int n1 = players.length;
-		final int n2 = trainers.length;
+		final int m = players.length;
+		final int n = trainers.length;
 		Arrays.sort(players);
 		Arrays.sort(trainers);
 		int c = 0;
-		for (int i = 0, j = 0; i < n1; i++) {
-			while (j < n2 && trainers[j] < players[i])
-				j++;
-			if (j < n2)
+		for (int i = 0, j = 0; i < n; i++) {
+			if (j < m && players[j] <= trainers[i]) {
 				c = c + 1;
-			j = j + 1;
+				j = j + 1;
+			}
 		}
 		return c;
 	}
