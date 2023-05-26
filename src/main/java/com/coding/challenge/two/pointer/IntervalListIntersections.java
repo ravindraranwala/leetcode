@@ -1,4 +1,4 @@
-package com.coding.challenge.general;
+package com.coding.challenge.two.pointer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
