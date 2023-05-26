@@ -2,7 +2,7 @@ package com.coding.challenge.two.pointer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 class IntervalListIntersections {
 	IntervalListIntersections() {
@@ -26,7 +26,7 @@ class IntervalListIntersections {
 		final int n1 = firstList.length;
 		final int n2 = secondList.length;
 		int[] latestFinish = { -1, -1 };
-		final List<int[]> overlappingIntervals = new ArrayList<>();
+		final Collection<int[]> overlappingIntervals = new ArrayList<>();
 		int i = 0;
 		int j = 0;
 		while (i < n1 && j < n2) {
