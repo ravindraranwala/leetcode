@@ -19,15 +19,13 @@ class TotalAppealOfString {
 		final int n = s.length();
 		final int[] p = new int[26];
 		long ans = 0;
-		long prevAns = 0;
 
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1, c = 0; i <= n; i++) {
 			final char ch = s.charAt(i - 1);
 			final int j = p[ch - a];
-			final long currAns = prevAns + i - j;
+			c = c + i - j;
+			ans = ans + c;
 			p[ch - a] = i;
-			ans = ans + currAns;
-			prevAns = currAns;
 		}
 		return ans;
 	}

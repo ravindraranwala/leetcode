@@ -24,14 +24,13 @@ class CountUniqueCharactersOfAllSubstrings {
 		final int[] d = new int[26];
 		int ans = 0;
 
-		for (int i = 1, prevAns = 0; i <= n; i++) {
+		for (int i = 1, c = 0; i <= n; i++) {
 			final char ch = s.charAt(i - 1);
 			final int j = p[ch - A];
-			final int currAns = prevAns + i - j - d[ch - A];
+			c = c + i - j - d[ch - A];
+			ans = ans + c;
 			d[ch - A] = i - j;
 			p[ch - A] = i;
-			ans = ans + currAns;
-			prevAns = currAns;
 		}
 		return ans;
 	}
