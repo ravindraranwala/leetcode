@@ -3,12 +3,12 @@ package com.coding.challenge.quick.select;
 import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
-class GenericQuickSelect {
+public class GenericQuickSelect {
 	GenericQuickSelect() {
 		throw new AssertionError();
 	}
 
-	static <T> T randomizedSelect(T[] a, int p, int r, int i, Comparator<? super T> cmp) {
+	public static <T> T randomizedSelect(T[] a, int p, int r, int i, Comparator<? super T> cmp) {
 		if (p == r)
 			return a[p];
 		final int q = randomizedPartition(a, p, r, cmp);
