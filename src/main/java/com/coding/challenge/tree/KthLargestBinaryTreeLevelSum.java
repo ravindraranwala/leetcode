@@ -25,7 +25,7 @@ class KthLargestBinaryTreeLevelSum {
 		final List<Long> levelSum = new ArrayList<>();
 		visitTree(root, 0, levelSum);
 		final int n = levelSum.size();
-		if (n - k < 0)
+		if (k > n)
 			return -1;
 		else
 			return GenericQuickSelect.randomizedSelect(levelSum.toArray(new Long[0]), 0, n - 1, n - k + 1,
