@@ -23,10 +23,8 @@ class AdvantageShuffle {
 		final int n = nums1.length;
 		final int[] p = new int[n];
 		final int[][] a = new int[n][2];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
 			a[i] = new int[] { i, nums2[i] };
-			p[i] = -1; // sentinel value.
-		}
 
 		Arrays.sort(nums1);
 		Arrays.sort(a, (b, c) -> Integer.compare(b[1], c[1]));
