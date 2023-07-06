@@ -2,7 +2,7 @@ package com.coding.challenge.two.pointer;
 
 import com.coding.challenge.ListNode;
 
-class LinkedListMiddle {
+public class LinkedListMiddle {
 	LinkedListMiddle() {
 		throw new AssertionError();
 	}
@@ -18,7 +18,7 @@ class LinkedListMiddle {
 	}
 
 	// two-pointer approach example.
-	static ListNode<Integer> middleNode(ListNode<Integer> head) {
+	public static ListNode<Integer> middleNode(ListNode<Integer> head) {
 		// declare the two pointers first.
 		ListNode<Integer> m = head;
 		ListNode<Integer> t = head;
