@@ -19,15 +19,15 @@ class ReorderList {
 		reorderList(headTwo);
 		assert "15243".equals(headTwo.toString());
 
-		ListNode<Integer> headThree = new ListNode<Integer>(1, new ListNode<>(2, new ListNode<>(3)));
+		final ListNode<Integer> headThree = new ListNode<Integer>(1, new ListNode<>(2, new ListNode<>(3)));
 		reorderList(headThree);
 		assert "132".equals(headThree.toString());
 
-		ListNode<Integer> headFour = new ListNode<Integer>(1, new ListNode<>(2));
+		final ListNode<Integer> headFour = new ListNode<Integer>(1, new ListNode<>(2));
 		reorderList(headFour);
 		assert "12".equals(headFour.toString());
 
-		ListNode<Integer> headFive = new ListNode<Integer>(1);
+		final ListNode<Integer> headFive = new ListNode<Integer>(1);
 		reorderList(headFive);
 		assert "1".equals(headFive.toString());
 	}
