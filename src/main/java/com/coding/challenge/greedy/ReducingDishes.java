@@ -28,6 +28,6 @@ class ReducingDishes {
 			mc = Math.max(mc, c);
 			p = p + satisfaction[i];
 		}
-		return Math.max(mc, 0);
+		return mc;
 	}
 }
