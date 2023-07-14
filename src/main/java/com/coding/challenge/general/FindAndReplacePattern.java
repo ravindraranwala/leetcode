@@ -1,21 +1,22 @@
 package com.coding.challenge.general;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 class FindAndReplacePattern {
+	private static final char FIRST_LETTER = 'a';
+
 	FindAndReplacePattern() {
 		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
 		final String[] wordsOne = { "abc", "deq", "mee", "aqq", "dkd", "ccc" };
-		System.out.println(findAndReplacePattern(wordsOne, "abb"));
+		assert Arrays.asList("mee", "aqq").equals(findAndReplacePattern(wordsOne, "abb"));
 
 		final String[] wordsTwo = { "a", "b", "c" };
-		System.out.println(findAndReplacePattern(wordsTwo, "a"));
+		assert Arrays.asList("a", "b", "c").equals(findAndReplacePattern(wordsTwo, "a"));
 	}
 
 	static List<String> findAndReplacePattern(String[] words, String pattern) {
@@ -23,18 +24,18 @@ class FindAndReplacePattern {
 		final int l = pattern.length();
 		for (String w : words) {
 			// checking for a bijection (one to one and on to) relation in two sets.
-			final Map<Character, Character> patternToWord = new HashMap<>();
-			final Map<Character, Character> wordToPattern = new HashMap<>();
+			final int[] patternToWord = new int[26];
+			final int[] wordToPattern = new int[26];
 			boolean match = true;
 			for (int i = 0; match && i < l; i++) {
-				if (patternToWord.containsKey(pattern.charAt(i)))
-					match = match && patternToWord.get(pattern.charAt(i)) == w.charAt(i);
+				if (patternToWord[pattern.charAt(i) - FIRST_LETTER] != 0)
+					match = match && patternToWord[pattern.charAt(i) - FIRST_LETTER] == w.charAt(i);
 
-				if (wordToPattern.containsKey(w.charAt(i)))
-					match = match && wordToPattern.get(w.charAt(i)) == pattern.charAt(i);
+				if (wordToPattern[w.charAt(i) - FIRST_LETTER] != 0)
+					match = match && wordToPattern[w.charAt(i) - FIRST_LETTER] == pattern.charAt(i);
 
-				wordToPattern.put(w.charAt(i), pattern.charAt(i));
-				patternToWord.put(pattern.charAt(i), w.charAt(i));
+				wordToPattern[w.charAt(i) - FIRST_LETTER] = pattern.charAt(i);
+				patternToWord[pattern.charAt(i) - FIRST_LETTER] = w.charAt(i);
 			}
 			if (match)
 				m.add(w);
