@@ -10,8 +10,8 @@ class LongestIdealSubsequence {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(longestIdealString("acfgbd", 2));
-		System.out.println(longestIdealString("abcd", 3));
+		assert longestIdealString("acfgbd", 2) == 4;
+		assert longestIdealString("abcd", 3) == 4;
 	}
 
 	static int longestIdealString(String s, int k) {
@@ -19,12 +19,10 @@ class LongestIdealSubsequence {
 		int l = 0;
 		for (char ch : s.toCharArray()) {
 			int maxLen = 1;
-			for (Entry<Character, Integer> e : t.entrySet()) {
-				if (Math.abs(e.getKey() - ch) <= k) {
-					final int len = e.getValue() + 1;
-					maxLen = Math.max(maxLen, len);
-				}
-			}
+			for (Entry<Character, Integer> e : t.entrySet())
+				if (Math.abs(e.getKey() - ch) <= k)
+					maxLen = Math.max(maxLen, e.getValue() + 1);
+
 			t.merge(ch, maxLen, Integer::max);
 			l = Math.max(l, maxLen);
 		}
