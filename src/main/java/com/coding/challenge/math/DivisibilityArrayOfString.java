@@ -22,7 +22,7 @@ class DivisibilityArrayOfString {
 		final int[] d = new int[n];
 
 		for (int i = 0, r = 0; i < n; i++) {
-			final long v = r * 10l + (word.charAt(i) - ZERO);
+			final long v = r * 10l + word.charAt(i) - ZERO;
 			r = (int) (v % m);
 			d[i] = r == 0 ? 1 : 0;
 		}
