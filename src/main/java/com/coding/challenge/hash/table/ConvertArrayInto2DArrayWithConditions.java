@@ -28,8 +28,7 @@ class ConvertArrayInto2DArrayWithConditions {
 		final List<List<Integer>> m = new ArrayList<>();
 		while (!f.isEmpty()) {
 			final List<Integer> l = new ArrayList<>();
-			final Iterator<Entry<Integer, Integer>> it = f.entrySet().iterator();
-			while (it.hasNext()) {
+			for (Iterator<Entry<Integer, Integer>> it = f.entrySet().iterator(); it.hasNext();) {
 				final Entry<Integer, Integer> e = it.next();
 				l.add(e.getKey());
 				e.setValue(e.getValue() - 1);
