@@ -21,26 +21,21 @@ class PartitionArrayAccordingToGivenPivot {
 		final int n = nums.length;
 		final int[] a = new int[n];
 		int i = 0;
-		for (int j = 0; j < n; j++) {
-			if (nums[j] < pivot) {
-				a[i] = nums[j];
+		int j = n - 1;
+		for (int k = 0; k < n; k++) {
+			if (nums[k] < pivot) {
+				a[i] = nums[k];
 				i = i + 1;
+			}
+			if (nums[n - k - 1] > pivot) {
+				a[j] = nums[n - k - 1];
+				j = j - 1;
 			}
 		}
 
-		for (int j = 0; j < n; j++) {
-			if (nums[j] == pivot) {
-				a[i] = nums[j];
-				i = i + 1;
-			}
-		}
+		for (int l = i; l <= j; l++)
+			a[l] = pivot;
 
-		for (int j = 0; j < n; j++) {
-			if (nums[j] > pivot) {
-				a[i] = nums[j];
-				i = i + 1;
-			}
-		}
 		return a;
 	}
 }
