@@ -42,10 +42,10 @@ class LongestStringChain {
 
 		// two-pointer approach used to determine whether s is a predecessor of t.
 		int i = 0;
-		for (int j = 0; j < n && i < n - 1; j++) {
+		for (int j = 0; j < n && i < n - 1; j++) 
 			if (s.charAt(i) == t.charAt(j))
 				i = i + 1;
-		}
+		
 		return i == n - 1;
 	}
 }
