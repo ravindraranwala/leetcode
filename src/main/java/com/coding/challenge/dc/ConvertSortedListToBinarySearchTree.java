@@ -1,5 +1,8 @@
 package com.coding.challenge.dc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.coding.challenge.ListNode;
 import com.coding.challenge.bst.TreeNode;
 
@@ -21,27 +24,21 @@ class ConvertSortedListToBinarySearchTree {
 	}
 
 	static TreeNode sortedListToBST(ListNode<Integer> head) {
-		int n = 0;
+		final List<Integer> nums = new ArrayList<>();
 		for (ListNode<Integer> curr = head; curr != null; curr = curr.next)
-			n = n + 1;
-		final int[] nums = new int[n];
-		ListNode<Integer> curr = head;
-		for (int i = 0; i < n; i++) {
-			nums[i] = curr.val;
-			curr = curr.next;
-		}
-		return heightBalancedBst(nums, 0, n - 1);
+			nums.add(curr.val);
+		return heightBalancedBst(nums, 0, nums.size() - 1);
 	}
 
-	private static TreeNode heightBalancedBst(int[] nums, int i, int j) {
+	private static TreeNode heightBalancedBst(List<Integer> nums, int i, int j) {
 		if (i == j)
-			return new TreeNode(nums[i]);
+			return new TreeNode(nums.get(i));
 		// since we always take the upper median.
 		if (i > j)
 			return null;
 		final int m = i + (j - i + 1) / 2;
 		final TreeNode left = heightBalancedBst(nums, i, m - 1);
 		final TreeNode right = heightBalancedBst(nums, m + 1, j);
-		return new TreeNode(nums[m], left, right);
+		return new TreeNode(nums.get(m), left, right);
 	}
 }
