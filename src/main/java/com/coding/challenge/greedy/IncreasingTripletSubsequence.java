@@ -1,4 +1,4 @@
-package com.coding.challenge.sorting;
+package com.coding.challenge.greedy;
 
 class IncreasingTripletSubsequence {
 	IncreasingTripletSubsequence() {
