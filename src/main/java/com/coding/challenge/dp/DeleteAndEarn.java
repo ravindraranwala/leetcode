@@ -1,6 +1,5 @@
 package com.coding.challenge.dp;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,26 +23,34 @@ class DeleteAndEarn {
 	}
 
 	static int deleteAndEarn(int[] nums) {
-		final Map<Integer, Integer> t = new HashMap<>();
-		// sentinel value.
-		t.put(100000, 0);
-		for (int val : nums)
-			t.merge(val, val, Integer::sum);
+		final Map<Integer, Integer> p = new HashMap<Integer, Integer>();
+		for (int e : nums)
+			p.merge(e, e, Integer::sum);
+		final Map<Integer, Integer> g = new HashMap<>();
+		final Map<Integer, Integer> s = new HashMap<>();
+		final Integer[] a = p.keySet().toArray(new Integer[0]);
+		for (int e : a)
+			visitGroup(e, g, p, s);
 
-		final Integer[] a = t.keySet().toArray(new Integer[0]);
-		Arrays.sort(a);
-		final int m = a.length;
-		int p = 0;
-		for (int j = m - 2, prev = 0, beforePrev = 0, curr = 0; j >= 0; j--) {
-			// check whether the values are adjacent to each other.
-			if (a[j] + 1 == a[j + 1]) {
-				curr = Math.max(prev, beforePrev + t.get(a[j]));
-			} else
-				curr = prev + t.get(a[j]);
-			p = Math.max(p, curr);
-			beforePrev = prev;
-			prev = curr;
-		}
-		return p;
+		int points = 0;
+		for (int gp : g.values())
+			points = points + gp;
+		return points;
+	}
+
+	private static void visitGroup(int e, Map<Integer, Integer> g, Map<Integer, Integer> p,
+			final Map<Integer, Integer> s) {
+		// trivial case of the recursion.
+		if (s.containsKey(e))
+			return;
+		// Memoization.
+		if (p.containsKey(e + 1) && !s.containsKey(e + 1))
+			visitGroup(e + 1, g, p, s);
+
+		final int sln = Math.max(s.getOrDefault(e + 1, 0), s.getOrDefault(e + 2, 0) + p.get(e));
+		s.put(e, sln);
+		if (g.containsKey(e + 1))
+			g.remove(e + 1);
+		g.put(e, sln);
 	}
 }
