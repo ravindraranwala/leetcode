@@ -1,0 +1,56 @@
+package com.coding.challenge.dp;
+
+import java.util.HashMap;
+import java.util.Map;
+
+class DeleteAndEarn {
+	DeleteAndEarn() {
+		throw new AssertionError();
+	}
+
+	public static void main(String[] args) {
+		final int[] numsOne = { 3, 4, 2 };
+		assert deleteAndEarn(numsOne) == 6;
+
+		final int[] numsTwo = { 2, 2, 3, 3, 3, 4 };
+		assert deleteAndEarn(numsTwo) == 9;
+
+		final int[] numsThree = { 8, 7, 3, 8, 1, 4, 10, 10, 10, 2 };
+		assert deleteAndEarn(numsThree) == 52;
+
+		final int[] numsFour = { 1 };
+		assert deleteAndEarn(numsFour) == 1;
+	}
+
+	static int deleteAndEarn(int[] nums) {
+		final Map<Integer, Integer> p = new HashMap<Integer, Integer>();
+		for (int e : nums)
+			p.merge(e, e, Integer::sum);
+		final Map<Integer, Integer> g = new HashMap<>();
+		final Map<Integer, Integer> s = new HashMap<>();
+		final Integer[] a = p.keySet().toArray(new Integer[0]);
+		for (int e : a)
+			visitGroup(e, g, p, s);
+
+		int points = 0;
+		for (int gp : g.values())
+			points = points + gp;
+		return points;
+	}
+
+	private static void visitGroup(int e, Map<Integer, Integer> g, Map<Integer, Integer> p,
+			final Map<Integer, Integer> s) {
+		// trivial case of the recursion.
+		if (s.containsKey(e))
+			return;
+		// Memoization.
+		if (p.containsKey(e + 1) && !s.containsKey(e + 1))
+			visitGroup(e + 1, g, p, s);
+
+		final int sln = Math.max(s.getOrDefault(e + 1, 0), s.getOrDefault(e + 2, 0) + p.get(e));
+		s.put(e, sln);
+		if (g.containsKey(e + 1))
+			g.remove(e + 1);
+		g.put(e, sln);
+	}
+}
