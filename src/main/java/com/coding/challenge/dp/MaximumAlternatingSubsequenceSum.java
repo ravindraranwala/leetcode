@@ -26,7 +26,7 @@ class MaximumAlternatingSubsequenceSum {
 		for (int i = 1, lastPickedVal = nums[0], minVal = 100001; i < n; i++) {
 			final long s1 = sln - lastPickedVal + nums[i];
 			final long s2 = sln - minVal + nums[i];
-			final long s = Math.max(Math.max(s1, s2), nums[i]);
+			final long s = Math.max(s1, s2);
 			if (s > sln) {
 				// pick the current element.
 				sln = s;
