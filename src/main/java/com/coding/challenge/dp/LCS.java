@@ -12,7 +12,7 @@ class LCS {
 		System.out.println(String.format("The length of the longest common subsequence is: %d", l));
 	}
 
-	private static int lcsLength(String text1, String text2) {
+	static int lcsLength(String text1, String text2) {
 		final int m = text1.length();
 		final int n = text2.length();
 		final int[][] c = new int[m + 1][n + 1];
