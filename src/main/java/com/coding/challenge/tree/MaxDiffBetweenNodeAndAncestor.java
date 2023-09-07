@@ -1,4 +1,4 @@
-package com.coding.challenge.dfs;
+package com.coding.challenge.tree;
 
 import com.coding.challenge.bst.TreeNode;
 
@@ -18,20 +18,17 @@ class MaxDiffBetweenNodeAndAncestor {
 	}
 
 	static int maxAncestorDiff(TreeNode root) {
-		final int[] ans = new int[1];
-		visitTree(root, ans, 0);
-		return ans[0];
+		return visitTree(root, 0)[2];
 	}
 
-	private static int[] visitTree(TreeNode node, int[] ans, int parentKey) {
+	private static int[] visitTree(TreeNode node, int parentKey) {
 		if (node == null)
-			return new int[] { parentKey, parentKey };
-		final int[] l = visitTree(node.left, ans, node.val);
-		final int[] r = visitTree(node.right, ans, node.val);
+			return new int[] { parentKey, parentKey, 0 };
+		final int[] l = visitTree(node.left, node.val);
+		final int[] r = visitTree(node.right, node.val);
 		final int min = Math.min(l[0], r[0]);
 		final int max = Math.max(l[1], r[1]);
 		final int diff = Math.max(Math.abs(node.val - min), Math.abs(node.val - max));
-		ans[0] = Math.max(ans[0], diff);
-		return new int[] { Math.min(min, node.val), Math.max(max, node.val) };
+		return new int[] { Math.min(min, node.val), Math.max(max, node.val), Math.max(Math.max(l[2], r[2]), diff) };
 	}
 }
