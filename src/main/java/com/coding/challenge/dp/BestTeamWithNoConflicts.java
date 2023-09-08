@@ -32,10 +32,10 @@ class BestTeamWithNoConflicts {
 		int ans = 0;
 		for (int i = 0; i < n; i++) {
 			int score = 0;
-			for (int j = 0; j < i; j++) {
+			for (int j = 0; j < i; j++) 
 				if (players[j][1] <= players[i][1])
 					score = Math.max(score, sln[j]);
-			}
+			
 			sln[i] = score + players[i][1];
 			ans = Math.max(ans, sln[i]);
 		}
