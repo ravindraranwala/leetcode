@@ -37,7 +37,7 @@ class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 		final int n = inorder.length;
 		for (int i = 0; i < n; i++)
 			inorderPositions.put(inorder[i], i);
-		return constructTree(inorderPositions, preorder, 0, inorder.length - 1, 0);
+		return constructTree(inorderPositions, preorder, 0, n - 1, 0);
 	}
 
 	private static TreeNode constructTree(Map<Integer, Integer> inorderPositions, int[] preorder, int start, int end,
