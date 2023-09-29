@@ -66,7 +66,7 @@ class SurroundedRegions {
 		for (int[] move : MOVES) {
 			final int r = i + move[0];
 			final int c = j + move[1];
-			if (r >= 0 && c >= 0 && r < board.length && c < board[0].length && board[r][c] == 'O')
+			if (board[r][c] == 'O')
 				captureRegion(board, r, c);
 		}
 	}
