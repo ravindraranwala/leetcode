@@ -52,6 +52,6 @@ class SerializeAndDeserializeBinaryTree {
 
 		final TreeNode left = decode(tree, a, n);
 		final TreeNode right = decode(tree, a, n);
-		return new TreeNode(Integer.valueOf(key), left, right);
+		return new TreeNode(Integer.parseInt(key), left, right);
 	}
 }
