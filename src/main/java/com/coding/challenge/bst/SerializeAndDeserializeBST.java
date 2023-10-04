@@ -3,7 +3,6 @@ package com.coding.challenge.bst;
 import java.util.StringJoiner;
 
 class SerializeAndDeserializeBST {
-	private static final String NIL = "#";
 	private static final char COMMA = ',';
 
 	SerializeAndDeserializeBST() {
@@ -29,9 +28,7 @@ class SerializeAndDeserializeBST {
 	}
 
 	private static void encode(TreeNode node, StringJoiner tree) {
-		if (node == null)
-			tree.add(NIL);
-		else {
+		if (node != null) {
 			// pre-order serialization of a BST.
 			tree.add(String.valueOf(node.val));
 			encode(node.left, tree);
@@ -40,21 +37,25 @@ class SerializeAndDeserializeBST {
 	}
 
 	static TreeNode deserialize(String data) {
-		return decode(data, new int[] { -1 }, data.length());
+		if (data.isEmpty())
+			return null;
+		return decode(data, new int[] { -1 }, data.length(), 10001);
 	}
 
-	private static TreeNode decode(String tree, int[] a, int n) {
-		a[0] = a[0] + 1;
-		final int i = a[0];
-		while (a[0] < n && tree.charAt(a[0]) != COMMA)
-			a[0] = a[0] + 1;
+	private static TreeNode decode(String tree, int[] a, int n, int upperBoundKey) {
+		if (a[0] == n)
+			return null;
+		int i = a[0] + 1;
+		while (i < n && tree.charAt(i) != COMMA)
+			i = i + 1;
 
-		final String key = tree.substring(i, a[0]);
-		if (NIL.equals(key))
+		final int key = Integer.parseInt(tree.substring(a[0] + 1, i));
+		if (key > upperBoundKey)
 			return null;
 
-		final TreeNode left = decode(tree, a, n);
-		final TreeNode right = decode(tree, a, n);
-		return new TreeNode(Integer.valueOf(key), left, right);
+		a[0] = i;
+		final TreeNode left = decode(tree, a, n, key);
+		final TreeNode right = decode(tree, a, n, upperBoundKey);
+		return new TreeNode(key, left, right);
 	}
 }
