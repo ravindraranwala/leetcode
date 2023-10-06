@@ -29,19 +29,16 @@ class LongestMountainInArray {
 		}
 
 		// right side.
-		final int[] right = new int[n];
-		for (int i = n - 2; i >= 0; i--) {
-			if (arr[i] > arr[i + 1])
-				right[i] = right[i + 1] + 1;
-			else
-				right[i] = 0;
-		}
-
-		// finding the mountain length.
 		int l = 0;
-		for (int i = 0; i < n; i++)
-			if (left[i] > 0 && right[i] > 0)
-				l = Math.max(l, left[i] + right[i] + 1);
+		for (int i = n - 2, right = 0; i >= 0; i--) {
+			if (arr[i] > arr[i + 1]) {
+				right = right + 1;
+				// finding the mountain length.
+				if (left[i] > 0)
+					l = Math.max(l, left[i] + right + 1);
+			} else
+				right = 0;
+		}
 
 		return l;
 	}
