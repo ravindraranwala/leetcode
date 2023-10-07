@@ -1,6 +1,7 @@
 package com.coding.challenge.greedy;
 
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 class MaximumProductAfterKIncrements {
 	MaximumProductAfterKIncrements() {
@@ -17,7 +18,7 @@ class MaximumProductAfterKIncrements {
 
 	static int maximumProduct(int[] nums, int k) {
 		// min heap.
-		final PriorityQueue<Integer> h = new PriorityQueue<>();
+		final Queue<Integer> h = new PriorityQueue<>();
 		for (int val : nums)
 			h.add(val);
 
