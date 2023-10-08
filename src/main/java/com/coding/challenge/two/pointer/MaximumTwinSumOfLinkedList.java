@@ -36,13 +36,11 @@ class MaximumTwinSumOfLinkedList {
 			l = tmp;
 		}
 
-		ListNode<Integer> tail = prev;
+		// finally, find the twin sum.
 		int sum = 0;
-		while (tail != null) {
+		for (ListNode<Integer> tail = prev; tail != null; head = head.next, tail = tail.next)
 			sum = Math.max(sum, head.val + tail.val);
-			head = head.next;
-			tail = tail.next;
-		}
+
 		return sum;
 	}
 }
