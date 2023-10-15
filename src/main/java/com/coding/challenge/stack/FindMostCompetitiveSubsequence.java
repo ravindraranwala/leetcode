@@ -1,8 +1,8 @@
-package com.coding.challenge.greedy;
+package com.coding.challenge.stack;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Deque;
 
 class FindMostCompetitiveSubsequence {
 	FindMostCompetitiveSubsequence() {
@@ -24,23 +24,22 @@ class FindMostCompetitiveSubsequence {
 
 	static int[] mostCompetitive(int[] nums, int k) {
 		final int n = nums.length;
-		// min heap.
-		final Queue<Integer> h = new PriorityQueue<>(
-				(a, b) -> Integer.compare(nums[a], nums[b]) == 0 ? Integer.compare(a, b)
-						: Integer.compare(nums[a], nums[b]));
+		final Deque<Integer> s = new ArrayDeque<>();
 
-		for (int i = 0; i < n - k; i++)
-			h.add(i);
-
-		final int[] s = new int[k];
-		for (int j = 0, p = -1; j < k; j++) {
-			h.add(n - k + j);
-			while (h.peek() <= p)
-				h.remove();
-
-			p = h.remove();
-			s[j] = nums[p];
+		for (int i = 0; i < n - k; i++) {
+			while (!s.isEmpty() && s.peek() > nums[i])
+				s.pop();
+			s.push(nums[i]);
 		}
-		return s;
+
+		final int[] a = new int[k];
+		for (int i = n - k; i < n; i++) {
+			while (!s.isEmpty() && s.peek() > nums[i])
+				s.pop();
+			s.push(nums[i]);
+			a[i - n + k] = s.pollLast();
+		}
+
+		return a;
 	}
 }
