@@ -1,6 +1,6 @@
 package com.coding.challenge.trie;
 
-class Trie {
+public class Trie {
 	private static final char FIRST_LETTER = 'a';
 	private final TrieNode root;
 
@@ -37,6 +37,20 @@ class Trie {
 	public boolean startsWith(String prefix) {
 		return startsWithRec(prefix, 0, root, prefix.length());
 
+	}
+
+	public String root(String word) {
+		return findRoot(word, 0, root, word.length());
+	}
+	
+	private static String findRoot(String word, int i, TrieNode node, int n) {
+		if (i == n)
+			return "";
+		if (node.children[word.charAt(i) - FIRST_LETTER] == null)
+			return "";
+		if (node.children[word.charAt(i) - FIRST_LETTER].word)
+			return word.substring(0, i + 1);
+		return findRoot(word, i + 1, node.children[word.charAt(i) - FIRST_LETTER], n);
 	}
 
 	private boolean startsWithRec(String word, int i, TrieNode node, int n) {
