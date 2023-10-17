@@ -40,7 +40,7 @@ class ReorganizeString {
 			if (f[q] > 0)
 				h.add(q);
 		}
-		if (h.size() == 1) {
+		if (!h.isEmpty()) {
 			final int k = h.remove();
 			if (f[k] == 1)
 				sb.append(Character.toChars(FIRST_LETTER + k));
