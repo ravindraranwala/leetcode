@@ -9,7 +9,6 @@ class KthFactor {
 		assert kthFactor(12, 3) == 3;
 		assert kthFactor(7, 2) == 7;
 		assert kthFactor(4, 4) == -1;
-		System.out.println(2 % 1);
 	}
 
 	static int kthFactor(int n, int k) {
