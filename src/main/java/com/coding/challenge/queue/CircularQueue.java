@@ -2,7 +2,7 @@ package com.coding.challenge.queue;
 
 class CircularQueue {
 	final int capacity;
-	final int a[];
+	final int[] a;
 	int head = 0;
 	int tail = -1;
 	int size = 0;
