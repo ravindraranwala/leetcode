@@ -9,13 +9,13 @@ class PartitionArraySuchThatMaximumDifferenceIsK {
 
 	public static void main(String[] args) {
 		final int[] numsOne = { 3, 6, 1, 2, 5 };
-		System.out.println(partitionArray(numsOne, 2));
+		assert partitionArray(numsOne, 2) == 2;
 
 		final int[] numsTwo = { 1, 2, 3 };
-		System.out.println(partitionArray(numsTwo, 1));
+		assert partitionArray(numsTwo, 1) == 2;
 
 		final int[] numsThree = { 2, 2, 4, 5 };
-		System.out.println(partitionArray(numsThree, 0));
+		assert partitionArray(numsThree, 0) == 3;
 	}
 
 	static int partitionArray(int[] nums, int k) {
