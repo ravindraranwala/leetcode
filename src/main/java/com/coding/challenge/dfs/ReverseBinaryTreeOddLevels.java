@@ -25,8 +25,7 @@ class ReverseBinaryTreeOddLevels {
 		final Map<Integer, List<TreeNode>> t = new HashMap<>();
 		visitTree(root, 0, t);
 		// reverse the node values at odd levels
-		for (int l : t.keySet()) {
-			final List<TreeNode> nodes = t.get(l);
+		for (List<TreeNode> nodes : t.values()) {
 			final int high = nodes.size() - 1;
 			for (int low = 0; low <= high / 2; low++) {
 				final TreeNode left = nodes.get(low);
