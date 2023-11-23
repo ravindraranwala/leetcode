@@ -27,9 +27,9 @@ class EliminateMaximumNumberOfMonsters {
 
 	static int eliminateMaximum(int[] dist, int[] speed) {
 		final int n = dist.length;
-		final double[] timeToReachCity = new double[n];
+		final int[] timeToReachCity = new int[n];
 		for (int i = 0; i < n; i++)
-			timeToReachCity[i] = dist[i] * 1.0 / speed[i];
+			timeToReachCity[i] = (int) Math.ceil(dist[i] * 1.0 / speed[i]);
 
 		int m = 0;
 		Arrays.sort(timeToReachCity);
