@@ -9,13 +9,16 @@ class CountOfSmallerNumbersAfterSelf {
 
 	public static void main(String[] args) {
 		final int[] numsOne = { 5, 2, 6, 1 };
-		System.out.println(Arrays.toString(countSmaller(numsOne)));
+		final int[] ansOne = { 2, 1, 1, 0 };
+		assert Arrays.equals(ansOne, countSmaller(numsOne));
 
 		final int[] numsTwo = { -1 };
-		System.out.println(Arrays.toString(countSmaller(numsTwo)));
+		final int[] ansTwo = { 0 };
+		assert Arrays.equals(ansTwo, countSmaller(numsTwo));
 
 		final int[] numsThree = { -1, -1 };
-		System.out.println(Arrays.toString(countSmaller(numsThree)));
+		final int[] ansThree = { 0, 0 };
+		assert Arrays.equals(ansThree, countSmaller(numsThree));
 	}
 
 	static int[] countSmaller(int[] nums) {
