@@ -17,7 +17,6 @@ class PacificAtlanticWaterFlow {
 		final List<List<Integer>> p1 = Arrays.asList(Arrays.asList(0, 4), Arrays.asList(1, 3), Arrays.asList(1, 4),
 				Arrays.asList(2, 2), Arrays.asList(3, 0), Arrays.asList(3, 1), Arrays.asList(4, 0));
 		assert p1.equals(pacificAtlantic(h1));
-		System.out.println();
 
 		final int[][] h2 = { { 1 } };
 		assert Arrays.asList(Arrays.asList(0, 0)).equals(pacificAtlantic(h2));
