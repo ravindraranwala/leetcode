@@ -2,8 +2,8 @@ package com.coding.challenge.dfs;
 
 import com.coding.challenge.bst.TreeNode;
 
-class KthSmallestElementInBS {
-	KthSmallestElementInBS() {
+class KthSmallestElementInBST {
+	KthSmallestElementInBST() {
 		throw new AssertionError();
 	}
 
