@@ -1,4 +1,4 @@
-package com.coding.challenge.two.pointer;
+package com.coding.challenge.greedy;
 
 class LargestMergeOfTwoStrings {
 	LargestMergeOfTwoStrings() {
