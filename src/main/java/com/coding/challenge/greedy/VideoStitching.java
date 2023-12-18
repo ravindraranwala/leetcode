@@ -19,7 +19,7 @@ class VideoStitching {
 		assert videoStitching(clips3, 9) == 3;
 
 		final int[][] clips4 = { { 5, 7 }, { 1, 8 }, { 0, 0 }, { 2, 3 }, { 4, 5 }, { 0, 6 }, { 5, 10 }, { 7, 10 } };
-		 assert videoStitching(clips4, 5) == 1;
+		assert videoStitching(clips4, 5) == 1;
 
 		final int[][] clips5 = { { 11, 28 }, { 35, 40 }, { 28, 38 }, { 0, 10 }, { 37, 39 }, { 40, 40 }, { 18, 34 },
 				{ 32, 38 }, { 14, 36 }, { 33, 36 } };
@@ -45,6 +45,7 @@ class VideoStitching {
 			if (clips[i][0] > f)
 				return -1;
 		}
-		return c;
+		// can't get here.
+		throw new AssertionError();
 	}
 }
