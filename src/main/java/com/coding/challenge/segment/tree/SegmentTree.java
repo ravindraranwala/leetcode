@@ -3,16 +3,15 @@ package com.coding.challenge.segment.tree;
 public final class SegmentTree implements RangeQuery {
 	private final int[] lo;
 	private final int[] hi;
-	private final int[] sum;
 	private final int[] delta;
+	private final int[] min;
 
-	public SegmentTree(int low, int high) {
-		final int n = high - low + 1;
+	public SegmentTree(int n) {
 		lo = new int[4 * n + 1];
 		hi = new int[4 * n + 1];
-		sum = new int[4 * n + 1];
 		delta = new int[4 * n + 1];
-		init(1, low, high);
+		min = new int[4 * n + 1];
+		init(1, 0, n - 1);
 	}
 
 	@Override
@@ -21,9 +20,10 @@ public final class SegmentTree implements RangeQuery {
 	}
 
 	private void increment(int i, int a, int b, int val) {
+		// disjoint intervals
 		if (b < lo[i] || a > hi[i])
 			return;
-		if (lo[i] >= a && hi[i] <= b) {
+		if (a <= lo[i] && hi[i] <= b) {
 			delta[i] = delta[i] + val;
 			return;
 		}
@@ -42,30 +42,13 @@ public final class SegmentTree implements RangeQuery {
 	}
 
 	void update(int i) {
-		sum[i] = sum[2 * i] + delta[2 * i] + sum[2 * i + 1] + delta[2 * i + 1];
-	}
-
-	@Override
-	public int sum(int a, int b) {
-		return sum(1, a, b);
-	}
-
-	private int sum(int i, int a, int b) {
-		if (b < lo[i] || a > hi[i])
-			return 0;
-		if (lo[i] >= a && hi[i] <= b)
-			return sum[i] + delta[i];
-
-		prop(i);
-		final int leftSum = sum(2 * i, a, b);
-		final int rightSum = sum(2 * i + 1, a, b);
-		update(i);
-		return leftSum + rightSum;
+		min[i] = Math.min(min[2 * i] + delta[2 * i], min[2 * i + 1] + delta[2 * i + 1]);
 	}
 
 	void init(int i, int a, int b) {
 		lo[i] = a;
 		hi[i] = b;
+		// leaf
 		if (a == b)
 			return;
 		final int m = (a + b) / 2;
@@ -73,5 +56,26 @@ public final class SegmentTree implements RangeQuery {
 		init(2 * i, a, m);
 		// right child
 		init(2 * i + 1, m + 1, b);
+	}
+
+	@Override
+	public int minimum(int a, int b) {
+		return minimum(1, a, b);
+	}
+
+	private int minimum(int i, int a, int b) {
+		// disjoint
+		if (b < lo[i] || a > hi[i])
+			return Integer.MAX_VALUE;
+		// complete cover
+		if (a <= lo[i] && hi[i] <= b)
+			return min[i] + delta[i];
+
+		// partial cover case.
+		prop(i);
+		final int leftMin = minimum(2 * i, a, b);
+		final int rightMin = minimum(2 * i + 1, a, b);
+		update(i);
+		return Math.min(leftMin, rightMin);
 	}
 }
