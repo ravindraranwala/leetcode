@@ -36,7 +36,7 @@ public final class NestedIterator implements Iterator<Integer> {
 		return it.hasNext();
 	}
 
-	interface NestedInteger {
+	static interface NestedInteger {
 		public boolean isInteger();
 
 		public Integer getInteger();
