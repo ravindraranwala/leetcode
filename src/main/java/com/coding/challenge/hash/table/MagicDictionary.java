@@ -13,7 +13,7 @@ public final class MagicDictionary {
 	}
 
 	public static void main(String[] args) {
-		MagicDictionary magicDictionary = new MagicDictionary();
+		final MagicDictionary magicDictionary = new MagicDictionary();
 		final String[] dictionary = { "hello", "leetcode" };
 		magicDictionary.buildDict(dictionary);
 		assert !magicDictionary.search("hello");
