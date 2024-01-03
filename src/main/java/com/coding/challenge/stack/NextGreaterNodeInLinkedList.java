@@ -34,10 +34,9 @@ class NextGreaterNodeInLinkedList {
 		int i = 0;
 		for (ListNode<Integer> curr = head; curr != null; curr = curr.next, i = i + 1) {
 			nums[i] = curr.val;
-			while (!s.isEmpty() && nums[s.peek()] < curr.val) {
-				a[s.peek()] = curr.val;
-				s.pop();
-			}
+			while (!s.isEmpty() && nums[s.peek()] < curr.val)
+				a[s.pop()] = curr.val;
+
 			s.push(i);
 		}
 		return a;
