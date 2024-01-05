@@ -4,7 +4,7 @@ import com.coding.challenge.bst.TreeNode;
 
 class SmallestSubtreeWithAllTheDeepestNodes {
 	SmallestSubtreeWithAllTheDeepestNodes() {
-
+		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
