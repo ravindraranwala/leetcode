@@ -20,28 +20,28 @@ class NonDecreasingSubsequences {
 	}
 
 	List<List<Integer>> findSubsequences(int[] nums) {
-		backtracking(nums, 0, new ArrayList<>());
+		backtrack(nums, 0, new ArrayList<>());
 		final List<List<Integer>> ans = new ArrayList<>();
 		for (List<Integer> increasingSubseq : s)
 			ans.add(increasingSubseq);
 		return ans;
 	}
 
-	private void backtracking(int[] nums, int i, List<Integer> currState) {
+	private void backtrack(int[] nums, int i, List<Integer> currState) {
 		if (i == nums.length) {
 			if (currState.size() >= 2)
 				s.add(new ArrayList<>(currState));
 			return;
 		}
 		// exclude the current element and explore.
-		backtracking(nums, i + 1, currState);
+		backtrack(nums, i + 1, currState);
 		// include the current element and explore.
 		// is it increasing subsequence after appending the ith element.
 		if (currState.isEmpty() || nums[i] >= currState.get(currState.size() - 1)) {
 			// choose it.
 			currState.add(nums[i]);
 			// explore.
-			backtracking(nums, i + 1, currState);
+			backtrack(nums, i + 1, currState);
 			// unchoose it.
 			currState.remove(currState.size() - 1);
 		}
