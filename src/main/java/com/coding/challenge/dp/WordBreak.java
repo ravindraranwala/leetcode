@@ -18,7 +18,7 @@ class WordBreak {
 
 	static boolean wordBreak(String s, List<String> wordDict) {
 		final int n = s.length();
-		final Set<String> dictionary = new HashSet<String>(wordDict);
+		final Set<String> dictionary = new HashSet<>(wordDict);
 		final boolean[] wb = new boolean[n];
 
 		for (int j = 0; j < n; j++) {
