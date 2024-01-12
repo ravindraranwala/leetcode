@@ -57,9 +57,8 @@ class EvenOddTree {
 		else
 			levels.set(level, node.val);
 
-		final boolean left = visitTree(node.left, levels, level + 1);
-		if (!left)
-			return false;
-		return visitTree(node.right, levels, level + 1);
+		// Note the short-circuit operator which returns immediately of the first call
+		// returns false.
+		return visitTree(node.left, levels, level + 1) && visitTree(node.right, levels, level + 1);
 	}
 }
