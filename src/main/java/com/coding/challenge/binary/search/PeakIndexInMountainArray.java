@@ -20,16 +20,16 @@ class PeakIndexInMountainArray {
 	}
 
 	static int peakIndexInMountainArray(int[] arr) {
-		int i = 0;
-		int j = arr.length - 1;
+		int l = 0;
+		int r = arr.length - 1;
 
-		while (j > i) {
-			final int mid = (i + j) / 2;
+		while (r > l) {
+			final int mid = (l + r) / 2;
 			if (arr[mid] < arr[mid + 1])
-				i = mid + 1;
+				l = mid + 1;
 			else
-				j = mid;
+				r = mid;
 		}
-		return i;
+		return l;
 	}
 }
