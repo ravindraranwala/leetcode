@@ -23,15 +23,13 @@ class PeakIndexInMountainArray {
 		int i = 0;
 		int j = arr.length - 1;
 
-		while (j - i >= 2) {
+		while (j > i) {
 			final int mid = (i + j) / 2;
-			if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1])
-				return mid;
-			if (arr[mid] > arr[mid - 1] && arr[mid] < arr[mid + 1])
+			if (arr[mid] < arr[mid + 1])
 				i = mid + 1;
-			else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1])
-				j = mid - 1;
+			else
+				j = mid;
 		}
-		return arr[i] > arr[j] ? i : j;
+		return i;
 	}
 }
