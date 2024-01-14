@@ -1,4 +1,4 @@
-package com.coding.challenge.hash.table;
+package com.coding.challenge.prefix.sum;
 
 import java.util.Arrays;
 import java.util.HashMap;
