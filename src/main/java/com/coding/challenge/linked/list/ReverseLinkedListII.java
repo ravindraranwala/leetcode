@@ -51,10 +51,9 @@ class ReverseLinkedListII {
 		curr = curr.next;
 		l = curr;
 
-		ListNode<Integer> prev = curr;
+		ListNode<Integer> prev = null;
 		ListNode<Integer> next = null;
-		curr = curr.next;
-		for (int j = left + 1; j <= right; j++) {
+		for (int j = left; j <= right; j++) {
 			next = curr.next;
 			curr.next = prev;
 			prev = curr;
