@@ -7,10 +7,10 @@ public class PredictTheWinner {
 
 	public static void main(String[] args) {
 		final int[] nums1 = { 1, 5, 2 };
-		System.out.println(predictTheWinner(nums1));
+		assert !predictTheWinner(nums1);
 
 		final int[] nums2 = { 1, 5, 233, 7 };
-		System.out.println(predictTheWinner(nums2));
+		assert predictTheWinner(nums2);
 	}
 
 	static boolean predictTheWinner(int[] nums) {
