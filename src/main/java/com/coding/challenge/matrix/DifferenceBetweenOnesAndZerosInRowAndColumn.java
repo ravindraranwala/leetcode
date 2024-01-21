@@ -21,19 +21,14 @@ class DifferenceBetweenOnesAndZerosInRowAndColumn {
 		final int m = grid.length;
 		final int n = grid[0].length;
 		final int[] onesRow = new int[m];
+		final int[] onesCol = new int[n];
 		for (int i = 0; i < m; i++) {
 			int s = 0;
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < n; j++) {
 				s = s + grid[i][j];
+				onesCol[j] = onesCol[j] + grid[i][j];
+			}
 			onesRow[i] = s;
-		}
-
-		final int[] onesCol = new int[n];
-		for (int i = 0; i < n; i++) {
-			int s = 0;
-			for (int j = 0; j < m; j++)
-				s = s + grid[j][i];
-			onesCol[i] = s;
 		}
 
 		final int[][] diff = new int[m][n];
