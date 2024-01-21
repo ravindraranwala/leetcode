@@ -23,12 +23,10 @@ class DifferenceBetweenOnesAndZerosInRowAndColumn {
 		final int[] onesRow = new int[m];
 		final int[] onesCol = new int[n];
 		for (int i = 0; i < m; i++) {
-			int s = 0;
 			for (int j = 0; j < n; j++) {
-				s = s + grid[i][j];
+				onesRow[i] = onesRow[i] + grid[i][j];
 				onesCol[j] = onesCol[j] + grid[i][j];
 			}
-			onesRow[i] = s;
 		}
 
 		final int[][] diff = new int[m][n];
