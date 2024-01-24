@@ -33,19 +33,19 @@ class LongestUnivaluePath {
 		if (node == null)
 			return 0;
 
-		int uniNodeCount = 1;
+		int uniPathLength = 0;
 		int maxSideLength = 0;
 		final int l1 = visitTree(node.left, a);
 		if (node.left != null && node.left.val == node.val) {
-			uniNodeCount = uniNodeCount + l1;
+			uniPathLength = uniPathLength + l1;
 			maxSideLength = Math.max(maxSideLength, l1);
 		}
 		final int l2 = visitTree(node.right, a);
 		if (node.right != null && node.right.val == node.val) {
-			uniNodeCount = uniNodeCount + l2;
+			uniPathLength = uniPathLength + l2;
 			maxSideLength = Math.max(maxSideLength, l2);
 		}
-		a[0] = Math.max(a[0], uniNodeCount - 1);
+		a[0] = Math.max(a[0], uniPathLength);
 		return maxSideLength + 1;
 	}
 }
