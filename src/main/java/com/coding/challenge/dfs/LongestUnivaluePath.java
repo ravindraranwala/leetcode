@@ -25,27 +25,17 @@ class LongestUnivaluePath {
 
 	static int longestUnivaluePath(TreeNode root) {
 		final int[] a = new int[1];
-		visitTree(root, a);
+		visitTree(root, a, -1);
 		return a[0];
 	}
 
-	private static int visitTree(TreeNode node, int[] a) {
-		if (node == null)
+	private static int visitTree(TreeNode root, int[] a, int parent) {
+		if (root == null)
 			return 0;
 
-		int uniPathLength = 0;
-		int maxSideLength = 0;
-		final int l1 = visitTree(node.left, a);
-		if (node.left != null && node.left.val == node.val) {
-			uniPathLength = uniPathLength + l1;
-			maxSideLength = Math.max(maxSideLength, l1);
-		}
-		final int l2 = visitTree(node.right, a);
-		if (node.right != null && node.right.val == node.val) {
-			uniPathLength = uniPathLength + l2;
-			maxSideLength = Math.max(maxSideLength, l2);
-		}
-		a[0] = Math.max(a[0], uniPathLength);
-		return maxSideLength + 1;
+		final int left = visitTree(root.left, a, root.val);
+		final int right = visitTree(root.right, a, root.val);
+		a[0] = Math.max(a[0], left + right);
+		return root.val == parent ? Math.max(left, right) + 1 : 0;
 	}
 }
