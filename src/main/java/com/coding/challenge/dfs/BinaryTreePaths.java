@@ -13,7 +13,7 @@ class BinaryTreePaths {
 	}
 
 	public static void main(String[] args) {
-		final TreeNode root1 = new TreeNode(1, new TreeNode(2000, null, new TreeNode(5)), new TreeNode(3));
+		final TreeNode root1 = new TreeNode(1, new TreeNode(100, null, new TreeNode(5)), new TreeNode(3));
 		final BinaryTreePaths p1 = new BinaryTreePaths();
 		p1.binaryTreePaths(root1);
 		System.out.println(p1.paths);
@@ -38,7 +38,7 @@ class BinaryTreePaths {
 		visitTree(root.left, currPath);
 		visitTree(root.right, currPath);
 		final int charsToBeDeleted = String.valueOf(root.val).length() + 2;
-		// at most 7 chars would require deleting.
+		// at most 6 chars would require deleting.
 		for (int i = 0; i < charsToBeDeleted; i++)
 			currPath.deleteCharAt(currPath.length() - 1);
 	}
