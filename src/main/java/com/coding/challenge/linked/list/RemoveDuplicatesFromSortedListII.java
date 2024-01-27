@@ -26,19 +26,15 @@ class RemoveDuplicatesFromSortedListII {
 	}
 
 	static ListNode<Integer> deleteDuplicates(ListNode<Integer> head) {
-		final ListNode<Integer> dummy = new ListNode<Integer>(-101, head);
-		ListNode<Integer> prev = dummy;
-		ListNode<Integer> curr = head;
-		while (curr != null && curr.next != null) {
-			if (curr.val == curr.next.val) {
-				final int dupKey = curr.val;
-				while (curr != null && curr.val == dupKey)
-					curr = curr.next;
-				prev.next = curr;
-			} else {
-				prev = curr;
-				curr = curr.next;
+		final ListNode<Integer> dummy = new ListNode<>(0);
+		ListNode<Integer> curr2 = dummy;
+		for (ListNode<Integer> curr1 = head; curr1 != null; curr1 = curr1.next) {
+			if (curr1.next == null || curr1.val != curr1.next.val) {
+				curr2.next = new ListNode<>(curr1.val);
+				curr2 = curr2.next;
 			}
+			while (curr1.next != null && curr1.val == curr1.next.val)
+				curr1 = curr1.next;
 		}
 		return dummy.next;
 	}
