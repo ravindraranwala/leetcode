@@ -6,7 +6,7 @@ class GuessNumberHigherOrLower {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(guessNumber(10));
+		assert guessNumber(10) == 6;
 	}
 
 	static int guessNumber(int n) {
