@@ -1,6 +1,10 @@
 package com.coding.challenge.array.util;
 
 public class ArrayUtils {
+	private ArrayUtils() {
+		throw new AssertionError();
+	}
+
 	/**
 	 * Reverses the input array in place.
 	 * 
