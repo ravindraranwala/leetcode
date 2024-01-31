@@ -22,11 +22,11 @@ class BuyAndSellStock {
 
 	static int maxProfit(int[] prices) {
 		final int n = prices.length;
-		int v = 0;
-		for (int i = 0; i < n - 1; i++) {
+		int profit = 0;
+		for (int i = 0; i < n - 1; i++)
 			if (prices[i] < prices[i + 1])
-				v = v + prices[i + 1] - prices[i];
-		}
-		return v;
+				profit = profit + prices[i + 1] - prices[i];
+
+		return profit;
 	}
 }
