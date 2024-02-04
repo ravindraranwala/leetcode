@@ -7,10 +7,10 @@ class MaxConsecutiveOnes {
 
 	public static void main(String[] args) {
 		final int[] nums1 = { 1, 1, 0, 1, 1, 1 };
-		System.out.println(findMaxConsecutiveOnes(nums1));
+		assert findMaxConsecutiveOnes(nums1) == 3;
 
 		final int[] nums2 = { 1, 0, 1, 1, 0, 1 };
-		System.out.println(findMaxConsecutiveOnes(nums2));
+		assert findMaxConsecutiveOnes(nums2) == 2;
 	}
 
 	static int findMaxConsecutiveOnes(int[] nums) {
