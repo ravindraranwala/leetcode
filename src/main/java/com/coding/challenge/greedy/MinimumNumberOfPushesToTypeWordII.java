@@ -22,7 +22,7 @@ class MinimumNumberOfPushesToTypeWordII {
 
 		Arrays.sort(f);
 		int pushes = 0;
-		for (int i = 25; i >= 0 && f[i] > 0; i--) {
+		for (int i = 25; i >= 0; i--) {
 			if (i >= 18)
 				pushes = pushes + f[i];
 			else if (i >= 10)
