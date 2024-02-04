@@ -50,7 +50,15 @@ public class MSTKruskal {
 		System.out.println(String.format("Min Cost to Repair Edges: %d", cost));
 	}
 
-	private static int mstKruskal(int n, Edge[] edges) {
+	/**
+	 * Computes the cost required to build the minimum spanning tree.
+	 * 
+	 * @param n     Number of nodes. Node id should start from 1. It can be 1, 2, 3,
+	 *              4, ..., n
+	 * @param edges undirected edges connecting nodes.
+	 * @return The minimum cost required to connect all the vertices.
+	 */
+	static int mstKruskal(int n, Edge[] edges) {
 		Node[] vertices = new Node[n + 1];
 
 		for (int i = 1; i <= n; i++) {
@@ -101,7 +109,7 @@ public class MSTKruskal {
 		return x.p;
 	}
 
-	static class Node {
+	private static class Node {
 		private int rank;
 		private Node p;
 	}
