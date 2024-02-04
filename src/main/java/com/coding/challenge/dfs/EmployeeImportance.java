@@ -28,8 +28,8 @@ class EmployeeImportance {
 	}
 
 	class Employee {
-		public int id;
-		public int importance;
-		public List<Integer> subordinates;
+		private int id;
+		private int importance;
+		private List<Integer> subordinates;
 	};
 }
