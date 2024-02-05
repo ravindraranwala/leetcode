@@ -11,6 +11,7 @@ class ClimbingStairs {
 
 	static int climbStairs(int n) {
 		int w = 0;
+		// similar to a Fibonacci series with one offset.
 		for (int i = 1, prev = 1, beforePrev = 0; i <= n; i++) {
 			w = prev + beforePrev;
 			beforePrev = prev;
