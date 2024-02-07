@@ -1,9 +1,9 @@
-package com.coding.challenge.kruskal;
+package com.coding.challenge.disjoint.sets;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coding.challenge.kruskal.MSTKruskal.Edge;
+import com.coding.challenge.disjoint.sets.MSTKruskal.Edge;
 
 class MinCostToConnectAllPoints {
 	MinCostToConnectAllPoints() {

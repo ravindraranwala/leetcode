@@ -1,4 +1,4 @@
-package com.coding.challenge.kruskal;
+package com.coding.challenge.disjoint.sets;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -59,7 +59,7 @@ public class MSTKruskal {
 	 * @return The minimum cost required to connect all the vertices.
 	 */
 	static int mstKruskal(int n, Edge[] edges) {
-		Node[] vertices = new Node[n + 1];
+		final Node[] vertices = new Node[n + 1];
 
 		for (int i = 1; i <= n; i++) {
 			vertices[i] = new Node();
@@ -71,8 +71,8 @@ public class MSTKruskal {
 
 		int cost = 0;
 		for (Edge edge : edges) {
-			Node u = vertices[edge.source];
-			Node v = vertices[edge.target];
+			final Node u = vertices[edge.source];
+			final Node v = vertices[edge.target];
 			if (findSet(u) != findSet(v)) {
 				cost += edge.weight; // A safe, light edge is found. This becomes a part of our MST.
 				union(u, v);
@@ -82,16 +82,16 @@ public class MSTKruskal {
 	}
 
 	// Disjoint set operations are implemented here.
-	private static void makeSet(Node x) {
+	static void makeSet(Node x) {
 		x.p = x;
 		x.rank = 0;
 	}
 
-	private static void union(Node x, Node y) {
+	static void union(Node x, Node y) {
 		link(findSet(x), findSet(y));
 	}
 
-	private static void link(Node x, Node y) {
+	static void link(Node x, Node y) {
 		// union by rank heuristic.
 		if (x.rank > y.rank)
 			y.p = x;
@@ -102,22 +102,22 @@ public class MSTKruskal {
 		}
 	}
 
-	private static Node findSet(Node x) {
+	static Node findSet(Node x) {
 		if (x != x.p)
 			x.p = findSet(x.p);// Path compression.
 
 		return x.p;
 	}
 
-	private static class Node {
+	static class Node {
 		private int rank;
 		private Node p;
 	}
 
 	public static class Edge {
-		private final int source;
-		private final int target;
-		private final int weight;
+		final int source;
+		final int target;
+		final int weight;
 
 		public Edge(int source, int target, int weight) {
 			this.source = source;
