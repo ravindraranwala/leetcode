@@ -28,8 +28,7 @@ class ReverseNodesInGroup {
 		ListNode<Integer> curr = head;
 		final ListNode<Integer> dummyHead = new ListNode<>(-1, head);
 		ListNode<Integer> prevGroupFirst = dummyHead;
-		final int groupCnt = n / k;
-		for (int g = 1; g <= groupCnt; g++) {
+		for (int g = 1, groupCnt = n / k; g <= groupCnt; g++) {
 			ListNode<Integer> prev = null;
 			ListNode<Integer> currGroupFirst = curr;
 			ListNode<Integer> currGroupLast = null;
