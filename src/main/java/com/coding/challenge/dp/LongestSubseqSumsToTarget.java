@@ -24,19 +24,20 @@ class LongestSubseqSumsToTarget {
 
 	static int lengthOfLongestSubsequence(List<Integer> nums, int target) {
 		final int n = nums.size();
-		final int[][] t = new int[target + 1][n + 1];
+		final int[][] l = new int[target + 1][n + 1];
 
 		for (int i = 1; i <= target; i++) {
-			t[i][0] = -1;
+			l[i][0] = -1;
 			for (int j = 1; j <= n; j++) {
 				final int rem = i - nums.get(j - 1);
-				t[i][j] = t[i][j - 1];
 				// choosing current element leads to some solution. So, try that out.
-				if (rem >= 0 && t[rem][j - 1] >= 0)
-					t[i][j] = Math.max(t[rem][j - 1] + 1, t[i][j - 1]);
+				if (rem >= 0 && l[rem][j - 1] >= 0)
+					l[i][j] = Math.max(l[rem][j - 1] + 1, l[i][j - 1]);
+				else
+					l[i][j] = l[i][j - 1];
 			}
 		}
 
-		return t[target][n];
+		return l[target][n];
 	}
 }
