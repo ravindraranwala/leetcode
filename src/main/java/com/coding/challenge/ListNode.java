@@ -4,7 +4,7 @@ package com.coding.challenge;
  * Definition for singly-linked list.
  */
 public final class ListNode<T> {
-	public final T val;
+	public T val;
 	public ListNode<T> next;
 
 	public ListNode(T val) {
