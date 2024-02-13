@@ -13,7 +13,7 @@ class UndergroundSystem {
 	}
 
 	public static void main(String[] args) {
-		UndergroundSystem undergroundSystem = new UndergroundSystem();
+		final UndergroundSystem undergroundSystem = new UndergroundSystem();
 		undergroundSystem.checkIn(45, "Leyton", 3);
 		undergroundSystem.checkIn(32, "Paradise", 8);
 		undergroundSystem.checkIn(27, "Leyton", 10);
