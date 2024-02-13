@@ -9,9 +9,7 @@ class FindElements {
 	final Set<Integer> recoveredVals = new HashSet<>();
 
 	public FindElements(TreeNode root) {
-		root.val = 0;
-		recoveredVals.add(root.val);
-		recoverTree(root);
+		recoverTree(root, 0);
 	}
 
 	public static void main(String[] args) {
@@ -30,16 +28,13 @@ class FindElements {
 		return recoveredVals.contains(target);
 	}
 
-	private void recoverTree(TreeNode root) {
-		if (root.left != null) {
-			root.left.val = root.val * 2 + 1;
-			recoveredVals.add(root.left.val);
-			recoverTree(root.left);
-		}
-		if (root.right != null) {
-			root.right.val = root.val * 2 + 2;
-			recoveredVals.add(root.right.val);
-			recoverTree(root.right);
-		}
+	private void recoverTree(TreeNode root, int val) {
+		if (root == null)
+			return;
+
+		root.val = val;
+		recoveredVals.add(val);
+		recoverTree(root.left, root.val * 2 + 1);
+		recoverTree(root.right, root.val * 2 + 2);
 	}
 }
