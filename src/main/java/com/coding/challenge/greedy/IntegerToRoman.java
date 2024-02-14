@@ -22,7 +22,7 @@ class IntegerToRoman {
 			int i = n - 1;
 			/*
 			 * Greedy choice property: Always chose the largest possible number and solve
-			 * the remaining optimally.
+			 * the remaining subproblem optimally.
 			 */
 			while (decimalEquivalent[i] > currNum)
 				i = i - 1;
