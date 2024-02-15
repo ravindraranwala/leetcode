@@ -20,11 +20,12 @@ class FindWordsThatCanBeFormedByCharacters {
 		int l = 0;
 		for (String word : words) {
 			final int[] wordFreq = new int[26];
-			boolean good = true;
-			for (char ch : word.toCharArray()) {
+			for (char ch : word.toCharArray())
 				wordFreq[ch - FIRST_LETTER] = wordFreq[ch - FIRST_LETTER] + 1;
-				good = good && wordFreq[ch - FIRST_LETTER] <= charsFreq[ch - FIRST_LETTER];
-			}
+
+			boolean good = true;
+			for (int i = 0; i < 26 && good; i++)
+				good = good && wordFreq[i] <= charsFreq[i];
 
 			if (good)
 				l = l + word.length();
