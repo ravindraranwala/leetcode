@@ -16,14 +16,17 @@ class InvertBinaryTree {
 	}
 
 	static TreeNode invertTree(TreeNode root) {
-		if (root == null)
-			return null;
+		preOrder(root);
+		return root;
+	}
 
-		invertTree(root.left);
-		invertTree(root.right);
+	private static void preOrder(TreeNode root) {
+		if (root == null)
+			return;
 		final TreeNode tmp = root.left;
 		root.left = root.right;
 		root.right = tmp;
-		return root;
+		preOrder(root.left);
+		preOrder(root.right);
 	}
 }
