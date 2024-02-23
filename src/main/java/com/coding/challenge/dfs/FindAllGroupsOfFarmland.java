@@ -38,11 +38,7 @@ class FindAllGroupsOfFarmland {
 			}
 		}
 
-		final int l = landCoordinates.size();
-		final int[][] coordinates = new int[l][4];
-		for (int i = 0; i < l; i++)
-			coordinates[i] = landCoordinates.get(i);
-		return coordinates;
+		return landCoordinates.toArray(new int[0][0]);
 	}
 
 	private static void visitGraph(int[][] land, int i, int j, boolean[][] d, int[] bottomRightCoord) {
