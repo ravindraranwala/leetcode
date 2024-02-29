@@ -20,7 +20,7 @@ class MyCalendarI {
 	public boolean book(int start, int end) {
 		for (int[] interval : intervals)
 			// check for non-overlapping intervals.
-			if (!(interval[0] >= end || interval[1] < start))
+			if (interval[0] < end && interval[1] >= start)
 				return false;
 
 		intervals.add(new int[] { start, end - 1 });
