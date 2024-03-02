@@ -25,7 +25,7 @@ class KeysAndRooms {
 		connectedComponent(rooms, d, 0);
 		boolean connected = true;
 		for (int i = 0; i < n; i++)
-			connected = connected & d[i];
+			connected = connected && d[i];
 		return connected;
 	}
 
