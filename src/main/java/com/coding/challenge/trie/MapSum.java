@@ -24,10 +24,8 @@ class MapSum {
 
 	public void insert(String key, int val) {
 		final int oldValue = keyStore.getOrDefault(key, 0);
-		final int n = key.length();
 		TrieNode curr = root;
-		for (int i = 0; i < n; i++) {
-			final char ch = key.charAt(i);
+		for (char ch : key.toCharArray()) {
 			if (curr.children[ch - FIRST_LETTER] == null)
 				curr.children[ch - FIRST_LETTER] = new TrieNode();
 			curr = curr.children[ch - FIRST_LETTER];
@@ -37,13 +35,13 @@ class MapSum {
 	}
 
 	public int sum(String prefix) {
-		final int n = prefix.length();
 		TrieNode curr = root;
-		for (int i = 0; i < n && curr != null; i++) {
-			final char ch = prefix.charAt(i);
+		for (char ch : prefix.toCharArray()) {
 			curr = curr.children[ch - FIRST_LETTER];
+			if (curr == null)
+				return 0;
 		}
-		return curr == null ? 0 : curr.sum;
+		return curr.sum;
 	}
 
 	private static class TrieNode {
