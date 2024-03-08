@@ -16,11 +16,9 @@ class NumbersWithSameConsecutiveDifferences {
 
 	static int[] numsSameConsecDiff(int n, int k) {
 		final List<Integer> ans = new ArrayList<>();
-		for (int num = 1; num < 10; num++) {
-			final StringBuilder state = new StringBuilder();
-			state.append(num);
-			backtrack(n, k, num, state, ans);
-		}
+		for (int num = 1; num < 10; num++)
+			backtrack(n - 1, k, num, ans);
+
 		final int l = ans.size();
 		final int[] a = new int[l];
 		for (int i = 0; i < l; i++)
@@ -28,29 +26,22 @@ class NumbersWithSameConsecutiveDifferences {
 		return a;
 	}
 
-	private static void backtrack(int n, int k, int prevNum, StringBuilder state, List<Integer> ans) {
-		if (state.length() == n) {
-			ans.add(Integer.parseInt(state.toString()));
+	private static void backtrack(int n, int k, int num, List<Integer> ans) {
+		if (n == 0) {
+			ans.add(num);
 			return;
 		}
 
+		final int tailDigit = num % 10;
 		// we have at most two possible choices here.
-		if (prevNum + k < 10) {
-			// choose.
-			state.append(prevNum + k);
+		// choose.
+		if (tailDigit + k < 10)
 			// explore.
-			backtrack(n, k, prevNum + k, state, ans);
-			// unchoose.
-			state.deleteCharAt(state.length() - 1);
-		}
+			backtrack(n - 1, k, num * 10 + tailDigit + k, ans);
 
-		if (k != 0 && prevNum - k >= 0) {
-			// choose.
-			state.append(prevNum - k);
+		// choose.
+		if (k != 0 && tailDigit - k >= 0)
 			// explore.
-			backtrack(n, k, prevNum - k, state, ans);
-			// unchoose.
-			state.deleteCharAt(state.length() - 1);
-		}
+			backtrack(n - 1, k, num * 10 + tailDigit - k, ans);
 	}
 }
