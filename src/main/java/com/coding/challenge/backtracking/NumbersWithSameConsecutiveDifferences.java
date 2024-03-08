@@ -34,15 +34,23 @@ class NumbersWithSameConsecutiveDifferences {
 			return;
 		}
 
-		for (int num = 0; num < 10; num++) {
-			if (Math.abs(num - prevNum) == k) {
-				// choose.
-				state.append(num);
-				// explore.
-				backtrack(n, k, num, state, ans);
-				// unchoose.
-				state.deleteCharAt(state.length() - 1);
-			}
+		// we have at most two possible choices here.
+		if (prevNum + k < 10) {
+			// choose.
+			state.append(prevNum + k);
+			// explore.
+			backtrack(n, k, prevNum + k, state, ans);
+			// unchoose.
+			state.deleteCharAt(state.length() - 1);
+		}
+
+		if (k != 0 && prevNum - k >= 0) {
+			// choose.
+			state.append(prevNum - k);
+			// explore.
+			backtrack(n, k, prevNum - k, state, ans);
+			// unchoose.
+			state.deleteCharAt(state.length() - 1);
 		}
 	}
 }
