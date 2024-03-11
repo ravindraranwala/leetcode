@@ -16,7 +16,7 @@ class StoneGameIII {
 		assert "Tie".equals(stoneGameIII(stoneValues3));
 
 		final int[] stoneValues4 = { 7, 2, -6, 8, -3, 5, -4, 9, 1, 10 };
-		"Alice".equals(stoneGameIII(stoneValues4));
+		assert "Alice".equals(stoneGameIII(stoneValues4));
 
 		final int[] stoneValues5 = { -5 };
 		assert "Bob".equals(stoneGameIII(stoneValues5));
