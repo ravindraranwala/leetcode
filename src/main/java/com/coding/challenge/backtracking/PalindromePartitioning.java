@@ -26,7 +26,7 @@ class PalindromePartitioning {
 	private static void backtrack(List<List<String>> l, String s, int i, List<String> curr) {
 		final int n = s.length();
 		if (i == n) {
-			l.add(new ArrayList<String>(curr));
+			l.add(new ArrayList<>(curr));
 			return;
 		}
 
