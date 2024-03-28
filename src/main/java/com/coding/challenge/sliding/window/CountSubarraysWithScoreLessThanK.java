@@ -23,7 +23,7 @@ class CountSubarraysWithScoreLessThanK {
 				sum = sum - nums[i];
 				i = i + 1;
 			}
-			// number of sub arrays finishing at index j, with score < k
+			// number of sub arrays finishing at index j, with score < k.
 			c = c + j - i + 1;
 		}
 		return c;
