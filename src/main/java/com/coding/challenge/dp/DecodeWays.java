@@ -17,19 +17,10 @@ class DecodeWays {
 
 	static int numDecodings(String s) {
 		final int n = s.length();
-		if (n == 1)
-			return s.charAt(0) == '0' ? 0 : 1;
-		int beforePrev = s.charAt(n - 1) == '0' ? 0 : 1;
-		int prev = 0;
-		if (s.charAt(n - 2) != '0') {
-			final int val = (s.charAt(n - 2) - '0') * 10 + (s.charAt(n - 1) - '0');
-			if (val > 26)
-				prev = beforePrev;
-			else
-				prev = beforePrev + 1;
-		}
+		int beforePrev = 1;
+		int prev = s.charAt(n - 1) == '0' ? 0 : 1;
 
-		for (int i = n - 3; i >= 0; i--) {
+		for (int i = n - 2; i >= 0; i--) {
 			int d = 0;
 			if (s.charAt(i) != '0') {
 				final int val = (s.charAt(i) - '0') * 10 + (s.charAt(i + 1) - '0');
