@@ -32,9 +32,9 @@ class NumberOfStudentsUnableToEatLunch {
 			if (sandwiches[i] == 1 && ones == 0)
 				return n - i;
 
-			if (sandwiches[i] == 0 && zeros > 0)
+			if (sandwiches[i] == 0)
 				zeros = zeros - 1;
-			else if (sandwiches[i] == 1 && ones > 0)
+			else
 				ones = ones - 1;
 		}
 		return 0;
