@@ -1,59 +1,57 @@
 package com.coding.challenge.tree;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.coding.challenge.bst.TreeNode;
 
 class SmallestStringStartingFromLeaf {
-	private static final Map<Integer, Character> charConverter = new HashMap<>();
-	static {
-		final char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-		for (int i = 0; i < 26; i++)
-			charConverter.put(i, alphabet[i]);
-	}
+	private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+	// identity element for smallest alphabetical string.
+	private String str = "~";
+	private char[] curr = new char[8500];
 
 	SmallestStringStartingFromLeaf() {
-		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
 		final TreeNode rootOne = new TreeNode(0, new TreeNode(1, new TreeNode(3), new TreeNode(4)),
 				new TreeNode(2, new TreeNode(3), new TreeNode(4)));
-		assert "dba".equals(smallestFromLeaf(rootOne));
+		assert "dba".equals(new SmallestStringStartingFromLeaf().smallestFromLeaf(rootOne));
 
 		final TreeNode rootTwo = new TreeNode(25, new TreeNode(1, new TreeNode(1), new TreeNode(3)),
 				new TreeNode(3, new TreeNode(0), new TreeNode(2)));
-		assert "adz".equals(smallestFromLeaf(rootTwo));
+		assert "adz".equals(new SmallestStringStartingFromLeaf().smallestFromLeaf(rootTwo));
 
 		final TreeNode nodeThree = new TreeNode(2, new TreeNode(2, null, new TreeNode(1, new TreeNode(0), null)),
 				new TreeNode(1, new TreeNode(0), null));
-		assert "abc".equals(smallestFromLeaf(nodeThree));
+		assert "abc".equals(new SmallestStringStartingFromLeaf().smallestFromLeaf(nodeThree));
 
 		final TreeNode nodeFour = new TreeNode(4, new TreeNode(0, new TreeNode(1), null), new TreeNode(1));
-		assert "bae".equals(smallestFromLeaf(nodeFour));
+		assert "bae".equals(new SmallestStringStartingFromLeaf().smallestFromLeaf(nodeFour));
 
 		final TreeNode rootFive = new TreeNode(25,
 				new TreeNode(1, new TreeNode(0, new TreeNode(1, new TreeNode(0), null), null), new TreeNode(0)), null);
-		assert "ababz".equals(smallestFromLeaf(rootFive));
+		assert "ababz".equals(new SmallestStringStartingFromLeaf().smallestFromLeaf(rootFive));
 	}
 
-	static String smallestFromLeaf(TreeNode root) {
-		return smallestStringFromLeaf(root, "");
+	String smallestFromLeaf(TreeNode root) {
+		smallestStringFromLeaf(root, 0);
+		return str;
 	}
 
-	private static String smallestStringFromLeaf(TreeNode root, String suffix) {
+	private void smallestStringFromLeaf(TreeNode root, int l) {
+		if (root == null)
+			return;
+		curr[l] = ALPHABET[root.val];
 		// leaf node found.
-		if (root.left == null && root.right == null)
-			return charConverter.get(root.val) + suffix;
-		else if (root.left == null)
-			return smallestStringFromLeaf(root.right, charConverter.get(root.val) + suffix);
-		else if (root.right == null)
-			return smallestStringFromLeaf(root.left, charConverter.get(root.val) + suffix);
-		else {
-			final String l = smallestStringFromLeaf(root.left, charConverter.get(root.val) + suffix);
-			final String r = smallestStringFromLeaf(root.right, charConverter.get(root.val) + suffix);
-			return l.compareTo(r) < 0 ? l : r;
+		if (root.left == null && root.right == null) {
+			final char[] a = new char[l + 1];
+			for (int i = 0; i <= l; i++)
+				a[i] = curr[l - i];
+			final String p = new String(a);
+			if (p.compareTo(str) < 0)
+				str = p;
+		} else {
+			smallestStringFromLeaf(root.left, l + 1);
+			smallestStringFromLeaf(root.right, l + 1);
 		}
 	}
 }
