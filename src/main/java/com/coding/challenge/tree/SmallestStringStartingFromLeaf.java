@@ -1,12 +1,15 @@
 package com.coding.challenge.tree;
 
+import java.util.Arrays;
+
 import com.coding.challenge.bst.TreeNode;
 
 class SmallestStringStartingFromLeaf {
 	private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+	private static final int LEN = 8500;
 	// identity element for smallest alphabetical string.
 	private String str = "~";
-	private char[] curr = new char[8500];
+	private char[] curr = new char[LEN];
 
 	SmallestStringStartingFromLeaf() {
 	}
@@ -33,25 +36,22 @@ class SmallestStringStartingFromLeaf {
 	}
 
 	String smallestFromLeaf(TreeNode root) {
-		smallestStringFromLeaf(root, 0);
+		dfs(root, 0);
 		return str;
 	}
 
-	private void smallestStringFromLeaf(TreeNode root, int l) {
+	private void dfs(TreeNode root, int l) {
 		if (root == null)
 			return;
-		curr[l] = ALPHABET[root.val];
+		curr[LEN - l - 1] = ALPHABET[root.val];
 		// leaf node found.
 		if (root.left == null && root.right == null) {
-			final char[] a = new char[l + 1];
-			for (int i = 0; i <= l; i++)
-				a[i] = curr[l - i];
-			final String p = new String(a);
+			final String p = new String(Arrays.copyOfRange(curr, LEN - l - 1, LEN));
 			if (p.compareTo(str) < 0)
 				str = p;
 		} else {
-			smallestStringFromLeaf(root.left, l + 1);
-			smallestStringFromLeaf(root.right, l + 1);
+			dfs(root.left, l + 1);
+			dfs(root.right, l + 1);
 		}
 	}
 }
