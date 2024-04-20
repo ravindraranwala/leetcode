@@ -5,7 +5,6 @@ import java.util.Arrays;
 import com.coding.challenge.bst.TreeNode;
 
 class SmallestStringStartingFromLeaf {
-	private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 	private static final int LEN = 8500;
 	// identity element for smallest alphabetical string.
 	private String str = "~";
@@ -43,7 +42,7 @@ class SmallestStringStartingFromLeaf {
 	private void dfs(TreeNode root, int l) {
 		if (root == null)
 			return;
-		curr[LEN - l - 1] = ALPHABET[root.val];
+		curr[LEN - l - 1] = (char) (root.val + 'a');
 		// leaf node found.
 		if (root.left == null && root.right == null) {
 			final String p = new String(Arrays.copyOfRange(curr, LEN - l - 1, LEN));
