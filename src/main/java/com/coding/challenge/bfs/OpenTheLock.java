@@ -38,10 +38,10 @@ class OpenTheLock {
 
 		while (!q.isEmpty()) {
 			final Vertex u = q.poll();
-			if (u.num == 0)
+			if (u.key == 0)
 				return u.d;
 
-			for (int i = 0, prefix = 0, positionalVal = 1000, num = u.num; i < 4; i++) {
+			for (int i = 0, prefix = 0, positionalVal = 1000, num = u.key; i < 4; i++) {
 				final int currDigit = num / positionalVal;
 				num = num % positionalVal;
 				final int[] v = { currDigit + 1, currDigit - 1 };
@@ -84,11 +84,11 @@ class OpenTheLock {
 	}
 
 	static class Vertex {
-		final int num;
+		final int key;
 		final int d;
 
-		Vertex(int num, int d) {
-			this.num = num;
+		Vertex(int key, int d) {
+			this.key = key;
 			this.d = d;
 		}
 	}
