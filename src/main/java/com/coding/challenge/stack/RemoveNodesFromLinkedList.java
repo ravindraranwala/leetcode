@@ -21,7 +21,8 @@ class RemoveNodesFromLinkedList {
 
 	static ListNode<Integer> removeNodes(ListNode<Integer> head) {
 		final Deque<ListNode<Integer>> s = new ArrayDeque<>();
-		s.push(new ListNode<>(100001));
+		final ListNode<Integer> dummyHead = new ListNode<>(100001);
+		s.push(dummyHead);
 
 		for (ListNode<Integer> curr = head; curr != null; curr = curr.next) {
 			while (s.peek().val < curr.val)
@@ -31,6 +32,6 @@ class RemoveNodesFromLinkedList {
 			s.push(curr);
 		}
 
-		return s.pollLast().next;
+		return dummyHead.next;
 	}
 }
