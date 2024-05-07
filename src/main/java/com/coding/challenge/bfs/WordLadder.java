@@ -26,7 +26,7 @@ class WordLadder {
 		q.offer(new Vertex(beginWord, 1));
 		while (!q.isEmpty()) {
 			final Vertex u = q.poll();
-			// explore u's adjacency list.
+			// scan u's adjacency list.
 			final int l = u.word.length();
 			final char[] a = u.word.toCharArray();
 			for (int i = 0; i < l; i++) {
