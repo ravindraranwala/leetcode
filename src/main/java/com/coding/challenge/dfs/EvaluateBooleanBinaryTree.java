@@ -15,7 +15,7 @@ class EvaluateBooleanBinaryTree {
 	}
 
 	static boolean evaluateTree(TreeNode root) {
-		if (root.left == null && root.right == null)
+		if (root.val == 0 || root.val == 1)
 			return root.val == 1;
 
 		final boolean left = evaluateTree(root.left);
