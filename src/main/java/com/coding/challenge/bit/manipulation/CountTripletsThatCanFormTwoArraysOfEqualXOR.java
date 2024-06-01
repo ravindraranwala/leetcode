@@ -1,5 +1,8 @@
 package com.coding.challenge.bit.manipulation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class CountTripletsThatCanFormTwoArraysOfEqualXOR {
 	CountTripletsThatCanFormTwoArraysOfEqualXOR() {
 		throw new AssertionError();
@@ -18,14 +21,23 @@ class CountTripletsThatCanFormTwoArraysOfEqualXOR {
 
 	static int countTriplets(int[] arr) {
 		final int n = arr.length;
+		final Map<Integer, Integer> xorFreq = new HashMap<>();
+		final Map<Integer, Integer> xorTripletsCnt = new HashMap<>();
+		final Map<Integer, Integer> xorLastIdx = new HashMap<>();
+		xorFreq.put(0, 1);
+		xorLastIdx.put(0, -1);
+		xorTripletsCnt.put(0, 0);
 		int c = 0;
-		for (int i = 0; i < n; i++) {
-			int xorVal = 0;
-			for (int j = i; j < n; j++) {
-				xorVal = xorVal ^ arr[j];
-				if (xorVal == 0)
-					c = c + j - i;
-			}
+		for (int i = 0, xor = 0; i < n; i++) {
+			xor = xor ^ arr[i];
+			int triplets = 0;
+			if (xorFreq.containsKey(xor))
+				triplets = xorTripletsCnt.get(xor) + xorFreq.get(xor) * (i - xorLastIdx.get(xor)) - 1;
+
+			c = c + triplets;
+			xorFreq.merge(xor, 1, Integer::sum);
+			xorTripletsCnt.put(xor, triplets);
+			xorLastIdx.put(xor, i);
 		}
 		return c;
 	}
