@@ -25,8 +25,8 @@ class LongestPalindrome {
 			f.merge(ch, 1, Integer::sum);
 
 		int oddCnt = 0;
-		for (char key : f.keySet())
-			if (f.get(key) % 2 == 1)
+		for (int freq : f.values())
+			if (freq % 2 == 1)
 				oddCnt = oddCnt + 1;
 
 		final int n = s.length();
