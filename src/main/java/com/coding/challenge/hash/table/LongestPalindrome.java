@@ -24,14 +24,12 @@ class LongestPalindrome {
 		for (char ch : s.toCharArray())
 			f.merge(ch, 1, Integer::sum);
 
-		int l = 0;
 		int oddCnt = 0;
-		for (char key : f.keySet()) {
-			final int freq = f.get(key);
-			l = l + freq;
-			if (freq % 2 == 1)
+		for (char key : f.keySet())
+			if (f.get(key) % 2 == 1)
 				oddCnt = oddCnt + 1;
-		}
-		return oddCnt == 0 ? l : l - oddCnt + 1;
+
+		final int n = s.length();
+		return oddCnt == 0 ? n : n - oddCnt + 1;
 	}
 }
