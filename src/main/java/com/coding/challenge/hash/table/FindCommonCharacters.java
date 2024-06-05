@@ -33,11 +33,10 @@ class FindCommonCharacters {
 		}
 
 		final List<String> l = new ArrayList<>();
-		for (int i = 0; i < 26; i++) {
-			final char ch = (char) (FIRST_LETTER + i);
+		for (int i = 0; i < 26; i++)
 			for (int j = 0; j < f[i]; j++)
-				l.add(String.valueOf(ch));
-		}
+				l.add(String.valueOf((char) (FIRST_LETTER + i)));
+
 		return l;
 	}
 }
