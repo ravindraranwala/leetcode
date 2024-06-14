@@ -1,11 +1,11 @@
 package com.coding.challenge.radix.sort;
 
-class RadixSort {
+public class RadixSort {
 	RadixSort() {
 		throw new AssertionError();
 	}
 
-	static int[] radixSort(int[] a, int d) {
+	public static int[] radixSort(int[] a, int d) {
 		int[] b = a;
 		for (int i = 0; i < d; i++)
 			b = countingSort(b, 9, i);
