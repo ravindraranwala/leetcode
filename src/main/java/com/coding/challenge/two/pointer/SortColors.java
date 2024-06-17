@@ -21,7 +21,7 @@ class SortColors {
 
 	/*
 	 * An extension of the Quick Sort Partition algorithm. In Quick Sort, we have
-	 * just two partitions whereas here we have three partitions.
+	 * just two partitions whereas here we have four partitions.
 	 */
 	static void sortColors(int[] nums) {
 		final int n = nums.length;
