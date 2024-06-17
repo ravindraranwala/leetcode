@@ -25,19 +25,16 @@ class SortColors {
 	 */
 	static void sortColors(int[] nums) {
 		final int n = nums.length;
-		for (int i = 0, zeroIdx = -1, oneIdx = -1, twoIdx = -1; i < n; i++) {
-			if (nums[i] == 0) {
-				zeroIdx = zeroIdx + 1;
-				oneIdx = oneIdx + 1;
-				twoIdx = twoIdx + 1;
-				exchange(nums, oneIdx, twoIdx);
-				exchange(nums, zeroIdx, oneIdx);
-			} else if (nums[i] == 1) {
-				oneIdx = oneIdx + 1;
-				twoIdx = twoIdx + 1;
-				exchange(nums, oneIdx, twoIdx);
-			} else
-				twoIdx = twoIdx + 1;
+		for (int k = 0, i = -1, j = -1; k < n; k++) {
+			if (nums[k] == 0) {
+				i = i + 1;
+				j = j + 1;
+				exchange(nums, j, k);
+				exchange(nums, i, j);
+			} else if (nums[k] == 1) {
+				j = j + 1;
+				exchange(nums, j, k);
+			}
 		}
 	}
 
