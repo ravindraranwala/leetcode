@@ -6,30 +6,30 @@ class GrumpyBookstoreOwner {
 	}
 
 	public static void main(String[] args) {
-		final int[] customersOne = { 1, 0, 1, 2, 1, 1, 7, 5 };
-		final int[] grumpyOne = { 0, 1, 0, 1, 0, 1, 0, 1 };
-		assert maxSatisfied(customersOne, grumpyOne, 3) == 16;
+		final int[] customers1 = { 1, 0, 1, 2, 1, 1, 7, 5 };
+		final int[] grumpy1 = { 0, 1, 0, 1, 0, 1, 0, 1 };
+		assert maxSatisfied(customers1, grumpy1, 3) == 16;
 
-		final int[] customersTwo = { 1 };
-		final int[] grumpyTwo = { 0 };
-		assert maxSatisfied(customersTwo, grumpyTwo, 1) == 1;
+		final int[] customers2 = { 1 };
+		final int[] grumpy2 = { 0 };
+		assert maxSatisfied(customers2, grumpy2, 1) == 1;
 	}
 
 	static int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
 		final int n = customers.length;
-		int s = 0;
-		int maxG = 0;
-
-		// fixed size window of length minutes.
-		for (int i = 0, g = 0; i < n; i++) {
-			if (grumpy[i] == 0)
-				s = s + customers[i];
+		int satisfaction = 0;
+		// Fixed size window of length minutes.
+		int windowMax = 0;
+		for (int e = 0, windowSum = 0; e < n; e++) {
+			if (grumpy[e] == 1)
+				windowSum = windowSum + customers[e];
 			else
-				g = g + customers[i];
-			maxG = Math.max(maxG, g);
-			if (i >= minutes - 1 && grumpy[i - minutes + 1] == 1)
-				g = g - customers[i - minutes + 1];
+				satisfaction = satisfaction + customers[e];
+
+			if (e >= minutes && grumpy[e - minutes] == 1)
+				windowSum = windowSum - customers[e - minutes];
+			windowMax = Math.max(windowMax, windowSum);
 		}
-		return s + maxG;
+		return satisfaction + windowMax;
 	}
 }
