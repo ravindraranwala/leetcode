@@ -6,38 +6,35 @@ class CountNumberOfNiceSubarrays {
 	}
 
 	public static void main(String[] args) {
-		final int[] numsOne = { 1, 1, 2, 1, 1 };
-		assert numberOfSubarrays(numsOne, 3) == 2;
+		final int[] nums1 = { 1, 1, 2, 1, 1 };
+		assert numberOfSubarrays(nums1, 3) == 2;
 
-		final int[] numsTwo = { 2, 4, 6 };
-		assert numberOfSubarrays(numsTwo, 1) == 0;
+		final int[] nums2 = { 2, 4, 6 };
+		assert numberOfSubarrays(nums2, 1) == 0;
 
-		final int[] numsThre = { 2, 2, 2, 1, 2, 2, 1, 2, 2, 2 };
-		assert numberOfSubarrays(numsThre, 2) == 16;
+		final int[] nums3 = { 2, 2, 2, 1, 2, 2, 1, 2, 2, 2 };
+		assert numberOfSubarrays(nums3, 2) == 16;
 	}
 
 	static int numberOfSubarrays(int[] nums, int k) {
 		final int n = nums.length;
-		int c = 0;
+		int cnt = 0;
+		for (int s = 0, e = 0, oddCnt = 0, subarrs = 0; e < n; e++) {
+			oddCnt = oddCnt + nums[e] % 2;
 
-		for (int i = 0, j = 0, oddCnt = 0, nextOddIdx = -1; j < n; j++) {
-			if (nums[j] % 2 == 1)
-				oddCnt = oddCnt + 1;
-			if (oddCnt == k) {
-				// find the next odd elements index.
-				int l = j + 1;
-				while (l < n && nums[l] % 2 == 0)
-					l = l + 1;
-				nextOddIdx = l;
+			if (oddCnt > k) {
+				subarrs = 0;
+				oddCnt = oddCnt - 1;
+				s = s + 1;
 			}
 
-			while (oddCnt == k) {
-				c = c + nextOddIdx - j;
-				if (nums[i] % 2 == 1)
-					oddCnt = oddCnt - 1;
-				i = i + 1;
+			while (oddCnt == k && nums[s] % 2 == 0) {
+				subarrs = subarrs + 1;
+				s = s + 1;
 			}
+			if (oddCnt == k)
+				cnt = cnt + subarrs + 1;
 		}
-		return c;
+		return cnt;
 	}
 }
