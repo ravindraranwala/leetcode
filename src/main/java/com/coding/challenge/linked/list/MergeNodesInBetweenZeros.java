@@ -22,15 +22,13 @@ class MergeNodesInBetweenZeros {
 	static ListNode<Integer> mergeNodes(ListNode<Integer> head) {
 		final ListNode<Integer> dummyHead = new ListNode<>(-1);
 		int s = 0;
-		for (ListNode<Integer> originalCurr = head.next, modifiedCurr = dummyHead; originalCurr != null; originalCurr = originalCurr.next) {
-			if (originalCurr.val != 0)
-				s = s + originalCurr.val;
-			else {
-				modifiedCurr.next = new ListNode<>(s);
+		for (ListNode<Integer> curr = head.next, last = dummyHead; curr != null; curr = curr.next) {
+			s = s + curr.val;
+			if (curr.val == 0) {
+				last.next = new ListNode<>(s);
+				last = last.next;
 				s = 0;
-				modifiedCurr = modifiedCurr.next;
 			}
-
 		}
 		return dummyHead.next;
 	}
