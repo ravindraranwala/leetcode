@@ -11,8 +11,8 @@ class CreateBinaryTreeFromDescriptions {
 	}
 
 	public static void main(String[] args) {
-		final int[][] descriptions = { { 20, 15, 1 }, { 20, 17, 0 }, { 50, 20, 1 }, { 50, 80, 0 }, { 80, 19, 1 } };
-		assert "[15, 20, 17, 50, 19, 80]".equals(createBinaryTree(descriptions).toString());
+		final int[][] descriptions1 = { { 20, 15, 1 }, { 20, 17, 0 }, { 50, 20, 1 }, { 50, 80, 0 }, { 80, 19, 1 } };
+		assert "[15, 20, 17, 50, 19, 80]".equals(createBinaryTree(descriptions1).toString());
 
 		final int[][] descriptions2 = { { 1, 2, 1 }, { 2, 3, 0 }, { 3, 4, 1 } };
 		assert "[2, 4, 3, 1]".equals(createBinaryTree(descriptions2).toString());
