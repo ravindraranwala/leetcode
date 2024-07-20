@@ -35,10 +35,10 @@ class LuckyNumbersInMatrix {
 		}
 
 		final List<Integer> luckyNums = new ArrayList<>();
-		for (int i = 0; i < m; i++)
-			for (int j = 0; j < n; j++)
-				if (rowMin[i] == colMax[j])
-					luckyNums.add(rowMin[i]);
+		for (int rowMinVal : rowMin) 
+			for (int colMaxVal : colMax) 
+				if (rowMinVal == colMaxVal)
+					luckyNums.add(rowMinVal);
 			
 		return luckyNums;
 	}
