@@ -56,11 +56,10 @@ class BuildMatrixWithConditions {
 			return new int[0][0];
 
 		final int[][] positions = new int[k + 1][2];
-		for (int r = 0; r < k; r++)
-			positions[rowList.remove()][0] = r;
-
-		for (int c = 0; c < k; c++)
-			positions[colList.remove()][1] = c;
+		for (int p = 0; p < k; p++) {
+			positions[rowList.remove()][0] = p;
+			positions[colList.remove()][1] = p;
+		}
 
 		// construct the output matrix.
 		final int[][] m = new int[k][k];
