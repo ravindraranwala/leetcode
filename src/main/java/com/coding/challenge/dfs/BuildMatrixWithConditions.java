@@ -27,20 +27,18 @@ class BuildMatrixWithConditions {
 	int[][] buildMatrix(int k, int[][] rowConditions, int[][] colConditions) {
 		final List<List<Integer>> rowAdjList = new ArrayList<>();
 		final List<List<Integer>> colAdjList = new ArrayList<>();
+		final Color[] color1 = new Color[k + 1];
+		final Color[] color2 = new Color[k + 1];
 		for (int i = 0; i <= k; i++) {
 			rowAdjList.add(new ArrayList<>());
 			colAdjList.add(new ArrayList<>());
+			color1[i] = Color.WHITE;
+			color2[i] = Color.WHITE;
 		}
 
 		for (int[] rowDependency : rowConditions)
 			rowAdjList.get(rowDependency[0]).add(rowDependency[1]);
-		final Color[] color1 = new Color[k + 1];
-		final Color[] color2 = new Color[k + 1];
 
-		for (int i = 1; i <= k; i++) {
-			color1[i] = Color.WHITE;
-			color2[i] = Color.WHITE;
-		}
 		final LinkedList<Integer> rowList = new LinkedList<>();
 		for (int i = 1; i <= k; i++)
 			if (Color.WHITE == color1[i])
