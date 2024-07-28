@@ -66,7 +66,7 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 			h.insert(new Vertex(i, d[i]));
 
 		while (!h.isEmpty()) {
-			final Vertex u = h.extract();
+			final Vertex u = h.extractMin();
 			for (Vertex v : adjList.get(u.id)) {
 				// edge relaxation step.
 				if (d[u.id] != Integer.MAX_VALUE && d[v.id] > d[u.id] + v.distance) {
@@ -133,7 +133,7 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 			}
 		}
 
-		private Vertex extract() {
+		private Vertex extractMin() {
 			if (this.size == 0)
 				throw new NoSuchElementException();
 			final Vertex head = a[1];
@@ -142,24 +142,22 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 			vertexToIdx.put(a[1].id, 1);
 			a[size] = null;
 			size--;
-			minHeapify(1, size);
+			minHeapify(1);
 			return head;
 		}
 
-		private void minHeapify(int i, int heapSize) {
-			if (heapSize > size)
-				throw new IllegalArgumentException("Heap size cannot be larger than array length.");
+		private void minHeapify(int i) {
 			final int l = left(i);
 			final int r = right(i);
 			int smallest = i;
-			if (l <= heapSize && a[l].distance < a[i].distance)
+			if (l <= size && a[l].distance < a[i].distance)
 				smallest = l;
-			if (r <= heapSize && a[r].distance < a[smallest].distance)
+			if (r <= size && a[r].distance < a[smallest].distance)
 				smallest = r;
 			if (smallest != i) {
 				// exchange the elements and build the heap property.
 				exchange(i, smallest);
-				minHeapify(smallest, heapSize);
+				minHeapify(smallest);
 			}
 		}
 
