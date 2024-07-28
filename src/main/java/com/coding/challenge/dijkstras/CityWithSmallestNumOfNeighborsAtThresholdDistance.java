@@ -38,14 +38,13 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 		int neighbours = Integer.MAX_VALUE;
 
 		for (int s = 0; s < n; s++) {
-			final int[] d = dijkstras(s, n, adjList, null);
+			final int[] d = dijkstras(s, n, adjList);
 
 			int c = 0;
 			for (int dist : d)
 				if (dist <= distanceThreshold)
 					c = c + 1;
 
-			// System.out.println(String.format("Node: %d has %d neighbours.", s, c - 1));
 			if (c <= neighbours) {
 				city = s;
 				neighbours = c;
@@ -56,7 +55,7 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 		return city;
 	}
 
-	private static int[] dijkstras(int s, int n, List<List<Vertex>> gAdjList, List<List<Vertex>> tree) {
+	private static int[] dijkstras(int s, int n, List<List<Vertex>> adjList) {
 		// init.
 		final int[] d = new int[n];
 		for (int i = 0; i < n; i++)
@@ -68,7 +67,7 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 
 		while (!h.isEmpty()) {
 			final Vertex u = h.extract();
-			for (Vertex v : gAdjList.get(u.id)) {
+			for (Vertex v : adjList.get(u.id)) {
 				// edge relaxation step.
 				if (d[u.id] != Integer.MAX_VALUE && d[v.id] > d[u.id] + v.distance) {
 					d[v.id] = d[u.id] + v.distance;
@@ -134,7 +133,7 @@ class CityWithSmallestNumOfNeighborsAtThresholdDistance {
 			}
 		}
 
-		public Vertex extract() {
+		private Vertex extract() {
 			if (this.size == 0)
 				throw new NoSuchElementException();
 			final Vertex head = a[1];
