@@ -13,11 +13,13 @@ class MinimumDeletionsToMakeStringBalanced {
 	static int minimumDeletions(String s) {
 		final int n = s.length();
 		int d = 0;
-		for (int i = n - 1, aCnt = 0; i >= 0; i--) {
-			if (s.charAt(i) == 'b')
-				d = Math.min(d + 1, aCnt);
+		for (int i = 0, bCnt = 0; i < n; i++) {
+			if (s.charAt(i) == 'a')
+				// two choices here.
+				// If s[i] is chosen or it is not chosen.
+				d = Math.min(bCnt, d + 1);
 			else
-				aCnt = aCnt + 1;
+				bCnt = bCnt + 1;
 		}
 		return d;
 	}
