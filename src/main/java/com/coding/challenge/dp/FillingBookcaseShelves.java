@@ -15,19 +15,21 @@ class FillingBookcaseShelves {
 
 	static int minHeightShelves(int[][] books, int shelfWidth) {
 		final int n = books.length;
-		final int[] h = new int[n + 1];
-
-		for (int i = n - 1; i >= 0; i--) {
+		final int[] h = new int[n];
+		for (int i = 0; i < n; i++) {
 			h[i] = Integer.MAX_VALUE;
-			for (int j = i, lastShelfHeight = 0, lastShelfWidth = 0; j < n; j++) {
-				lastShelfHeight = Math.max(lastShelfHeight, books[j][1]);
-				lastShelfWidth = lastShelfWidth + books[j][0];
-				if (lastShelfWidth <= shelfWidth)
-					h[i] = Math.min(h[i], lastShelfHeight + h[j + 1]);
-				else
-					break;
+			int j = i;
+			int w = books[j][0];
+			int shelfHeight = books[j][1];
+			while (j > 0 && w <= shelfWidth) {
+				h[i] = Math.min(h[i], h[j - 1] + shelfHeight);
+				j = j - 1;
+				w = w + books[j][0];
+				shelfHeight = Math.max(shelfHeight, books[j][1]);
 			}
+			if (w <= shelfWidth)
+				h[i] = shelfHeight;
 		}
-		return h[0];
+		return h[n - 1];
 	}
 }
