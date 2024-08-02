@@ -2,6 +2,8 @@ package com.coding.challenge.array;
 
 import java.util.Arrays;
 
+import com.coding.challenge.radix.sort.RadixSort;
+
 class NextPermutation {
 	NextPermutation() {
 		throw new AssertionError();
@@ -71,6 +73,33 @@ class NextPermutation {
 
 				exchange(nums, p, s);
 			}
+			return;
+		}
+		// If no answer found, then reverse the array.
+		for (int j = 0; j < n / 2; j++)
+			exchange(nums, j, n - j - 1);
+	}
+
+	static void nextPermutationLinear(int[] nums) {
+		final int n = nums.length;
+		int i = n - 2;
+		while (i >= 0 && nums[i] >= nums[i + 1])
+			i = i - 1;
+
+		if (i >= 0) {
+			int k = n - 1;
+			while (nums[k] <= nums[i])
+				k = k - 1;
+			// exchange the two numbers at indices i and k
+			exchange(nums, i, k);
+			// Then sort the elements starting from i + 1 to n.
+			final int m = n - i - 1;
+			final int[] a = new int[m];
+			for (int p = 0; p < m; p++) 
+				a[p] = nums[p + i + 1];
+			final int[] b = RadixSort.radixSort(a, 3);
+			for (int p = 0; p < m; p++)
+				nums[p + i + 1] = b[p];
 			return;
 		}
 		// If no answer found, then reverse the array.
