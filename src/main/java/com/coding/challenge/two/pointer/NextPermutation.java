@@ -1,8 +1,6 @@
-package com.coding.challenge.array;
+package com.coding.challenge.two.pointer;
 
 import java.util.Arrays;
-
-import com.coding.challenge.radix.sort.RadixSort;
 
 class NextPermutation {
 	NextPermutation() {
@@ -57,54 +55,17 @@ class NextPermutation {
 		while (i >= 0 && nums[i] >= nums[i + 1])
 			i = i - 1;
 
+		final int m = n - 1 - i;
+		for (int j = 0; j < m / 2; j++)
+			exchange(nums, i + j + 1, n - 1 - j);
+		
 		if (i >= 0) {
-			int k = n - 1;
+			int k = i + 1;
 			while (nums[k] <= nums[i])
-				k = k - 1;
-			// exchange the two numbers at indices i and k
+				k = k + 1;
+			
 			exchange(nums, i, k);
-			// Then sort the elements starting from i + 1 to n.
-			for (int p = i + 1; p < n; p++) {
-				int s = p;
-				// find the smallest element to the right of the current element.
-				for (int q = p; q < n; q++)
-					if (nums[q] < nums[s])
-						s = q;
-
-				exchange(nums, p, s);
-			}
-			return;
 		}
-		// If no answer found, then reverse the array.
-		for (int j = 0; j < n / 2; j++)
-			exchange(nums, j, n - j - 1);
-	}
-
-	static void nextPermutationLinear(int[] nums) {
-		final int n = nums.length;
-		int i = n - 2;
-		while (i >= 0 && nums[i] >= nums[i + 1])
-			i = i - 1;
-
-		if (i >= 0) {
-			int k = n - 1;
-			while (nums[k] <= nums[i])
-				k = k - 1;
-			// exchange the two numbers at indices i and k
-			exchange(nums, i, k);
-			// Then sort the elements starting from i + 1 to n.
-			final int m = n - i - 1;
-			final int[] a = new int[m];
-			for (int p = 0; p < m; p++) 
-				a[p] = nums[p + i + 1];
-			final int[] b = RadixSort.radixSort(a, 3);
-			for (int p = 0; p < m; p++)
-				nums[p + i + 1] = b[p];
-			return;
-		}
-		// If no answer found, then reverse the array.
-		for (int j = 0; j < n / 2; j++)
-			exchange(nums, j, n - j - 1);
 	}
 
 	private static void exchange(int[] a, int i, int j) {
