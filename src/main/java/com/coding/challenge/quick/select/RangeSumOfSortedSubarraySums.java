@@ -9,11 +9,11 @@ class RangeSumOfSortedSubarraySums {
 
 	public static void main(String[] args) {
 		final int[] nums = { 1, 2, 3, 4 };
-		System.out.println(rangeSum(nums, 4, 1, 5));
+		assert rangeSum(nums, 4, 1, 5) == 13;
 		
-		System.out.println(rangeSum(nums, 4, 3, 4));
+		assert rangeSum(nums, 4, 3, 4) == 6;
 		
-		System.out.println(rangeSum(nums, 4, 1, 10));
+		assert rangeSum(nums, 4, 1, 10) == 50;
 	}
 
 	static int rangeSum(int[] nums, int n, int left, int right) {
