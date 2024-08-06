@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class MinimumNumberOfPushesToTypeWordII {
 	private static final char FIRST_LETTER = 'a';
-
+	
 	MinimumNumberOfPushesToTypeWordII() {
 		throw new AssertionError();
 	}
@@ -21,17 +21,14 @@ class MinimumNumberOfPushesToTypeWordII {
 			f[ch - FIRST_LETTER] = f[ch - FIRST_LETTER] + 1;
 
 		Arrays.sort(f);
-		int pushes = 0;
-		for (int i = 25; i >= 0; i--) {
-			if (i >= 18)
-				pushes = pushes + f[i];
-			else if (i >= 10)
-				pushes = pushes + f[i] * 2;
-			else if (i >= 2)
-				pushes = pushes + f[i] * 3;
-			else
-				pushes = pushes + f[i] * 4;
-		}
-		return pushes;
-	}
+		int p = 4 * (f[0] + f[1]);
+		for (int i = 2; i < 10; i++)
+			p = p + 3 * f[i];
+		for (int i = 10; i < 18; i++)
+			p = p + 2 * f[i];
+		for (int i = 18; i < 26; i++)
+			p = p + f[i];
+
+		return p;
+    }
 }
