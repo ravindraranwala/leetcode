@@ -11,12 +11,11 @@ class NumberComplement {
 	}
 
 	static int findComplement(int num) {
-		int currNum = 1;
 		int allOneVal = 1;
-		while (allOneVal < num) {
-			currNum = currNum * 2;
-			allOneVal = allOneVal + currNum;
-		}
+		while (allOneVal < num)
+			// binary addition is faster than multiplication.
+			allOneVal = allOneVal + allOneVal + 1;
+
 		return allOneVal - num;
 	}
 }
