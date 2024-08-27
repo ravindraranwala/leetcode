@@ -31,12 +31,9 @@ class NaryTreePostorderTraversal {
 		l.add(root.val);
 	}
 
-	static class Node {
+	private static class Node {
 		public int val;
 		public List<Node> children = Collections.emptyList();
-
-		public Node() {
-		}
 
 		public Node(int _val) {
 			val = _val;
