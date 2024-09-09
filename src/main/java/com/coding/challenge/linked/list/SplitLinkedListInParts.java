@@ -32,13 +32,13 @@ class SplitLinkedListInParts {
 
 		for (int i = 0; curr != null; i++) {
 			parts[i] = curr;
-			ListNode<Integer> prev = curr;
+			ListNode<Integer> tail = curr;
 			final int l = i < r ? maxLen : minLen;
-			for (int j = 0; j < l; j++) {
-				prev = curr;
-				curr = curr.next;
-			}
-			prev.next = null;
+			for (int j = 1; j < l; j++) 
+				tail = tail.next;
+
+			curr = tail.next;
+			tail.next = null;
 		}
 
 		return parts;
