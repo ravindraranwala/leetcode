@@ -23,20 +23,24 @@ class SplitLinkedListInParts {
 		int n = 0;
 		for (ListNode<Integer> curr = head; curr != null; curr = curr.next)
 			n = n + 1;
-		final int size = n / k;
-		final int extendedGrps = n % k;
+
+		final int minLen = n / k;
+		final int maxLen = minLen + 1;
+		final int r = n % k;
 		final ListNode[] parts = new ListNode[k];
 		ListNode<Integer> curr = head;
-		for (int g = 1; curr != null; g++) {
-			ListNode<Integer> end = curr;
-			final int l = g <= extendedGrps ? size + 1 : size;
-			for (int i = 1; i < l; i++)
-				end = end.next;
-			final ListNode<Integer> next = end.next;
-			end.next = null;
-			parts[g - 1] = curr;
-			curr = next;
+
+		for (int i = 0; curr != null; i++) {
+			parts[i] = curr;
+			ListNode<Integer> tail = curr;
+			final int l = i < r ? maxLen : minLen;
+			for (int j = 1; j < l; j++) 
+				tail = tail.next;
+
+			curr = tail.next;
+			tail.next = null;
 		}
+
 		return parts;
 	}
 }
