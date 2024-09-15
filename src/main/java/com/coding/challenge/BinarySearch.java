@@ -32,8 +32,12 @@ public class BinarySearch {
 	 * @return index of the target if it exists in the array. Otherwise, return -1
 	 */
 	public static int search(int[] nums, int target) {
-		int l = 0;
-		int r = nums.length - 1;
+		return search(nums, target, 0, nums.length - 1);
+	}
+
+	public static int search(int[] nums, int target, int i, int j) {
+		int l = i;
+		int r = j;
 		while (l <= r) {
 			final int m = (l + r) / 2;
 			if (nums[m] < target)
