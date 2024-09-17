@@ -37,4 +37,28 @@ class LongestSubarrayWithMaximumBitwiseAND {
 		}
 		return l;
 	}
+
+	private static int longestSubarrayOnePass(int[] nums) {
+		int maxValue = 0;
+		/*
+		 * Now use the sliding window to find the longest subarray containing this max
+		 * value.
+		 */
+		int l = 1;
+		final int n = nums.length;
+		for (int i = -1, j = 0; j < n; j++) {
+			if (nums[j] == maxValue)
+				l = Math.max(l, j - i);
+			else if (nums[j] > maxValue) {
+				maxValue = nums[j];
+				// start a new window.
+				i = j - 1;
+				l = 1;
+			} else
+				// start a new window.
+				i = j;
+
+		}
+		return l;
+	}
 }
