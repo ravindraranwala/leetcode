@@ -40,8 +40,7 @@ class MinimumTimeDifference {
 		b = countingSort(b, 9, 4);
 		b = countingSort(b, 9, 3);
 		b = countingSort(b, 9, 1);
-		b = countingSort(b, 9, 0);
-		return b;
+		return countingSort(b, 9, 0);
 	}
 
 	private static String[] countingSort(String[] a, int k, int d) {
