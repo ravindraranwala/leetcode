@@ -27,7 +27,6 @@ class RankTransformOfAnArray {
 
 	static int[] arrayRankTransform(int[] arr) {
 		final int n = arr.length;
-
 		final int[] r = new int[n];
 		for (int i = 0; i < n; i++)
 			r[i] = arr[i];
