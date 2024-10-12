@@ -7,19 +7,19 @@ class FindMinimumInRotatedSortedArray {
 
 	public static void main(String[] args) {
 		final int[] nums1 = { 3, 4, 5, 1, 2 };
-		System.out.println(findMin(nums1));
+		assert findMin(nums1) == 1;
 
 		final int[] nums2 = { 4, 5, 6, 7, 0, 1, 2 };
-		System.out.println(findMin(nums2));
+		assert findMin(nums2) == 0;
 
 		final int[] nums3 = { 11, 13, 15, 17 };
-		System.out.println(findMin(nums3));
+		assert findMin(nums3) == 11;
 
 		final int[] nums4 = { 1 };
-		System.out.println(findMin(nums4));
+		assert findMin(nums4) == 1;
 
 		final int[] nums5 = { 2, 1 };
-		System.out.println(findMin(nums5));
+		assert findMin(nums5) == 1;
 	}
 
 	static int findMin(int[] nums) {
