@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 class RemoveSubFoldersFromTheFilesystem {
-    private final TrieNode root = new TrieNode(false);
+	private final TrieNode root = new TrieNode(false);
 	private static final char DELIMITER = '/';
 
 	RemoveSubFoldersFromTheFilesystem() {
@@ -28,7 +28,7 @@ class RemoveSubFoldersFromTheFilesystem {
 	}
 
 	List<String> removeSubfolders(String[] folder) {
-        for (String f : folder)
+		for (String f : folder)
 			insert(f);
 
 		final List<String> folders = new ArrayList<>();
@@ -39,7 +39,7 @@ class RemoveSubFoldersFromTheFilesystem {
 		return folders;
 	}
 
-    private void insert(String folder) {
+	private void insert(String folder) {
 		final int m = folder.length();
 		TrieNode curr = root;
 		int i = 1;
