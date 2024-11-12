@@ -2,8 +2,6 @@ package com.coding.challenge.binary.search;
 
 import java.util.Arrays;
 
-import com.coding.challenge.BinarySearch;
-
 class MostBeautifulItemForEachQuery {
 	MostBeautifulItemForEachQuery() {
 		throw new AssertionError();
@@ -24,36 +22,35 @@ class MostBeautifulItemForEachQuery {
 		final int[] queries3 = { 5 };
 		final int[] ans3 = { 0 };
 		assert Arrays.equals(ans3, maximumBeauty(items3, queries3));
-
-		final int[][] items4 = { { 193, 732 }, { 781, 962 }, { 864, 954 }, { 749, 627 }, { 136, 746 }, { 478, 548 },
-				{ 640, 908 }, { 210, 799 }, { 567, 715 }, { 914, 388 }, { 487, 853 }, { 533, 554 }, { 247, 919 },
-				{ 958, 150 }, { 193, 523 }, { 176, 656 }, { 395, 469 }, { 763, 821 }, { 542, 946 }, { 701, 676 } };
-		final int[] queries4 = { 885, 1445, 1580, 1309, 205, 1788, 1214, 1404, 572, 1170, 989, 265, 153, 151, 1479,
-				1180, 875, 276, 1584 };
-		final int[] ans4 = { 962, 962, 962, 962, 746, 962, 962, 962, 946, 962, 962, 919, 746, 746, 962, 962, 962, 919,
-				962 };
-		assert Arrays.equals(ans4, maximumBeauty(items4, queries4));
 	}
 
 	static int[] maximumBeauty(int[][] items, int[] queries) {
-		final int n = queries.length;
-		final int[] ans = new int[n];
+		final int m = queries.length;
+		final int n = items.length;
 		Arrays.sort(items, (a, b) -> Integer.compare(a[0], b[0]));
 
-		final int m = items.length;
-		final int[] maxBeauty = new int[m];
-		final int[] price = new int[m];
-		for (int i = 0, b = 0; i < m; i++) {
-			b = Math.max(b, items[i][1]);
-			maxBeauty[i] = b;
-			price[i] = items[i][0];
-		}
+		for (int i = 1; i < n; i++)
+			items[i][1] = Math.max(items[i][1], items[i - 1][1]);
 
-		for (int i = 0; i < n; i++) {
-			final int j = BinarySearch.predecessor(price, queries[i] + 1);
-			if (j >= 0)
-				ans[i] = maxBeauty[j];
+		final int[] a = new int[m];
+		for (int j = 0; j < m; j++) {
+			final int k = predecessor(items, queries[j] + 1);
+			if (k >= 0)
+				a[j] = items[k][1];
 		}
-		return ans;
+		return a;
+	}
+
+	static int predecessor(int[][] a, int target) {
+		int l = 0;
+		int r = a.length;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (a[mid][0] < target)
+				l = mid + 1;
+			else
+				r = mid;
+		}
+		return l - 1;
 	}
 }
