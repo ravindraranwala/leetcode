@@ -79,6 +79,19 @@ public class BinarySearch {
 		}
 		return l - 1;
 	}
+	
+	public static int predecessor(int[] a, int target, int i, int j) {
+		int l = i;
+		int r = j + 1;
+		while (l < r) {
+			final int mid = (l + r) / 2;
+			if (a[mid] < target)
+				l = mid + 1;
+			else
+				r = mid;
+		}
+		return l - 1;
+	}
 
 	/**
 	 * Finds the position of the element in the input array that appears before the
