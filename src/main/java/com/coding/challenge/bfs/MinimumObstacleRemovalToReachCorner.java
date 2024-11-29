@@ -42,12 +42,12 @@ class MinimumObstacleRemovalToReachCorner {
 		throw new AssertionError();
 	}
 
-	static class Vertex {
+	private static class Vertex {
 		private final int r;
 		private final int c;
 		private final int obstacles;
 
-		public Vertex(int r, int c, int obstacles) {
+		private Vertex(int r, int c, int obstacles) {
 			this.r = r;
 			this.c = c;
 			this.obstacles = obstacles;
