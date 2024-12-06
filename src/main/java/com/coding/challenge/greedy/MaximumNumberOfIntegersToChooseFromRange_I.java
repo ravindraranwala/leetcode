@@ -10,13 +10,13 @@ class MaximumNumberOfIntegersToChooseFromRange_I {
 
 	public static void main(String[] args) {
 		final int[] banned1 = { 1, 6, 5 };
-		System.out.println(maxCount(banned1, 5, 6));
+		assert maxCount(banned1, 5, 6) == 2;
 
 		final int[] banned2 = { 1, 2, 3, 4, 5, 6, 7 };
-		System.out.println(maxCount(banned2, 8, 1));
+		assert maxCount(banned2, 8, 1) == 0;
 
 		final int[] banned3 = { 11 };
-		System.out.println(maxCount(banned3, 7, 50));
+		assert maxCount(banned3, 7, 50) == 7;
 	}
 
 	static int maxCount(int[] banned, int n, int maxSum) {
