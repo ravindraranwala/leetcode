@@ -21,8 +21,9 @@ class ConstructStringWithRepeatLimit {
 		for (int i = 25, j = i - 1; i >= 0; i--) {
 			while (f[i] > 0) {
 				final int c = Math.min(repeatLimit, f[i]);
+				final char ch = (char) (FIRST_LETTER + i);
 				for (int k = 0; k < c; k++)
-					ans.append((char) (FIRST_LETTER + i));
+					ans.append(ch);
 
 				f[i] = f[i] - c;
 
