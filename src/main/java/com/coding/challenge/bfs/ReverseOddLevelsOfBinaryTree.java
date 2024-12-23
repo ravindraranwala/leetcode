@@ -20,26 +20,35 @@ class ReverseOddLevelsOfBinaryTree {
 	}
 
 	static TreeNode reverseOddLevels(TreeNode root) {
-		final Queue<TreeNode> q = new ArrayDeque<>();
-		q.offer(root);
+		final Queue<Vertex> q = new ArrayDeque<>();
+		q.offer(new Vertex(root, 0));
 		final Deque<Integer> s = new ArrayDeque<>();
-		int c = 0;
 		while (!q.isEmpty()) {
-			final TreeNode u = q.poll();
-			c = c + 1;
-			final int h = (int) (Math.log10(c) / Math.log10(2));
-			if (u.left != null) {
-				q.offer(u.left);
-				q.offer(u.right);
-				if (h % 2 == 0) {
-					s.push(u.left.val);
-					s.push(u.right.val);
+			final Vertex u = q.poll();
+			if (u.node.left != null) {
+				final Vertex l = new Vertex(u.node.left, u.d + 1);
+				q.offer(l);
+				final Vertex r = new Vertex(u.node.right, u.d + 1);
+				q.offer(r);
+				if (u.d % 2 == 0) {
+					s.push(l.node.val);
+					s.push(r.node.val);
 				}
 			}
 
-			if (h % 2 == 1)
-				u.val = s.pop();
+			if (u.d % 2 == 1)
+				u.node.val = s.pop();
 		}
 		return root;
+	}
+	
+	private static class Vertex {
+		private final TreeNode node;
+		private final int d;
+
+		private Vertex(TreeNode node, int d) {
+			this.node = node;
+			this.d = d;
+		}
 	}
 }
