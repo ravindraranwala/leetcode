@@ -18,20 +18,21 @@ class FindLargestValueInEachTreeRow {
 	}
 
 	static List<Integer> largestValues(TreeNode root) {
-		final List<Integer> levelMax = new ArrayList<>();
-		visitTree(root, levelMax, 0);
-		return levelMax;
+		final List<Integer> l = new ArrayList<>();
+		dfs(root, l, 0);
+		return l;
 	}
 
-	private static void visitTree(TreeNode node, List<Integer> levelMax, int level) {
-		// trivial case of the recursion.
-		if (node == null)
+	private static void dfs(TreeNode root, List<Integer> l, int h) {
+		if (root == null)
 			return;
-		if (levelMax.size() - 1 < level)
-			levelMax.add(node.val);
-		else if (levelMax.get(level) < node.val)
-			levelMax.set(level, node.val);
-		visitTree(node.left, levelMax, level + 1);
-		visitTree(node.right, levelMax, level + 1);
+
+		if (l.size() == h)
+			l.add(root.val);
+		else
+			l.set(h, Math.max(l.get(h), root.val));
+
+		dfs(root.left, l, h + 1);
+		dfs(root.right, l, h + 1);
 	}
 }
