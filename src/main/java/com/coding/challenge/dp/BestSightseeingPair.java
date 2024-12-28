@@ -15,13 +15,12 @@ class BestSightseeingPair {
 
 	static int maxScoreSightseeingPair(int[] values) {
 		final int n = values.length;
-		int maxScore = 0;
-		for (int i = n - 2, p = 0; i >= 0; i--) {
-			final int s1 = p - values[i + 1] + values[i] - 1;
-			final int s2 = values[i] + values[i + 1] - 1;
-			p = Math.max(s1, s2);
-			maxScore = Math.max(maxScore, p);
+		int score = 0;
+		for (int j = 1, i = 0; j < n; j++) {
+			score = Math.max(score, values[i] + values[j] + i - j);
+			if (values[j] + j - i > values[i])
+				i = j;
 		}
-		return maxScore;
+		return score;
 	}
 }
