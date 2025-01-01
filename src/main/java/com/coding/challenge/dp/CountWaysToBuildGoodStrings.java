@@ -22,7 +22,7 @@ class CountWaysToBuildGoodStrings {
 			if (i >= one)
 				s[i] = (s[i] + s[i - one]) % MOD;
 		}
-		// constructing an optimal solution
+		// Solve original problem.
 		int c = 0;
 		for (int j = low; j <= high; j++)
 			c = (c + s[j]) % MOD;
