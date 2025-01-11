@@ -7,16 +7,16 @@ class CountPrefixAndSuffixPairsI {
 
 	public static void main(String[] args) {
 		final String[] words1 = { "a", "aba", "ababa", "aa" };
-		System.out.println(countPrefixSuffixPairs(words1));
+		assert countPrefixSuffixPairs(words1) == 4;
 
 		final String[] words2 = { "pa", "papa", "ma", "mama" };
-		System.out.println(countPrefixSuffixPairs(words2));
+		assert countPrefixSuffixPairs(words2) == 2;
 
 		final String[] words3 = { "abab", "ab" };
-		System.out.println(countPrefixSuffixPairs(words3));
+		assert countPrefixSuffixPairs(words3) == 0;
 
 		final String[] words4 = { "a", "abb" };
-		System.out.println(countPrefixSuffixPairs(words4));
+		assert countPrefixSuffixPairs(words4) == 0;
 	}
 
 	static int countPrefixSuffixPairs(String[] words) {
