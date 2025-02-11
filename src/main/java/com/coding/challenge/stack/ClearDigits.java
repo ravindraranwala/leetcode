@@ -14,11 +14,9 @@ class ClearDigits {
 	}
 
 	static String clearDigits(String s) {
-		final int n = s.length();
 		final Deque<Character> stack = new ArrayDeque<>();
 
-		for (int i = 0; i < n; i++) {
-			final char ch = s.charAt(i);
+		for (char ch : s.toCharArray()) {
 			if (Character.isDigit(ch))
 				stack.pop();
 			else
@@ -26,9 +24,9 @@ class ClearDigits {
 		}
 
 		// constructing the solution.
-		final int m = stack.size();
-		final char[] a = new char[m];
-		for (int i = 0; i < m; i++)
+		final int n = stack.size();
+		final char[] a = new char[n];
+		for (int i = 0; i < n; i++)
 			a[i] = stack.pollLast();
 
 		return new String(a);
