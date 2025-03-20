@@ -1,4 +1,4 @@
-package com.coding.challenge.sliding.window;
+package com.coding.challenge.greedy;
 
 class MinimumOperationsToMakeBinaryArrayElementsEqualToOneI {
 	MinimumOperationsToMakeBinaryArrayElementsEqualToOneI() {
