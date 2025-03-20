@@ -15,31 +15,32 @@ class WiggleSubsequence {
 		final int[] nums3 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		assert wiggleMaxLength(nums3) == 2;
 
-		final int[] nums4 = { 84 };
+		final int[] nums4 = { 1, 1, 1, 1, 1, 1, 1 };
 		assert wiggleMaxLength(nums4) == 1;
+
+		final int[] nums5 = { 1, 2 };
+		assert wiggleMaxLength(nums5) == 2;
+
+		final int[] nums6 = { 7 };
+		assert wiggleMaxLength(nums6) == 1;
 	}
 
 	static int wiggleMaxLength(int[] nums) {
-		// option 1.
-		final int l1 = wiggleLength(nums, false);
-		// option 2.
-		final int l2 = wiggleLength(nums, true);
-		return Math.max(l1, l2);
-	}
-
-	private static int wiggleLength(int[] nums, boolean increasing) {
 		final int n = nums.length;
-		boolean inc = increasing;
-		int l = 1;
-		for (int i = 1; i < n; i++) {
-			if (inc && nums[i] < nums[i - 1]) {
+		int l = 0;
+		boolean diffFound = false;
+		for (int i = 1, d = 0; i < n; i++) {
+			final int currDelta = nums[i] - nums[i - 1];
+			if (currDelta != 0)
+				diffFound = true;
+			if (d > 0 && currDelta < 0)
 				l = l + 1;
-				inc = false;
-			} else if (!inc && nums[i] > nums[i - 1]) {
+			else if (d < 0 && currDelta > 0)
 				l = l + 1;
-				inc = true;
-			}
+
+			if (currDelta != 0)
+				d = currDelta;
 		}
-		return l;
+		return diffFound ? l + 2 : 1;
 	}
 }
