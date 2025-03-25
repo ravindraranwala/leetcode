@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-class PriorityQueue {
+class PriorityQueueLong {
 	private Vertex[] a;
 	private int size = 0;
 	private final Map<Integer, Integer> vertexToIdx = new HashMap<>();
 
-	PriorityQueue() {
+	PriorityQueueLong() {
 		a = new Vertex[11];
 		a[0] = null; // dummy head
 	}
@@ -47,7 +47,7 @@ class PriorityQueue {
 		size++;
 	}
 
-	void decreaseKey(int id, int distance) {
+	void decreaseKey(int id, long distance) {
 		final int idx = vertexToIdx.get(id);
 		a[idx].distance = distance;
 		decreaseKey(idx);
@@ -102,9 +102,9 @@ class PriorityQueue {
 	
 	static class Vertex {
 		final int id;
-		int distance;
+		long distance;
 
-		Vertex(int id, int distance) {
+		Vertex(int id, long distance) {
 			this.id = id;
 			this.distance = distance;
 		}
