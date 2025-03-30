@@ -2,6 +2,7 @@ package com.coding.challenge.bfs;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 class MaximumNumberOfPointsFromGridQueries {
 	private static int[][] MOVES = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
@@ -28,7 +29,7 @@ class MaximumNumberOfPointsFromGridQueries {
 		final int m = grid.length;
 		final int n = grid[0].length;
 		final boolean[][] d = new boolean[m][n];
-		final PriorityQueue<Vertex> h = new PriorityQueue<>(
+		final Queue<Vertex> h = new PriorityQueue<>(
 				(v1, v2) -> Integer.compare(grid[v1.row][v1.col], grid[v2.row][v2.col]));
 		d[0][0] = true;
 		Arrays.sort(a, (p, q) -> Integer.compare(p[1], q[1]));
