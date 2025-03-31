@@ -17,7 +17,7 @@ class DisjointSets {
 		link(findSet(x), findSet(y));
 	}
 
-	static void link(Node x, Node y) {
+	private static void link(Node x, Node y) {
 		// union by rank heuristic.
 		if (x.rank > y.rank)
 			y.p = x;
