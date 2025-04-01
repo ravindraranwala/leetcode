@@ -6,8 +6,8 @@ class SolvingQuestionsWithBrainpower {
 	}
 
 	public static void main(String[] args) {
-		final int[][] questions = { { 3, 2 }, { 4, 3 }, { 4, 4 }, { 2, 5 } };
-		assert mostPoints(questions) == 5;
+		final int[][] questions1 = { { 3, 2 }, { 4, 3 }, { 4, 4 }, { 2, 5 } };
+		assert mostPoints(questions1) == 5;
 
 		final int[][] questions2 = { { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, { 5, 5 } };
 		assert mostPoints(questions2) == 7;
