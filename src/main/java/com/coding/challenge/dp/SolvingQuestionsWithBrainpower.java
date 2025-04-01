@@ -15,17 +15,13 @@ class SolvingQuestionsWithBrainpower {
 
 	static long mostPoints(int[][] questions) {
 		final int n = questions.length;
-		final long[] points = new long[n];
-		// trivial case of the recursion.
-		points[n - 1] = questions[n - 1][0];
-
-		for (int i = n - 2; i >= 0; i--) {
-			long val = questions[i][0];
-			final int nextIdx = i + questions[i][1] + 1;
-			if (nextIdx < n)
-				val = val + points[nextIdx];
-			points[i] = Math.max(points[i + 1], val);
+		final long[] p = new long[n + 1];
+		for (int i = n - 1; i >= 0; i--) {
+			if (i + questions[i][1] < n)
+				p[i] = Math.max(questions[i][0] + p[i + questions[i][1] + 1], p[i + 1]);
+			else
+				p[i] = Math.max(questions[i][0], p[i + 1]);
 		}
-		return points[0];
+		return p[0];
 	}
 }
