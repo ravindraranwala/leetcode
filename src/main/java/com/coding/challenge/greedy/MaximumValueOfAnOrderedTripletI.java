@@ -40,7 +40,7 @@ class MaximumValueOfAnOrderedTripletI {
 	static long maximumTripletValueOptimized(int[] nums) {
 		final int n = nums.length;
 		long ans = 0;
-		for (int k = 2, maxDelta = nums[0] - nums[1], maxVal = Math.max(nums[0], nums[1]); k < n; k++) {
+		for (int k = 0, maxDelta = 0, maxVal = 0; k < n; k++) {
 			ans = Math.max(ans, maxDelta * 1l * nums[k]);
 			maxDelta = Math.max(maxDelta, maxVal - nums[k]);
 			maxVal = Math.max(maxVal, nums[k]);
