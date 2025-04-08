@@ -6,7 +6,7 @@ class LowestCommonAncestorOfDeepestLeaves {
 	private int maxDepth = 0;
 	private TreeNode lca = null;
 
-	public LowestCommonAncestorOfDeepestLeaves() {
+	LowestCommonAncestorOfDeepestLeaves() {
 
 	}
 

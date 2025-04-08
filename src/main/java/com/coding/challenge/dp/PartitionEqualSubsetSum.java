@@ -11,31 +11,44 @@ class PartitionEqualSubsetSum {
 
 		final int[] nums2 = { 1, 2, 3, 5 };
 		assert !canPartition(nums2);
+
+		final int[] nums3 = { 100, 4, 6 };
+		assert !canPartition(nums3);
+
+		final int[] nums4 = { 100 };
+		assert !canPartition(nums4);
+
+		final int[] nums5 = { 1, 5, 10, 6 };
+		assert canPartition(nums5);
 	}
 
 	static boolean canPartition(int[] nums) {
-		if (nums.length == 1)
-			return false;
-		int sum = 0;
+		int s = 0;
 		for (int val : nums)
-			sum = sum + val;
+			s = s + val;
 
-		if (sum % 2 == 1)
+		if (s % 2 == 1)
 			return false;
-		final int s = sum / 2;
-		final int n = nums.length;
-		final boolean[][] t = new boolean[s + 1][n + 1];
-		// trivial case of the recursion.
-		for (int j = 0; j <= n; j++)
-			t[0][j] = true;
 
-		for (int i = 0; i <= s; i++) {
-			for (int j = 1; j <= n; j++) {
-				t[i][j] = t[i][j - 1];
-				if (i - nums[j - 1] >= 0)
-					t[i][j] = t[i][j] || t[i - nums[j - 1]][j - 1];
+		final int n = nums.length;
+		final int sum = s / 2;
+		final boolean[][] t = new boolean[sum + 1][n];
+
+		// trivial case of the recursion.
+		for (int i = 0; i < n; i++)
+			t[0][i] = true;
+
+		if (nums[0] <= sum)
+			t[nums[0]][0] = true;
+
+		for (int currSum = 1; currSum <= sum; currSum++) {
+			for (int i = 1; i < n; i++) {
+				t[currSum][i] = t[currSum][i - 1];
+				if (currSum >= nums[i])
+					t[currSum][i] = t[currSum][i] || t[currSum - nums[i]][i - 1];
 			}
 		}
-		return t[s][n];
+
+		return t[sum][n - 1];
 	}
 }
