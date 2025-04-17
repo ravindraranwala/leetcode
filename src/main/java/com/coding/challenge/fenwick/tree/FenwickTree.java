@@ -7,7 +7,11 @@ package com.coding.challenge.fenwick.tree;
  *
  */
 public final class FenwickTree {
-	private final int[] tree;
+	private final long[] tree;
+
+	public FenwickTree(int n) {
+		tree = new long[n + 1];
+	}
 
 	/**
 	 * Constructs a fenwick tree using the given input.
@@ -16,7 +20,7 @@ public final class FenwickTree {
 	 */
 	public FenwickTree(int[] nums) {
 		final int n = nums.length + 1;
-		tree = new int[n];
+		tree = new long[n];
 
 		// copy the input array.
 		System.arraycopy(nums, 0, tree, 1, nums.length);
@@ -29,37 +33,34 @@ public final class FenwickTree {
 	}
 
 	/**
-	 * Updates the value at the position index of the array to have the new value.
+	 * Add the given value to the element at position i.
 	 * 
-	 * @param index point where the value should be changed.
-	 * @param val   new value.
+	 * @param i   Zero based index i where the given value is added.
+	 * @param val new value to be added at the position i.
 	 */
-	public void update(int index, int val) {
-		final int currVal = prefixSum(index + 1) - prefixSum(index);
-		add(index + 1, val - currVal);
-	}
-
-	private void add(int i, int val) {
+	public void add(int i, int val) {
 		final int n = tree.length;
-		while (i < n) {
-			tree[i] = tree[i] + val;
-			i = i + lsb(i);
+		int k = i + 1;
+		while (k < n) {
+			tree[k] = tree[k] + val;
+			k = k + lsb(k);
 		}
 	}
 
 	/**
-	 * Sums up the numbers in the range left to right, b oth inclusive.
+	 * Sums up the numbers in the range i to j, both inclusive. The indices should
+	 * be zero based.
 	 * 
-	 * @param left  starting position (inclusive).
-	 * @param right ending position (inclusive).
-	 * @return sum of the values from left to right, both inclusive.
+	 * @param i starting position (inclusive). Zero based index.
+	 * @param j ending position (inclusive). Zero based index.
+	 * @return sum of the values from i to j, both inclusive.
 	 */
-	public int sumRange(int left, int right) {
-		return prefixSum(right + 1) - prefixSum(left);
+	public long rangeQuery(int i, int j) {
+		return prefixSum(j + 1) - prefixSum(i);
 	}
 
-	private int prefixSum(int i) {
-		int sum = 0;
+	private long prefixSum(int i) {
+		long sum = 0;
 		while (i != 0) {
 			sum = sum + tree[i];
 			i = i - lsb(i);
