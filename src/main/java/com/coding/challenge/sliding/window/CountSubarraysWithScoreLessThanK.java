@@ -15,7 +15,7 @@ class CountSubarraysWithScoreLessThanK {
 
 	static long countSubarrays(int[] nums, long k) {
 		final int n = nums.length;
-		long ans = 0;
+		long c = 0;
 		long s = 0;
 
 		for (int i = 0, j = 0; j < n; j++) {
@@ -24,8 +24,8 @@ class CountSubarraysWithScoreLessThanK {
 				s = s - nums[i];
 				i = i + 1;
 			}
-			ans = ans + j - i + 1;
+			c = c + j - i + 1;
 		}
-		return ans;
+		return c;
 	}
 }
