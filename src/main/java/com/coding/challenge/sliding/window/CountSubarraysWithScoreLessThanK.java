@@ -15,17 +15,17 @@ class CountSubarraysWithScoreLessThanK {
 
 	static long countSubarrays(int[] nums, long k) {
 		final int n = nums.length;
-		long c = 0;
-		long sum = 0;
+		long ans = 0;
+		long s = 0;
+
 		for (int i = 0, j = 0; j < n; j++) {
-			sum = sum + nums[j];
-			while (i <= j && sum * (j - i + 1) >= k) {
-				sum = sum - nums[i];
+			s = s + nums[j];
+			while (s * (j - i + 1) >= k) {
+				s = s - nums[i];
 				i = i + 1;
 			}
-			// number of sub arrays finishing at index j, with score < k.
-			c = c + j - i + 1;
+			ans = ans + j - i + 1;
 		}
-		return c;
+		return ans;
 	}
 }
