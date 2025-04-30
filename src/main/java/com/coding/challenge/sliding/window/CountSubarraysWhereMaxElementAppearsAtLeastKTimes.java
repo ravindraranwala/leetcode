@@ -15,24 +15,21 @@ class CountSubarraysWhereMaxElementAppearsAtLeastKTimes {
 
 	static long countSubarrays(int[] nums, int k) {
 		final int n = nums.length;
-		int maxElt = 0;
-		// find the max value first.
-		for (int i = 0; i < n; i++)
-			maxElt = Math.max(maxElt, nums[i]);
+		int maxVal = 0;
+		for (int e : nums)
+			maxVal = Math.max(maxVal, e);
 
-		long c = 0;
-		for (int s = 0, e = 0, f = 0; e < n; e++) {
-			if (nums[e] == maxElt)
-				f = f + 1;
-
-			// count sub arrays finishing at e if any.
-			while (f == k) {
-				if (nums[s] == maxElt)
-					f = f - 1;
-				s = s + 1;
+		long ans = 0;
+		for (int i = 0, j = 0, c = 0; j < n; j++) {
+			if (nums[j] == maxVal)
+				c = c + 1;
+			while (c == k) {
+				if (nums[i] == maxVal)
+					c = c - 1;
+				i = i + 1;
 			}
-			c = c + s;
+			ans = ans + i;
 		}
-		return c;
+		return ans;
 	}
 }
