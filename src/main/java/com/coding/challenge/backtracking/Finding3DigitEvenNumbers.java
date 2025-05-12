@@ -19,8 +19,7 @@ class Finding3DigitEvenNumbers {
 		assert Arrays.equals(a2, findEvenNumbers(digits2));
 
 		final int[] digits3 = { 3, 7, 5 };
-		final int[] a3 = {};
-		assert Arrays.equals(a3, findEvenNumbers(digits3));
+		assert findEvenNumbers(digits3).length == 0;
 	}
 
 	static int[] findEvenNumbers(int[] digits) {
