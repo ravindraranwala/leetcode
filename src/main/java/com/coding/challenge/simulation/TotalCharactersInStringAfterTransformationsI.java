@@ -14,22 +14,22 @@ class TotalCharactersInStringAfterTransformationsI {
 	}
 
 	static int lengthAfterTransformations(String s, int t) {
-        final int[] f = new int[26];
-        for (char ch : s.toCharArray()) 
-        	f[ch - FIRST_LETTER] = f[ch - FIRST_LETTER] + 1;
-        
-        for (int i = 1; i <= t; i++) {
-        	final int zFreq = f[25];
-        	for (int j = 25; j > 1; j--)
-        		f[j] = f[j - 1];
-        	
-        	f[1] = (f[0] + zFreq) % MOD;
-        	f[0] = zFreq;
-        }
-        int l = 0;
-        for (int freq : f) 
-        	l = (l + freq) % MOD;
-        
-        return l;
-    }
+		final int[] f = new int[26];
+		for (char ch : s.toCharArray())
+			f[ch - FIRST_LETTER] = f[ch - FIRST_LETTER] + 1;
+
+		for (int i = 1; i <= t; i++) {
+			final int zFreq = f[25];
+			for (int j = 25; j > 1; j--)
+				f[j] = f[j - 1];
+
+			f[1] = (f[0] + zFreq) % MOD;
+			f[0] = zFreq;
+		}
+		int l = 0;
+		for (int freq : f)
+			l = (l + freq) % MOD;
+
+		return l;
+	}
 }
