@@ -28,16 +28,16 @@ class SnakesAndLadders {
 			final Vertex u = q.remove();
 			// scan the adjacency list or simulate dice rolls.
 			for (int i = 1; i <= 6; i++) {
-				final int lbl = u.label + i;
-				if (lbl <= size) {
-					final int[] p = rowAndCol(lbl, n);
-					final int next = board[p[0]][p[1]] == -1 ? lbl : board[p[0]][p[1]];
-					if (next == size)
+				final int next = u.label + i;
+				if (next <= size) {
+					final int[] p = rowAndCol(next, n);
+					final int dest = board[p[0]][p[1]] == -1 ? next : board[p[0]][p[1]];
+					if (dest == size)
 						return u.distance + 1;
 
-					if (!d[next]) {
-						d[next] = true;
-						q.offer(new Vertex(next, u.distance + 1));
+					if (!d[dest]) {
+						d[dest] = true;
+						q.offer(new Vertex(dest, u.distance + 1));
 					}
 				}
 			}
