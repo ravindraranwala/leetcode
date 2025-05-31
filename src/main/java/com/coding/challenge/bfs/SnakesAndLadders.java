@@ -31,13 +31,13 @@ class SnakesAndLadders {
 				final int lbl = u.label + i;
 				if (lbl <= size) {
 					final int[] p = rowAndCol(lbl, n);
-					final int dest = board[p[0]][p[1]] == -1 ? lbl : board[p[0]][p[1]];
-					if (dest == size)
+					final int next = board[p[0]][p[1]] == -1 ? lbl : board[p[0]][p[1]];
+					if (next == size)
 						return u.distance + 1;
 
-					if (!d[dest]) {
-						d[dest] = true;
-						q.offer(new Vertex(dest, u.distance + 1));
+					if (!d[next]) {
+						d[next] = true;
+						q.offer(new Vertex(next, u.distance + 1));
 					}
 				}
 			}
