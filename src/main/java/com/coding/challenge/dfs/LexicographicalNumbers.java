@@ -37,23 +37,18 @@ class LexicographicalNumbers {
 
 	static List<Integer> lexicalOrder(int n) {
 		final List<Integer> l = new ArrayList<>();
-		final int bound = Math.min(9, n);
-		for (int i = 1; i <= bound; i++) {
-			l.add(i);
-			lexicalNumbers(l, i * 10, n);
-		}
+		for (int k = 1; k < 10; k++)
+			lexicographicalOrder(l, k, n);
 		return l;
 	}
 
-	private static void lexicalNumbers(List<Integer> l, int currNum, int n) {
-		if (currNum > n)
+	private static void lexicographicalOrder(List<Integer> l, int curr, int n) {
+		if (curr > n)
 			return;
 
-		final int bound = Math.min(9, n - currNum);
-		for (int i = 0; i <= bound; i++) {
-			final int val = currNum + i;
-			l.add(val);
-			lexicalNumbers(l, val * 10, n);
-		}
+		l.add(curr);
+		final int next = curr * 10;
+		for (int v = 0; v < 10; v++)
+			lexicographicalOrder(l, next + v, n);
 	}
 }
