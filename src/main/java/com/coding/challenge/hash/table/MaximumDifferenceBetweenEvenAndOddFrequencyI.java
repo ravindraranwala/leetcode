@@ -1,4 +1,4 @@
-package com.coding.challenge.string;
+package com.coding.challenge.hash.table;
 
 class MaximumDifferenceBetweenEvenAndOddFrequencyI {
 	private static final char FIRST_LETTER = 'a';
