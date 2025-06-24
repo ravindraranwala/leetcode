@@ -19,19 +19,18 @@ class DivideStringIntoGroupsOfSizek {
 		final int n = s.length();
 		final int groupCnt = (n + k - 1) / k;
 		final String[] ans = new String[groupCnt];
-		StringBuilder currGroup = new StringBuilder();
+		final char[] currGroup = new char[k];
 		for (int i = 0; i < n; i++) {
-			if (currGroup.length() == k) {
-				ans[i / k - 1] = currGroup.toString();
-				currGroup = new StringBuilder();
-			}
-			currGroup.append(s.charAt(i));
+			if (i > 0 && i % k == 0)
+				ans[i / k - 1] = new String(currGroup);
+
+			currGroup[i % k] = s.charAt(i);
 		}
 
-		while (currGroup.length() < k)
-			currGroup.append(fill);
+		for (int j = n; j % k > 0; j++)
+			currGroup[j % k] = fill;
 
-		ans[groupCnt - 1] = currGroup.toString();
+		ans[groupCnt - 1] = new String(currGroup);
 		return ans;
 	}
 }
