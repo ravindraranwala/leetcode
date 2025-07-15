@@ -1,4 +1,4 @@
-package com.coding.challenge.hash.table;
+package com.coding.challenge.string;
 
 class ValidWord {
 	private static final char LOWER_FIRST_LETTER = 'a';
