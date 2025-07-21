@@ -13,14 +13,19 @@ class DeleteCharactersToMakeFancyString {
 
 	static String makeFancyString(String s) {
 		final int n = s.length();
-		final StringBuilder sb = new StringBuilder();
-		sb.append(s.charAt(0));
-		if (n > 1)
-			sb.append(s.charAt(1));
-		for (int i = 2; i < n; i++)
-			if (s.charAt(i - 2) != s.charAt(i - 1) || s.charAt(i - 1) != s.charAt(i))
-				sb.append(s.charAt(i));
+		final StringBuilder ans = new StringBuilder();
+		ans.append(s.charAt(0));
 
-		return sb.toString();
+		for (int i = 1, c = 1; i < n; i++) {
+			final char ch = s.charAt(i);
+			if (ch == s.charAt(i - 1))
+				c = c + 1;
+			else
+				c = 1;
+
+			if (c < 3)
+				ans.append(ch);
+		}
+		return ans.toString();
 	}
 }
