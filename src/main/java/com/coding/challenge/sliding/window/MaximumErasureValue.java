@@ -1,7 +1,7 @@
 package com.coding.challenge.sliding.window;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 class MaximumErasureValue {
 	MaximumErasureValue() {
@@ -9,26 +9,31 @@ class MaximumErasureValue {
 	}
 
 	public static void main(String[] args) {
-		final int[] numsOne = { 4, 2, 4, 5, 6 };
-		assert maximumUniqueSubarray(numsOne) == 17;
+		final int[] nums1 = { 4, 2, 4, 5, 6 };
+		assert maximumUniqueSubarray(nums1) == 17;
 
-		final int[] numsTwo = { 5, 2, 1, 2, 5, 2, 1, 2, 5 };
-		assert maximumUniqueSubarray(numsTwo) == 8;
+		final int[] nums2 = { 5, 2, 1, 2, 5, 2, 1, 2, 5 };
+		assert maximumUniqueSubarray(nums2) == 8;
 	}
 
 	static int maximumUniqueSubarray(int[] nums) {
 		final int n = nums.length;
-		final Set<Integer> s = new HashSet<>();
-		int max = 0;
-		for (int i = 0, j = 0, sum = 0; j < n; j++) {
-			while (!s.add(nums[j])) {
-				s.remove(nums[i]);
-				sum = sum - nums[i];
-				i = i + 1;
+		int maxScore = 0;
+		final Map<Integer, Integer> w = new HashMap<>();
+
+		for (int l = 0, r = 0, s = 0; r < n; r++) {
+			if (w.containsKey(nums[r])) {
+				final int k = w.get(nums[r]);
+				while (l <= k) {
+					w.remove(nums[l]);
+					s = s - nums[l];
+					l = l + 1;
+				}
 			}
-			sum = sum + nums[j];
-			max = Math.max(max, sum);
+			w.put(nums[r], r);
+			s = s + nums[r];
+			maxScore = Math.max(maxScore, s);
 		}
-		return max;
+		return maxScore;
 	}
 }
