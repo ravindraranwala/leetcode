@@ -21,18 +21,18 @@ class FruitIntoBaskets {
 
 	static int totalFruit(int[] fruits) {
 		final int n = fruits.length;
-		final Map<Integer, Integer> t = new HashMap<>();
-		int l = 0;
+		int maxLen = 0;
+		final Map<Integer, Integer> f = new HashMap<>();
 		for (int i = 0, j = 0; j < n; j++) {
-			t.merge(fruits[j], 1, Integer::sum);
-			while (t.size() > 2) {
-				t.put(fruits[i], t.get(fruits[i]) - 1);
-				if (t.get(fruits[i]) == 0)
-					t.remove(fruits[i]);
+			f.merge(fruits[j], 1, Integer::sum);
+			while (f.size() == 3) {
+				f.put(fruits[i], f.get(fruits[i]) - 1);
+				if (f.get(fruits[i]) == 0)
+					f.remove(fruits[i]);
 				i = i + 1;
 			}
-			l = Math.max(l, j - i + 1);
+			maxLen = Math.max(maxLen, j - i + 1);
 		}
-		return l;
+		return maxLen;
 	}
 }
