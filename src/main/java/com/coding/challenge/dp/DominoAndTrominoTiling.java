@@ -17,7 +17,6 @@ class DominoAndTrominoTiling {
 		assert numTilingsMath(3) == 5;
 		assert numTilingsMath(4) == 11;
 		assert numTilingsMath(699) == 939053561;
-		System.out.println(numTilingsMath(699));
 	}
 
 	static int numTilings(int n) {
