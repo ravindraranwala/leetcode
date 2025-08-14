@@ -21,10 +21,8 @@ class Largest3SameDigitNumberInString {
 			else
 				c = 1;
 
-			if (c == 3) {
-				if (ch > maxGood)
-					maxGood = ch;
-			}
+			if (c == 3 && ch > maxGood)
+				maxGood = ch;
 		}
 		if (maxGood == '\0')
 			return "";
