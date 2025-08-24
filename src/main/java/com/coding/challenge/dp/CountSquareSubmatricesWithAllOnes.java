@@ -18,7 +18,7 @@ class CountSquareSubmatricesWithAllOnes {
 		final int m = matrix.length;
 		final int n = matrix[0].length;
 
-		final int[][] colData = new int[m][n];
+		final int[] colData = new int[n];
 
 		int ans = 0;
 		final int[][] t = new int[m][n];
@@ -31,7 +31,7 @@ class CountSquareSubmatricesWithAllOnes {
 		for (int j = 1; j < n; j++) {
 			t[0][j] = matrix[0][j];
 			ans = ans + t[0][j];
-			colData[0][j] = matrix[0][j];
+			colData[j] = matrix[0][j];
 		}
 
 		// row major order.
@@ -39,13 +39,13 @@ class CountSquareSubmatricesWithAllOnes {
 			for (int j = 1, ci = matrix[i][0]; j < n; j++) {
 				if (matrix[i][j] == 0) {
 					ci = 0;
-					colData[i][j] = 0;
+					colData[j] = 0;
 				} else {
 					ci = ci + 1;
-					colData[i][j] = colData[i - 1][j] + 1;
+					colData[j] = colData[j] + 1;
 				}
 
-				t[i][j] = Math.min(t[i - 1][j - 1] + 1, Math.min(ci, colData[i][j]));
+				t[i][j] = Math.min(t[i - 1][j - 1] + 1, Math.min(ci, colData[j]));
 				ans = ans + t[i][j];
 			}
 		}
