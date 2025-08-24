@@ -1,7 +1,7 @@
 package com.coding.challenge.sliding.window;
 
-class LongestSubarrayOfOnesAfterDeletingOneElement {
-	LongestSubarrayOfOnesAfterDeletingOneElement() {
+class LongestSubarrayOf1sAfterDeletingOneElement {
+	LongestSubarrayOf1sAfterDeletingOneElement() {
 		throw new AssertionError();
 	}
 
@@ -19,22 +19,16 @@ class LongestSubarrayOfOnesAfterDeletingOneElement {
 	static int longestSubarray(int[] nums) {
 		final int n = nums.length;
 		int l = 0;
-		int i = 0;
-		int j = 0;
-		int zeros = 0;
-		while (j < n) {
-			if (nums[j] == 0)
-				zeros = zeros + 1;
-			if (zeros == 2)
-				l = Math.max(l, j - i);
-			while (zeros == 2) {
-				if (nums[i] == 0)
-					zeros = zeros - 1;
-				i = i + 1;
+
+		for (int i = 0, j = 0, k = -1; j < n; j++) {
+			if (nums[j] == 0) {
+				i = k + 1;
+				k = j;
 			}
-			j = j + 1;
+
+			// delete one element.
+			l = Math.max(l, j - i);
 		}
-		l = Math.max(l, j - i);
-		return l - 1;
+		return l;
 	}
 }
