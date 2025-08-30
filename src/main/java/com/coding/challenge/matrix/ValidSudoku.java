@@ -1,6 +1,8 @@
 package com.coding.challenge.matrix;
 
 class ValidSudoku {
+	private static final char ZERO = '0';
+
 	ValidSudoku() {
 		throw new AssertionError();
 	}
@@ -22,29 +24,29 @@ class ValidSudoku {
 	}
 
 	static boolean isValidSudoku(char[][] board) {
-		final int m = board.length;
-		final int n = board[0].length;
-		final boolean[][] rows = new boolean[m][n + 1];
-		final boolean[][] cols = new boolean[m][n + 1];
-		final boolean[][] box = new boolean[m + 1][n + 1];
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
+		final boolean[][] rowData = new boolean[9][10];
+		final boolean[][] colData = new boolean[9][10];
+		final boolean[][] boxData = new boolean[9][10];
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				// if value is not empty, then consume it.
 				if (board[i][j] != '.') {
-					final int value = Integer.valueOf(board[i][j] + "");
-					if (rows[i][value] || cols[j][value] || box[findBox(i, j)][value])
+					final int val = board[i][j] - ZERO;
+					if (rowData[i][val])
 						return false;
-					rows[i][value] = true;
-					cols[j][value] = true;
-					box[findBox(i, j)][value] = true;
+					if (colData[j][val])
+						return false;
+					final int b = (i / 3) * 3 + j / 3;
+					if (boxData[b][val])
+						return false;
+
+					rowData[i][val] = true;
+					colData[j][val] = true;
+					boxData[b][val] = true;
 				}
 			}
 		}
 		return true;
-	}
-
-	private static int findBox(int r, int c) {
-		final int rowOffset = (r / 3);
-		final int colOffset = (c / 3) + 1;
-		return rowOffset * 3 + colOffset;
 	}
 }
