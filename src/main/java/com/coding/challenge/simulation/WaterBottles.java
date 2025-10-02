@@ -6,8 +6,8 @@ class WaterBottles {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(numWaterBottles(9, 3));
-		System.out.println(numWaterBottles(15, 4));
+		assert numWaterBottles(9, 3) == 13;
+		assert numWaterBottles(15, 4) == 19;
 	}
 
 	static int numWaterBottles(int numBottles, int numExchange) {
