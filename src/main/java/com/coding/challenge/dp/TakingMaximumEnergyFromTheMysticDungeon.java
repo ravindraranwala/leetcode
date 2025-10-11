@@ -34,14 +34,14 @@ class TakingMaximumEnergyFromTheMysticDungeon {
 	static int maximumEnergyOptimized(int[] energy, int k) {
 		final int n = energy.length;
 		int maxEnergy = Integer.MIN_VALUE;
-		for (int i = 0; i < k; i++) {
-			int j = i;
-			int jumpMaxEnergy = 0;
-			while (j < n) {
-				jumpMaxEnergy = Math.max(jumpMaxEnergy + energy[j], energy[j]);
-				j = j + k;
+		for (int p = 0; p < k; p++) {
+			int i = p;
+			int pathMaxEnergy = 0;
+			while (i < n) {
+				pathMaxEnergy = Math.max(pathMaxEnergy + energy[i], energy[i]);
+				i = i + k;
 			}
-			maxEnergy = Math.max(maxEnergy, jumpMaxEnergy);	
+			maxEnergy = Math.max(maxEnergy, pathMaxEnergy);
 		}
 		return maxEnergy;
 	}
