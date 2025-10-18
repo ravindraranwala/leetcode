@@ -14,26 +14,24 @@ class AdjacentIncreasingSubarraysDetectionI {
 
 		final List<Integer> nums2 = Arrays.asList(1, 2, 3, 4, 4, 4, 4, 5, 6, 7);
 		assert !hasIncreasingSubarrays(nums2, 5);
-		
+
 		final List<Integer> nums3 = Arrays.asList(2, 1);
 		assert hasIncreasingSubarrays(nums3, 1);
 	}
 
 	static boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
 		final int n = nums.size();
-		final boolean[] kIncr = new boolean[n];
-		kIncr[0] = k <= 1;
-		for (int i = 1, l = 1; i < n; i++) {
+		for (int i = 1, l1 = 0, l2 = 1; i < n; i++) {
 			if (nums.get(i) > nums.get(i - 1))
-				l = l + 1;
-			else
-				l = 1;
-
-			if (i >= 2 * k - 1 && l >= k && kIncr[i - 2 * k + 1])
+				l2 = l2 + 1;
+			else {
+				l1 = l2;
+				l2 = 1;
+			}
+			if (l2 >= 2 * k)
 				return true;
-
-			if (l >= k)
-				kIncr[i - k + 1] = true;
+			if (l1 >= k && l2 >= k)
+				return true;
 		}
 		return false;
 	}
