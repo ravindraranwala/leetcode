@@ -1,4 +1,4 @@
-package com.coding.challenge.sliding.window;
+package com.coding.challenge.array;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +25,14 @@ class AdjacentIncreasingSubarraysDetectionII {
 	static int maxIncreasingSubarrays(List<Integer> nums) {
 		final int n = nums.size();
 		int k = 0;
-		for (int p = 0, q = p, r = 1; r < n; r++) {
-			if (nums.get(r) <= nums.get(r - 1)) {
-				p = q;
-				q = r;
+		for (int i = 1, l1 = 0, l2 = 1; i < n; i++) {
+			if (nums.get(i) > nums.get(i - 1))
+				l2 = l2 + 1;
+			else {
+				l1 = l2;
+				l2 = 1;
 			}
-			k = Math.max(k, Math.max(Math.min(q - p, r - q + 1), Math.max(q - p, r - q + 1) / 2));
+			k = Math.max(k, Math.max(Math.min(l1, l2), l2/ 2));
 		}
 		return k;
 	}
