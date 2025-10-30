@@ -22,8 +22,8 @@ class MakeArrayElementsEqualToZero {
 
 		int selections = 0;
 		for (int i = 0, prefixSum = 0; i < n; i++) {
-			final int postfixSum = sum - prefixSum - nums[i];
 			if (nums[i] == 0) {
+				final int postfixSum = sum - prefixSum - nums[i];
 				final int delta = Math.abs(prefixSum - postfixSum);
 				if (delta == 1)
 					selections = selections + 1;
