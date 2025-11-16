@@ -20,7 +20,7 @@ class NumberOfSubstringsWithOnly1s {
 			if (s.charAt(i) == '0')
 				lastZeroIdx = i;
 
-			c = (c + (i - lastZeroIdx)) % MOD;
+			c = (c + i - lastZeroIdx) % MOD;
 		}
 		return c;
 	}
