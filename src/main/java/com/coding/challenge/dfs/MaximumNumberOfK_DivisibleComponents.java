@@ -29,16 +29,15 @@ class MaximumNumberOfK_DivisibleComponents {
 			adjList.get(e[0]).add(e[1]);
 			adjList.get(e[1]).add(e[0]);
 		}
-		dfs(0, adjList, values, new boolean[n], k);
+		dfs(0, adjList, values, -1, k);
 		return edgesRemoved + 1;
 	}
 
-	private int dfs(int u, List<List<Integer>> adjList, int[] values, boolean[] d, int k) {
-		d[u] = true;
+	private int dfs(int u, List<List<Integer>> adjList, int[] values, int p, int k) {
 		int rem = values[u] % k;
 		for (int v : adjList.get(u)) {
-			if (!d[v]) {
-				final int childRem = dfs(v, adjList, values, d, k);
+			if (v != p) {
+				final int childRem = dfs(v, adjList, values, u, k);
 				if (childRem == 0)
 					edgesRemoved = edgesRemoved + 1;
 				rem = (rem + childRem) % k;
