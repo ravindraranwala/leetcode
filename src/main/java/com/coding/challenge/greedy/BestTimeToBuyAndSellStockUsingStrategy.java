@@ -21,9 +21,6 @@ class BestTimeToBuyAndSellStockUsingStrategy {
 		for (int p = 0; p < n; p++)
 			initProfit = initProfit + (prices[p] * strategy[p]);
 
-		if (k > n)
-			return initProfit;
-
 		long sumOfPrdOne = 0;
 		for (int q = 0, mid = k / 2; q < mid; q++)
 			sumOfPrdOne = sumOfPrdOne + (prices[q] * strategy[q]);
