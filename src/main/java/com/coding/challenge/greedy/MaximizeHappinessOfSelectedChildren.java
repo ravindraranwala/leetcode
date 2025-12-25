@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class MaximizeHappinessOfSelectedChildren {
 	MaximizeHappinessOfSelectedChildren() {
-
+		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
