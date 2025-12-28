@@ -14,46 +14,48 @@ class MeetingRoomsIII {
 		assert mostBooked(2, meetings1) == 0;
 
 		final int[][] meetings2 = { { 1, 20 }, { 2, 10 }, { 3, 5 }, { 4, 9 }, { 6, 8 } };
-		assert mostBooked(2, meetings2) == 1;
+		assert mostBooked(3, meetings2) == 1;
 	}
 
 	static int mostBooked(int n, int[][] meetings) {
-		final Queue<Room> free = new PriorityQueue<>((r1, r2) -> Integer.compare(r1.number, r2.number));
-		for (int r = 0; r < n; r++)
-			free.add(new Room(r, 0));
-
-		final Queue<Room> occupied = new PriorityQueue<>((r1, r2) -> Long.compare(r1.finishTime, r2.finishTime));
 		Arrays.sort(meetings, (m1, m2) -> Integer.compare(m1[0], m2[0]));
-		final int[] mCnt = new int[n];
+		final Queue<Room> occupied = new PriorityQueue<>((r1, r2) -> Long.compare(r1.finishTime, r2.finishTime));
+		final Queue<Room> free = new PriorityQueue<>((r1, r2) -> Integer.compare(r1.id, r2.id));
+		for (int i = 0; i < n; i++)
+			free.add(new Room(i, -1));
+
+		final int[] a = new int[n];
 		for (int[] m : meetings) {
-			while (!occupied.isEmpty() && occupied.peek().finishTime <= m[0])
-				free.add(occupied.remove());
+			final int start = m[0];
+			while (!occupied.isEmpty() && occupied.peek().finishTime < start)
+				free.add(occupied.poll());
 
 			if (free.isEmpty()) {
-				final long t = occupied.peek().finishTime;
-				while (!occupied.isEmpty() && occupied.peek().finishTime == t)
+				final long minFinish = occupied.peek().finishTime;
+				while (!occupied.isEmpty() && occupied.peek().finishTime == minFinish)
 					free.add(occupied.remove());
 			}
-			final Room room = free.remove();
-			mCnt[room.number] = mCnt[room.number] + 1;
-			room.finishTime = Math.max(room.finishTime, m[0]) + m[1] - m[0];
-			occupied.add(room);
+
+			final Room r = free.remove();
+			r.finishTime = Math.max(r.finishTime, start - 1) + m[1] - start;
+			occupied.offer(r);
+			a[r.id] = a[r.id] + 1;
 		}
 
-		int k = 0;
-		for (int j = 1; j < n; j++)
-			if (mCnt[j] > mCnt[k])
-				k = j;
+		int ans = 0;
+		for (int j = 0; j < n; j++)
+			if (a[j] > a[ans])
+				ans = j;
 
-		return k;
+		return ans;
 	}
 
 	static class Room {
-		final int number;
+		final int id;
 		long finishTime;
 
 		Room(int id, int finishTime) {
-			this.number = id;
+			this.id = id;
 			this.finishTime = finishTime;
 		}
 	}
