@@ -68,7 +68,6 @@ class LastDayWhereYouCanStillCross {
 		final int day;
 
 		WaterCell(int row, int col, int day) {
-			super();
 			this.row = row;
 			this.col = col;
 			this.day = day;
