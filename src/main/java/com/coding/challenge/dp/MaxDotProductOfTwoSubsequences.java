@@ -18,30 +18,38 @@ class MaxDotProductOfTwoSubsequences {
 		final int[] nums6 = { 1, 1 };
 		assert maxDotProduct(nums5, nums6) == -1;
 
-		final int[] nums7 = { -3, -8, 3, -10, 1, 3, 9 };
-		final int[] nums8 = { 9, 2, 3, 7, -9, 1, -8, 5, -1, -1 };
-		assert maxDotProduct(nums7, nums8) == 200;
+		final int[] nums7 = { -1 };
+		final int[] nums8 = { -2, -5 };
+		assert maxDotProduct(nums7, nums8) == 5;
 
+		final int[] nums9 = { -3, -7 };
+		final int[] nums10 = { -2 };
+		assert maxDotProduct(nums9, nums10) == 14;
+
+		final int[] nums11 = { 1, -6 };
+		final int[] nums12 = { -2, -4 };
+		assert maxDotProduct(nums11, nums12) == 24;
 	}
 
 	static int maxDotProduct(int[] nums1, int[] nums2) {
+		// init
 		final int m = nums1.length;
 		final int n = nums2.length;
-		final int[][] dp = new int[m][n];
-		dp[0][0] = nums1[0] * nums2[0];
-		// trivial case of the recursion.
-		for (int i = 1; i < m; i++)
-			dp[i][0] = Math.max(dp[i - 1][0], nums1[i] * nums2[0]);
+		final int[][] p = new int[m + 1][n + 1];
+		final int minVal = -1000000000;
+		// trivial or base case of the recursion
+		for (int i = 0; i <= m; i++)
+			p[i][0] = minVal;
 
-		// trivial case of the recursion.
-		for (int j = 1; j < n; j++)
-			dp[0][j] = Math.max(dp[0][j - 1], nums1[0] * nums2[j]);
+		for (int j = 1; j <= n; j++)
+			p[0][j] = minVal;
 
-		for (int i = 1; i < m; i++)
-			for (int j = 1; j < n; j++)
-				dp[i][j] = Math.max(Math.max(dp[i][j - 1], dp[i - 1][j]),
-						Math.max(dp[i - 1][j - 1] + nums1[i] * nums2[j], nums1[i] * nums2[j]));
+		// non-trivial recursive step.
+		for (int i = 1; i <= m; i++)
+			for (int j = 1; j <= n; j++)
+				p[i][j] = Math.max(Math.max(p[i - 1][j - 1] + nums1[i - 1] * nums2[j - 1], nums1[i - 1] * nums2[j - 1]),
+						Math.max(p[i][j - 1], p[i - 1][j]));
 
-		return dp[m - 1][n - 1];
+		return p[m][n];
 	}
 }
