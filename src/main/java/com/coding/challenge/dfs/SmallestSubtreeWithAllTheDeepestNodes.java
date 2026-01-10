@@ -8,38 +8,35 @@ class SmallestSubtreeWithAllTheDeepestNodes {
 	}
 
 	public static void main(String[] args) {
-		final TreeNode root = new TreeNode(3,
+		final TreeNode root1 = new TreeNode(3,
 				new TreeNode(5, new TreeNode(6), new TreeNode(2, new TreeNode(7), new TreeNode(4))),
 				new TreeNode(1, new TreeNode(0), new TreeNode(8)));
-		System.out.println(subtreeWithAllDeepest(root));
+		System.out.println(subtreeWithAllDeepest(root1));
+
+		System.out.println(subtreeWithAllDeepest(new TreeNode(1)));
+
+		final TreeNode root2 = new TreeNode(0, new TreeNode(1, null, new TreeNode(2)), new TreeNode(3));
+		System.out.println(subtreeWithAllDeepest(root2));
 	}
 
 	static TreeNode subtreeWithAllDeepest(TreeNode root) {
-		final int depth = findDepth(root);
-		return visitTree(root, depth, 0);
+		final TreeNode[] ans = new TreeNode[1];
+		dfs(root, -1, new int[1], ans);
+		return ans[0];
 	}
 
-	private static int findDepth(TreeNode node) {
-		if (node == null)
-			return -1;
+	private static int dfs(TreeNode root, int ph, int[] h, TreeNode[] ans) {
+		if (root == null)
+			return ph;
 
-		final int dl = findDepth(node.left);
-		final int dr = findDepth(node.right);
-		return Math.max(dl, dr) + 1;
-	}
+		final int lh = dfs(root.left, ph + 1, h, ans);
+		final int rh = dfs(root.right, ph + 1, h, ans);
 
-	private static TreeNode visitTree(TreeNode node, int depth, int currDepth) {
-		if (node == null)
-			return null;
-		if (currDepth == depth)
-			return node;
+		if (lh == rh && lh >= h[0]) {
+			h[0] = lh;
+			ans[0] = root;
+		}
 
-		final TreeNode leftLca = visitTree(node.left, depth, currDepth + 1);
-		final TreeNode rightLca = visitTree(node.right, depth, currDepth + 1);
-		if (leftLca != null && rightLca != null)
-			return node;
-		if (leftLca != null)
-			return leftLca;
-		return rightLca;
+		return Math.max(lh, rh);
 	}
 }
