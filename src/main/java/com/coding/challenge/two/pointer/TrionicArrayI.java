@@ -42,6 +42,6 @@ class TrionicArrayI {
 
 		// each of the three sub arrays should not be empty.
 		// we should inspect all the elements of the input sequence in the end.
-		return i != s && j != i && j != k && k == n;
+		return i != s && j != i && k != j && k == n;
 	}
 }
