@@ -1,4 +1,4 @@
-package com.coding.challenge.string;
+package com.coding.challenge.two.pointer;
 
 class CountBinarySubstrings {
 
@@ -16,16 +16,16 @@ class CountBinarySubstrings {
 		final int n = s.length();
 		int c = 0;
 
-		for (int i = 1, l = 0; i < n; i++) {
-			final char ch = s.charAt(i);
-			if (ch != s.charAt(i - 1)) {
+		for (int j = 1, i = -1; j < n; j++) {
+			final char ch = s.charAt(j);
+			if (ch != s.charAt(j - 1)) {
 				c = c + 1;
-				l = 1;
-			} else if (i > 2 * l && ch != s.charAt(i - 2 * l - 1)) {
+				i = j - 1;
+			} else if (i > 0 && ch != s.charAt(i - 1)) {
 				c = c + 1;
-				l = l + 1;
+				i = i - 1;
 			} else
-				l = 0;
+				i = -1;
 		}
 		return c;
 	}
