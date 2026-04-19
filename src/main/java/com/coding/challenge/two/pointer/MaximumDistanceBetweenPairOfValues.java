@@ -23,10 +23,13 @@ class MaximumDistanceBetweenPairOfValues {
 		final int m = nums1.length;
 		final int n = nums2.length;
 		int d = 0;
-		for (int i = 0, j = 0; i < m && j < n; j++) {
-			while (i < m && nums1[i] > nums2[j])
-				i = i + 1;
-			d = Math.max(d, j - i);
+
+		for (int i = m - 1, j = n - 1; i >= 0; i--) {
+			while (j > 0 && nums2[j] < nums1[i])
+				j = j - 1;
+
+			if (j >= i)
+				d = Math.max(d, j - i);
 		}
 		return d;
 	}
