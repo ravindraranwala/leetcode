@@ -2,12 +2,12 @@ package com.coding.challenge.quick.select;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-class QuickSelect {
+public class QuickSelect {
 	QuickSelect() {
 		throw new AssertionError();
 	}
 
-	static int randomizedSelect(int[] a, int p, int r, int i) {
+	public static int randomizedSelect(int[] a, int p, int r, int i) {
 		if (p == r)
 			return a[p];
 		final int q = randomizedPartition(a, p, r);
