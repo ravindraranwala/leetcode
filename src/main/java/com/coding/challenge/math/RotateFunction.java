@@ -24,7 +24,7 @@ class RotateFunction {
 
 		int maxF = prevF;
 		for (int i = 1; i < n; i++) {
-			final int currF = prevF - (nums[n - i] * (n - 1)) + s - nums[n - i];
+			final int currF = prevF - nums[n - i] * n + s;
 			maxF = Math.max(maxF, currF);
 			prevF = currF;
 		}
