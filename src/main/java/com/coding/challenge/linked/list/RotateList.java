@@ -8,38 +8,35 @@ class RotateList {
 	}
 
 	public static void main(String[] args) {
-		final ListNode<Integer> l1 = new ListNode<Integer>(1,
+		final ListNode<Integer> head1 = new ListNode<>(1,
 				new ListNode<>(2, new ListNode<>(3, new ListNode<>(4, new ListNode<>(5)))));
-		assert "45123".equals(rotateRight(l1, 2).toString());
+		assert "45123".equals(rotateRight(head1, 2).toString());
 
-		final ListNode<Integer> l2 = new ListNode<>(0, new ListNode<>(1, new ListNode<>(2)));
-		assert "201".equals(rotateRight(l2, 4).toString());
-
-		assert rotateRight(null, 1) == null;
+		final ListNode<Integer> head2 = new ListNode<>(0, new ListNode<>(1, new ListNode<>(2)));
+		assert "201".equals(rotateRight(head2, 4).toString());
 	}
 
 	static ListNode<Integer> rotateRight(ListNode<Integer> head, int k) {
 		if (head == null)
-			return null;
-		int n = 0;
-		ListNode<Integer> tail = null;
+			return head;
+
+		int n = 1;
 		ListNode<Integer> curr = head;
-		while (curr != null) {
+		while (curr.next != null) {
 			n = n + 1;
-			tail = curr;
 			curr = curr.next;
 		}
-
-		final int offset = n - k % n;
-		if (offset == n)
+		final int d = k % n;
+		if (d == 0)
 			return head;
-		ListNode<Integer> leftEnd = head;
-		for (int i = 1; i < offset; i++)
-			leftEnd = leftEnd.next;
 
-		tail.next = head;
-		final ListNode<Integer> h = leftEnd.next;
-		leftEnd.next = null;
-		return h;
+		curr.next = head;
+		ListNode<Integer> tail = head;
+		for (int i = 1; i < n - d; i++)
+			tail = tail.next;
+
+		final ListNode<Integer> newHead = tail.next;
+		tail.next = null;
+		return newHead;
 	}
 }
