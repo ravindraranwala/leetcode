@@ -8,28 +8,27 @@ class MinimumInitialEnergyToFinishTasks {
 	}
 
 	public static void main(String[] args) {
-		final int[][] tasksOne = { { 1, 2 }, { 2, 4 }, { 4, 8 } };
-		assert minimumEffort(tasksOne) == 8;
+		final int[][] tasks1 = { { 1, 2 }, { 2, 4 }, { 4, 8 } };
+		assert minimumEffort(tasks1) == 8;
 
-		final int[][] tasksTwo = { { 1, 3 }, { 2, 4 }, { 10, 11 }, { 10, 12 }, { 8, 9 } };
-		assert minimumEffort(tasksTwo) == 32;
+		final int[][] tasks2 = { { 1, 3 }, { 2, 4 }, { 10, 11 }, { 10, 12 }, { 8, 9 } };
+		assert minimumEffort(tasks2) == 32;
 
-		final int[][] tasksThree = { { 1, 7 }, { 2, 8 }, { 3, 9 }, { 4, 10 }, { 5, 11 }, { 6, 12 } };
-		assert minimumEffort(tasksThree) == 27;
+		final int[][] tasks3 = { { 1, 7 }, { 2, 8 }, { 3, 9 }, { 4, 10 }, { 5, 11 }, { 6, 12 } };
+		assert minimumEffort(tasks3) == 27;
 	}
 
 	static int minimumEffort(int[][] tasks) {
 		final int n = tasks.length;
-		Arrays.sort(tasks, (a, b) -> Integer.compare(a[1] - a[0], b[1] - b[0]));
-		int e = 0;
-		for (int i = n - 1, r = 0; i >= 0; i--) {
-			if (tasks[i][1] > r) {
-				e = e + tasks[i][1] - r;
-				r = 0;
+		Arrays.sort(tasks, (o1, o2) -> Integer.compare(o2[1] - o2[0], o1[1] - o1[0]));
+		int effort = 0;
+		for (int i = 0, rem = 0; i < n; i++) {
+			if (rem < tasks[i][1]) {
+				effort = effort + tasks[i][1] - rem;
+				rem = tasks[i][1] - tasks[i][0];
 			} else
-				r = r - tasks[i][1];
-			r = r + tasks[i][1] - tasks[i][0];
+				rem = rem - tasks[i][0];
 		}
-		return e;
+		return effort;
 	}
 }
