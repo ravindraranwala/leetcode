@@ -1,6 +1,8 @@
 package com.coding.challenge.hash.table;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 class FindThePrefixCommonArrayOfTwoArrays {
 	FindThePrefixCommonArrayOfTwoArrays() {
@@ -8,37 +10,34 @@ class FindThePrefixCommonArrayOfTwoArrays {
 	}
 
 	public static void main(String[] args) {
-		final int[] arr1 = { 1, 3, 2, 4 };
-		final int[] arr2 = { 3, 1, 2, 4 };
-		final int[] ans1 = { 0, 2, 3, 4 };
-		assert Arrays.equals(ans1, findThePrefixCommonArray(arr1, arr2));
+		final int[] nums1 = { 1, 3, 2, 4 };
+		final int[] nums2 = { 3, 1, 2, 4 };
+		final int[] a1 = { 0, 2, 3, 4 };
+		assert Arrays.equals(a1, findThePrefixCommonArray(nums1, nums2));
 
-		final int[] arr3 = { 2, 3, 1 };
-		final int[] arr4 = { 3, 1, 2 };
-		final int[] ans2 = { 0, 1, 3 };
-		assert Arrays.equals(ans2, findThePrefixCommonArray(arr3, arr4));
+		final int[] nums3 = { 2, 3, 1 };
+		final int[] nums4 = { 3, 1, 2 };
+		final int[] a2 = { 0, 1, 3 };
+		assert Arrays.equals(a2, findThePrefixCommonArray(nums3, nums4));
 	}
 
 	static int[] findThePrefixCommonArray(int[] A, int[] B) {
 		final int n = A.length;
-		final boolean[] f1 = new boolean[n + 1];
-		final boolean[] f2 = new boolean[n + 1];
-		final int[] ans = new int[n];
-		int c = 0;
+		final int[] c = new int[n];
+		final Set<Integer> s1 = new HashSet<>();
+		final Set<Integer> s2 = new HashSet<>();
+		final Set<Integer> intersect = new HashSet<>();
 
 		for (int i = 0; i < n; i++) {
-			if (A[i] == B[i])
-				c = c + 1;
-			else {
-				if (f2[A[i]])
-					c = c + 1;
-				if (f1[B[i]])
-					c = c + 1;
-			}
-			ans[i] = c;
-			f1[A[i]] = true;
-			f2[B[i]] = true;
+			s1.add(A[i]);
+			s2.add(B[i]);
+			if (!intersect.contains(A[i]) && s2.contains(A[i]))
+				intersect.add(A[i]);
+			if (!intersect.contains(B[i]) && s1.contains(B[i]))
+				intersect.add(B[i]);
+
+			c[i] = intersect.size();
 		}
-		return ans;
+		return c;
 	}
 }
