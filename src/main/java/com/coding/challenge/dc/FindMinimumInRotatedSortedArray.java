@@ -1,6 +1,6 @@
 package com.coding.challenge.dc;
 
-class FindMinimumInRotatedSortedArray {
+public class FindMinimumInRotatedSortedArray {
 	FindMinimumInRotatedSortedArray() {
 		throw new AssertionError();
 	}
@@ -22,7 +22,7 @@ class FindMinimumInRotatedSortedArray {
 		return nums[(i + 1) % n];
 	}
 
-	private static int findPeak(int[] a, int i, int j) {
+	public static int findPeak(int[] a, int i, int j) {
 		if (i == j)
 			return i;
 
