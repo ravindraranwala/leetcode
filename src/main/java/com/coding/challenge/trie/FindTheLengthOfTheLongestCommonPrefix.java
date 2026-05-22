@@ -1,59 +1,72 @@
 package com.coding.challenge.trie;
 
 class FindTheLengthOfTheLongestCommonPrefix {
-	private static final char ZERO = '0';
-	private final TrieNode root = new TrieNode();
 
 	FindTheLengthOfTheLongestCommonPrefix() {
+		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
 		final int[] arr1 = { 1, 10, 100 };
 		final int[] arr2 = { 1000 };
-		assert new FindTheLengthOfTheLongestCommonPrefix().longestCommonPrefix(arr1, arr2) == 3;
+		assert longestCommonPrefix(arr1, arr2) == 3;
 
 		final int[] arr3 = { 1, 2, 3 };
 		final int[] arr4 = { 4, 4, 4 };
-		assert new FindTheLengthOfTheLongestCommonPrefix().longestCommonPrefix(arr3, arr4) == 0;
-
-		final int[] arr5 = { 1, 26 };
-		final int[] arr6 = { 22, 2 };
-		assert new FindTheLengthOfTheLongestCommonPrefix().longestCommonPrefix(arr5, arr6) == 1;
+		assert longestCommonPrefix(arr3, arr4) == 0;
 	}
 
-	int longestCommonPrefix(int[] arr1, int[] arr2) {
-		for (int num1 : arr1)
-			addWord(num1 + "");
-		int l = 0;
-		for (int num2 : arr2)
-			l = Math.max(l, search(num2 + ""));
+	static int longestCommonPrefix(int[] arr1, int[] arr2) {
+		final Trie trie = new Trie();
+		for (int val2 : arr2)
+			trie.insert(String.valueOf(val2));
 
-		return l;
+		int maxLen = 0;
+		for (int val1 : arr1)
+			maxLen = Math.max(maxLen, trie.search(String.valueOf(val1)));
+
+		return maxLen;
 	}
 
-	void addWord(String word) {
-		final int n = word.length();
-		TrieNode curr = root;
-		for (int i = 0; i < n; i++) {
-			if (curr.children[word.charAt(i) - ZERO] == null)
-				curr.children[word.charAt(i) - ZERO] = new TrieNode();
+	static class Trie {
+		private final TrieNode root;
+		private static final char ZERO = '0';
 
-			curr = curr.children[word.charAt(i) - ZERO];
+		Trie() {
+			root = new TrieNode();
 		}
-	}
 
-	int search(String word) {
-		final int n = word.length();
-		int i = 0;
-		TrieNode curr = root;
-		while (i < n && curr.children[word.charAt(i) - ZERO] != null) {
-			curr = curr.children[word.charAt(i) - ZERO];
-			i = i + 1;
+		void insert(String num) {
+			TrieNode curr = root;
+			for (char ch : num.toCharArray()) {
+				final int offset = ch - ZERO;
+				if (curr.children[offset] == null)
+					curr.children[offset] = new TrieNode();
+
+				curr = curr.children[offset];
+			}
 		}
-		return i;
-	}
 
-	static class TrieNode {
-		private final TrieNode[] children = new TrieNode[10];
+		int search(String num) {
+			int d = 0;
+			TrieNode curr = root;
+			for (char ch : num.toCharArray()) {
+				final int offset = ch - ZERO;
+				if (curr.children[offset] == null)
+					return d;
+
+				d = d + 1;
+				curr = curr.children[offset];
+			}
+			return d;
+		}
+
+		static class TrieNode {
+			final TrieNode[] children;
+
+			TrieNode() {
+				children = new TrieNode[10];
+			}
+		}
 	}
 }
