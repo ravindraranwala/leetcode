@@ -8,8 +8,8 @@ class LeftAndRightSumDifferences {
 	}
 
 	public static void main(String[] args) {
-		final int[] exp1 = { 15, 1, 11, 22 };
 		final int[] nums1 = { 10, 4, 8, 3 };
+		final int[] exp1 = { 15, 1, 11, 22 };
 		assert Arrays.equals(leftRightDifference(nums1), exp1);
 
 		final int[] nums2 = { 0 };
