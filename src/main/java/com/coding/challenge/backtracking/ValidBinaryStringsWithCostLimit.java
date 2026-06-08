@@ -2,9 +2,11 @@ package com.coding.challenge.backtracking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 class ValidBinaryStringsWithCostLimit {
 	private static final char ZERO = '0';
@@ -15,17 +17,13 @@ class ValidBinaryStringsWithCostLimit {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(generateValidStrings(3, 1));
-		System.out.println(generateValidStrings(1, 0));
+		assert Set.of("000", "100", "010").equals(new HashSet<>(generateValidStrings(3, 1)));
+		assert Set.of("0", "1").equals(new HashSet<>(generateValidStrings(1, 0)));
 	}
 
 	static List<String> generateValidStrings(int n, int k) {
 		final Map<String, Integer> validBinStrings = generateBinStrings(k, n - 1);
-		final List<String> ans = new ArrayList<>();
-		for (String binStr : validBinStrings.keySet())
-			ans.add(binStr);
-
-		return ans;
+		return new ArrayList<>(validBinStrings.keySet());
 	}
 
 	private static Map<String, Integer> generateBinStrings(int k, int idx) {
