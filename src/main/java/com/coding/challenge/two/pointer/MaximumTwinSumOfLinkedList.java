@@ -11,36 +11,40 @@ class MaximumTwinSumOfLinkedList {
 		final ListNode<Integer> listOne = new ListNode<>(5, new ListNode<>(4, new ListNode<>(2, new ListNode<>(1))));
 		assert pairSum(listOne) == 6;
 
-		final ListNode<Integer> listTwo = new ListNode<>(4, new ListNode<>(2, new ListNode<>(2, new ListNode<>(3))));
-		assert pairSum(listTwo) == 7;
+		final ListNode<Integer> listTwo = new ListNode<>(4, new ListNode<>(2, new ListNode<>(25, new ListNode<>(3))));
+		assert pairSum(listTwo) == 27;
 
 		final ListNode<Integer> listThree = new ListNode<>(1, new ListNode<>(100000));
 		assert pairSum(listThree) == 100001;
 	}
 
 	static int pairSum(ListNode<Integer> head) {
-		// find the middle of the linked list first.
-		ListNode<Integer> l = head;
-		ListNode<Integer> h = head;
-		while (h != null) {
-			l = l.next;
-			h = h.next.next;
+		ListNode<Integer> slow = head;
+		ListNode<Integer> fast = head;
+
+		while (fast != null) {
+			slow = slow.next;
+			fast = fast.next.next;
 		}
 
-		// Now reverse the second half of the linked list.
-		ListNode<Integer> prev = null;
-		while (l != null) {
-			final ListNode<Integer> tmp = l.next;
-			l.next = prev;
-			prev = l;
-			l = tmp;
+		ListNode<Integer> prev = slow;
+		ListNode<Integer> curr = slow.next;
+		while (curr != null) {
+			final ListNode<Integer> tmp = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = tmp;
 		}
 
-		// finally, find the twin sum.
-		int sum = 0;
-		for (ListNode<Integer> tail = prev; tail != null; head = head.next, tail = tail.next)
-			sum = Math.max(sum, head.val + tail.val);
+		ListNode<Integer> tail = prev;
+		ListNode<Integer> s = head;
+		int pairSum = Integer.MIN_VALUE;
+		while (s != slow) {
+			pairSum = Math.max(pairSum, s.val + tail.val);
+			s = s.next;
+			tail = tail.next;
+		}
 
-		return sum;
+		return pairSum;
 	}
 }
