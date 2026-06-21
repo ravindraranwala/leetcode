@@ -19,17 +19,15 @@ class MaximumIceCreamBars {
 	}
 
 	static int maxIceCream(int[] costs, int coins) {
-		int k = 0;
-		for (int cost : costs)
-			k = Math.max(k, cost);
-		final int[] b = CountingSort.countingSort(costs, k);
-		int c = 0;
-		for (int cost : b) {
-			if (cost <= coins) {
-				coins = coins - cost;
-				c = c + 1;
+		final int[] sortedCosts = CountingSort.countingSort(costs, 100000);
+		int cnt = 0;
+		final int n = costs.length;
+		for (int i = 0, remCoins = coins; i < n; i++) {
+			if (remCoins >= sortedCosts[i]) {
+				remCoins = remCoins - sortedCosts[i];
+				cnt = cnt + 1;
 			}
 		}
-		return c;
+		return cnt;
 	}
 }
