@@ -1,4 +1,4 @@
-package com.coding.challenge.hash.table;
+package com.coding.challenge.string;
 
 class NumberOfSubstringsContainingAllThreeCharacters {
 	private static final char FIRST_LETTER = 'a';
@@ -15,12 +15,12 @@ class NumberOfSubstringsContainingAllThreeCharacters {
 
 	static int numberOfSubstrings(String s) {
 		final int n = s.length();
+		int cnt = 0;
 		final int[] lastIdx = { -1, -1, -1 };
-		int c = 0;
 		for (int i = 0; i < n; i++) {
 			lastIdx[s.charAt(i) - FIRST_LETTER] = i;
-			c = c + Math.min(lastIdx[0], Math.min(lastIdx[1], lastIdx[2])) + 1;
+			cnt = cnt + Math.min(lastIdx[0], Math.min(lastIdx[1], lastIdx[2])) + 1;
 		}
-		return c;
+		return cnt;
 	}
 }
