@@ -42,8 +42,7 @@ class PathExistenceQueriesInGraphI {
 			else {
 				final int low = Math.min(queries[i][0], queries[i][1]);
 				final int high = Math.max(queries[i][0], queries[i][1]);
-				final int maxEdgeWeight = st.maximum(low, high - 1);
-				a[i] = maxEdgeWeight <= maxDiff;
+				a[i] = st.maximum(low, high - 1) <= maxDiff;
 			}
 		}
 		return a;
