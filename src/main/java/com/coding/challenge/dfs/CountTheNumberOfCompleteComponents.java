@@ -22,7 +22,6 @@ class CountTheNumberOfCompleteComponents {
 		for (int nodes = 2; nodes <= n; nodes++)
 			nodeToEdgesCnt[nodes] = nodeToEdgesCnt[nodes - 1] + nodes - 1;
 
-		// System.out.println(Arrays.toString(nodeToEdgesCnt));
 		final List<List<Integer>> adjList = new ArrayList<>();
 		for (int i = 0; i < n; i++)
 			adjList.add(new ArrayList<>());
