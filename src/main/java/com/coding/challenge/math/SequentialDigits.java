@@ -6,6 +6,7 @@ import java.util.List;
 
 class SequentialDigits {
 	private static final int MAX_DIGIT = 9;
+	private static final int BASE = 10;
 
 	SequentialDigits() {
 		throw new AssertionError();
@@ -31,9 +32,9 @@ class SequentialDigits {
 		for (int len = 2; len <= MAX_DIGIT; len++) {
 			for (int startingDigit = 1; startingDigit <= MAX_DIGIT; startingDigit++) {
 				int prevVal = vals[startingDigit];
-				final int lastDigit = prevVal % 10;
+				final int lastDigit = prevVal % BASE;
 				if (lastDigit < MAX_DIGIT) {
-					final int currVal = prevVal * 10 + lastDigit + 1;
+					final int currVal = prevVal * BASE + lastDigit + 1;
 					vals[startingDigit] = currVal;
 					if (currVal >= low && currVal <= high)
 						ans.add(currVal);
