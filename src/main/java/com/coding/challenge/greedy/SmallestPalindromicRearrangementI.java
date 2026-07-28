@@ -34,6 +34,6 @@ class SmallestPalindromicRearrangementI {
 			if (remainingFreq == 1)
 				ans[n / 2] = ch;
 		}
-		return new String(ans);
+		return String.valueOf(ans);
 	}
 }
