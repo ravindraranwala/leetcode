@@ -1,10 +1,13 @@
 package com.coding.challenge.greedy;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 class MinimumNumberOfPushesToTypeWordII {
 	private static final char FIRST_LETTER = 'a';
-	
+	private static final int NUM_OF_KEYS = 8;
+	private static final int ALPHABET_SIZE = 26;
+
 	MinimumNumberOfPushesToTypeWordII() {
 		throw new AssertionError();
 	}
@@ -16,19 +19,21 @@ class MinimumNumberOfPushesToTypeWordII {
 	}
 
 	static int minimumPushes(String word) {
-		final int[] f = new int[26];
+		final int[] letterFreq = new int[ALPHABET_SIZE];
 		for (char ch : word.toCharArray())
-			f[ch - FIRST_LETTER] = f[ch - FIRST_LETTER] + 1;
+			letterFreq[ch - FIRST_LETTER] = letterFreq[ch - FIRST_LETTER] + 1;
 
-		Arrays.sort(f);
-		int p = 4 * (f[0] + f[1]);
-		for (int i = 2; i < 10; i++)
-			p = p + 3 * f[i];
-		for (int i = 10; i < 18; i++)
-			p = p + 2 * f[i];
-		for (int i = 18; i < 26; i++)
-			p = p + f[i];
+		Arrays.sort(letterFreq);
+		final PriorityQueue<Integer> lettersToKey = new PriorityQueue<>();
+		for (int j = 0; j < NUM_OF_KEYS; j++)
+			lettersToKey.add(0);
 
-		return p;
-    }
+		int pushes = 0;
+		for (int i = ALPHABET_SIZE - 1; i >= 0; i--) {
+			final int pushesToLetter = lettersToKey.poll() + 1;
+			pushes = pushes + pushesToLetter * letterFreq[i];
+			lettersToKey.offer(pushesToLetter);
+		}
+		return pushes;
+	}
 }
