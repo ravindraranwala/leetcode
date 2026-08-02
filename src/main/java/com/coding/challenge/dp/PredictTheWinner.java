@@ -1,6 +1,6 @@
 package com.coding.challenge.dp;
 
-public class PredictTheWinner {
+class PredictTheWinner {
 	PredictTheWinner() {
 		throw new AssertionError();
 	}
@@ -15,26 +15,24 @@ public class PredictTheWinner {
 
 	static boolean predictTheWinner(int[] nums) {
 		final int n = nums.length;
-		final int[][] score = new int[n][n];
-		final int[][] sum = new int[n][n];
-		// trivial case of the recursion.
-		for (int i = 0; i < n; i++) {
-			score[i][i] = nums[i];
-			sum[i][i] = nums[i];
+		final int[] preSum = new int[n + 1];
+		final int[][] t = new int[n + 1][n + 1];
+		// trivial or base case of the recursion.
+		for (int i = 1, runningSum = 0; i <= n; i++) {
+			t[i][i] = nums[i - 1];
+			runningSum = runningSum + nums[i - 1];
+			preSum[i] = runningSum;
 		}
 
-		// non-trivial case of the recursion.
+		// Non trivial, recursive step.
 		for (int l = 2; l <= n; l++) {
-			for (int i = 0; i < n - l + 1; i++) {
+			for (int i = 1; i <= n - l + 1; i++) {
 				final int j = i + l - 1;
-				// sum is associative and commutative operator.
-				sum[i][j] = sum[i][j - 1] + nums[j];
-				// we have two choices i and j, consider each. local brute force.
-				final int choice1 = nums[i] + sum[i + 1][j] - score[i + 1][j];
-				final int choice2 = nums[j] + sum[i][j - 1] - score[i][j - 1];
-				score[i][j] = Math.max(choice1, choice2);
+				t[i][j] = Math.max(nums[i - 1] + preSum[j] - preSum[i] - t[i + 1][j],
+						nums[j - 1] + preSum[j - 1] - preSum[i - 1] - t[i][j - 1]);
 			}
 		}
-		return score[0][n - 1] >= sum[0][n - 1] - score[0][n - 1];
+
+		return t[1][n] >= preSum[n] - t[1][n];
 	}
 }
