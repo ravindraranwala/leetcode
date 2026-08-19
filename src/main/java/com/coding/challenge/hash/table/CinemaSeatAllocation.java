@@ -8,7 +8,7 @@ class CinemaSeatAllocation {
 	private static final int FIRST_GROUP_START = 2;
 	private static final int SECOND_GROUP_START = 4;
 	private static final int THIRD_GROUP_START = 6;
-	private static final int ROW_LENGTH = 10;
+	private static final int SEATS_PER_ROW = 10;
 	private static final boolean[] EMPTY_ROW = new boolean[0];
 	private static final int MAX_AVAIL_GROUPS_PER_ROW = 2;
 
@@ -30,7 +30,7 @@ class CinemaSeatAllocation {
 	static int maxNumberOfFamilies(int n, int[][] reservedSeats) {
 		final Map<Integer, boolean[]> reservationsByRow = new HashMap<>();
 		for (int[] r : reservedSeats)
-			reservationsByRow.computeIfAbsent(r[0], unused -> new boolean[ROW_LENGTH + 1])[r[1]] = true;
+			reservationsByRow.computeIfAbsent(r[0], unused -> new boolean[SEATS_PER_ROW + 1])[r[1]] = true;
 
 		int availGroups = 0;
 		for (int row : reservationsByRow.keySet()) {
