@@ -33,7 +33,7 @@ class CinemaSeatAllocation {
 			reservationsByRow.computeIfAbsent(r[0], unused -> new boolean[ROW_LENGTH + 1])[r[1]] = true;
 
 		int availGroups = 0;
-		for (int row : reservationsByRow.keySet())
+		for (int row : reservationsByRow.keySet()) {
 			if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), FIRST_GROUP_START, GROUP_SIZE + GROUP_SIZE))
 				availGroups = availGroups + 2;
 			else if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), FIRST_GROUP_START, GROUP_SIZE))
@@ -42,6 +42,7 @@ class CinemaSeatAllocation {
 				availGroups = availGroups + 1;
 			else if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), THIRD_GROUP_START, GROUP_SIZE))
 				availGroups = availGroups + 1;
+		}
 
 		return MAX_AVAIL_GROUPS_PER_ROW * (n - reservationsByRow.size()) + availGroups;
 	}
