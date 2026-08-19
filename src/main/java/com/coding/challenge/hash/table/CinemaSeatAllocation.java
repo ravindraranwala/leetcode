@@ -9,7 +9,6 @@ class CinemaSeatAllocation {
 	private static final int SECOND_GROUP_START = 4;
 	private static final int THIRD_GROUP_START = 6;
 	private static final int SEATS_PER_ROW = 10;
-	private static final boolean[] EMPTY_ROW = new boolean[0];
 	private static final int MAX_AVAIL_GROUPS_PER_ROW = 2;
 
 	CinemaSeatAllocation() {
@@ -34,13 +33,13 @@ class CinemaSeatAllocation {
 
 		int availGroups = 0;
 		for (int row : reservationsByRow.keySet()) {
-			if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), FIRST_GROUP_START, GROUP_SIZE + GROUP_SIZE))
+			if (allFree(reservationsByRow.get(row), FIRST_GROUP_START, GROUP_SIZE + GROUP_SIZE))
 				availGroups = availGroups + 2;
-			else if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), FIRST_GROUP_START, GROUP_SIZE))
+			else if (allFree(reservationsByRow.get(row), FIRST_GROUP_START, GROUP_SIZE))
 				availGroups = availGroups + 1;
-			else if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), SECOND_GROUP_START, GROUP_SIZE))
+			else if (allFree(reservationsByRow.get(row), SECOND_GROUP_START, GROUP_SIZE))
 				availGroups = availGroups + 1;
-			else if (allFree(reservationsByRow.getOrDefault(row, EMPTY_ROW), THIRD_GROUP_START, GROUP_SIZE))
+			else if (allFree(reservationsByRow.get(row), THIRD_GROUP_START, GROUP_SIZE))
 				availGroups = availGroups + 1;
 		}
 
