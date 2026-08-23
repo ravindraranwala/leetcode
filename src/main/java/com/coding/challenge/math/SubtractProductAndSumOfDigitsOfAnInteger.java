@@ -1,5 +1,7 @@
 package com.coding.challenge.math;
 
+import com.coding.challenge.util.math.NumUtil;
+
 class SubtractProductAndSumOfDigitsOfAnInteger {
 	SubtractProductAndSumOfDigitsOfAnInteger() {
 		throw new AssertionError();
@@ -12,13 +14,6 @@ class SubtractProductAndSumOfDigitsOfAnInteger {
 	}
 
 	static int subtractProductAndSum(int n) {
-		int prd = 1;
-		int sum = 0;
-		for (int num = n; num > 0; num = num / 10) {
-			final int digit = num % 10;
-			prd = prd * digit;
-			sum = sum + digit;
-		}
-		return prd - sum;
+		return NumUtil.digitProduct(n) - NumUtil.digitSum(n);
 	}
 }
