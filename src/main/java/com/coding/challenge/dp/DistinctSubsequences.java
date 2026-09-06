@@ -6,33 +6,47 @@ class DistinctSubsequences {
 	}
 
 	public static void main(String[] args) {
-		final String s1 = "rabbbit";
-		final String t1 = "rabbit";
-		assert numDistinct(s1, t1) == 3;
-
-		final String s2 = "babgbag";
-		final String t2 = "bag";
-		assert numDistinct(s2, t2) == 5;
+		assert numDistinct("rabbbit", "rabbit") == 3;
+		assert numDistinct("babgbag", "bag") == 5;
 	}
 
 	static int numDistinct(String s, String t) {
 		final int m = t.length();
 		final int n = s.length();
-		final int[][] c = new int[m][n + 1];
-
-		// trivial case of the recursion.
+		final int[] ans = new int[n];
+		// trivial case of the recursion where i = m - 1.
 		for (int j = 0; j < n; j++)
-			c[0][j + 1] = s.charAt(j) == t.charAt(0) ? c[0][j] + 1 : c[0][j];
+			if (s.charAt(j) == t.charAt(m - 1))
+				ans[j] = 1;
 
-		// recursive step
-		for (int i = 1; i < m; i++) {
+		// recursive step.
+		for (int i = m - 2; i >= 0; i--) {
+			final int[] c = new int[n];
+			// Postfix sum of smaller subinstance solutions.
+			int postfixSum = 0;
+			for (int k = n - 1; k >= 0; k--) {
+				postfixSum = postfixSum + ans[k];
+				c[k] = postfixSum;
+			}
+
+			final int l = m - i;
 			for (int j = 0; j < n; j++) {
-				if (t.charAt(i) == s.charAt(j))
-					c[i][j + 1] = c[i - 1][j] + c[i][j];
-				else
-					c[i][j + 1] = c[i][j];
+				if (j <= n - l) {
+					if (s.charAt(j) == t.charAt(i))
+						ans[j] = c[j + 1];
+					else
+						ans[j] = 0;
+				} else {
+					// no solution exists as s is shorter than t.
+					ans[j] = 0;
+				}
 			}
 		}
-		return c[m - 1][n];
+
+		int cnt = 0;
+		for (int idx = 0; idx < n; idx++)
+			cnt = cnt + ans[idx];
+
+		return cnt;
 	}
 }
