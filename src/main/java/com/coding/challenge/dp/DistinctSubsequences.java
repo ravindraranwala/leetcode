@@ -21,25 +21,21 @@ class DistinctSubsequences {
 
 		// recursive step.
 		for (int i = m - 2; i >= 0; i--) {
-			final int[] c = new int[n];
 			// Postfix sum of smaller subinstance solutions.
-			int postfixSum = 0;
-			for (int k = n - 1; k >= 0; k--) {
-				postfixSum = postfixSum + ans[k];
-				c[k] = postfixSum;
-			}
 
 			final int l = m - i;
-			for (int j = 0; j < n; j++) {
+			for (int j = n - 1, postfixSum = 0; j >= 0; j--) {
+				final int tmp = ans[j];
 				if (j <= n - l) {
 					if (s.charAt(j) == t.charAt(i))
-						ans[j] = c[j + 1];
+						ans[j] = postfixSum;
 					else
 						ans[j] = 0;
 				} else {
 					// no solution exists as s is shorter than t.
 					ans[j] = 0;
 				}
+				postfixSum = postfixSum + tmp;
 			}
 		}
 
