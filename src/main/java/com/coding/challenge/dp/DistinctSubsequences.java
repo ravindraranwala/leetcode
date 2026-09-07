@@ -13,34 +13,20 @@ class DistinctSubsequences {
 	static int numDistinct(String s, String t) {
 		final int m = t.length();
 		final int n = s.length();
-		final int[] ans = new int[n];
-		// trivial case of the recursion where i = m - 1.
-		for (int j = 0; j < n; j++)
-			if (s.charAt(j) == t.charAt(m - 1))
-				ans[j] = 1;
+		final int[][] ans = new int[m + 1][n + 1];
+		// trivial case of the recursion
+		for (int j = 0; j <= n; j++)
+			ans[m][j] = 1;
 
-		// recursive step.
-		for (int i = m - 2; i >= 0; i--) {
-			// Postfix sum of smaller subinstance solutions.
-			final int l = m - i;
-			for (int j = n - l, postfixSum = ans[j + 1]; j >= 0; j--) {
-				final int tmp = ans[j];
+		// Recursive step.
+		for (int i = m - 1; i >= 0; i--) {
+			for (int j = n - 1; j >= 0; j--) {
 				if (s.charAt(j) == t.charAt(i))
-					ans[j] = postfixSum;
+					ans[i][j] = ans[i][j + 1] + ans[i + 1][j + 1];
 				else
-					ans[j] = 0;
-
-				postfixSum = postfixSum + tmp;
+					ans[i][j] = ans[i][j + 1];
 			}
-
-			for (int j = n - l + 1; j < n; j++)
-				ans[j] = 0;
 		}
-
-		int cnt = 0;
-		for (int idx = 0; idx < n; idx++)
-			cnt = cnt + ans[idx];
-
-		return cnt;
+		return ans[0][0];
 	}
 }
