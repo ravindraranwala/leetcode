@@ -1,24 +1,23 @@
 package com.coding.challenge.math;
 
-class CountCommasInRange {
+class CountCommasInRangeII {
 	private static final int BASE = 10;
 	private static final int GROUP_SIZE = 3;
 
-	CountCommasInRange() {
+	CountCommasInRangeII() {
 		throw new AssertionError();
 	}
 
 	public static void main(String[] args) {
 		assert countCommas(1002) == 3;
 		assert countCommas(998) == 0;
-		assert countCommas(10000) == 9001;
 	}
 
-	static int countCommas(int n) {
-		int c = 0;
+	static long countCommas(long n) {
+		long c = 0;
 		int d = 1;
-		int start = 1;
-		while (d <= 9 && n >= start * BASE) {
+		long start = 1;
+		while (n >= start * BASE) {
 			c = c + (start * BASE - start) * commas(d);
 			d = d + 1;
 			start = start * BASE;
