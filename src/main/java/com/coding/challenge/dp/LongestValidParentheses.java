@@ -4,6 +4,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 class LongestValidParentheses {
+	private static final char OPEN_BRACKET = '(';
+
 	LongestValidParentheses() {
 		throw new AssertionError();
 	}
@@ -16,20 +18,21 @@ class LongestValidParentheses {
 
 	static int longestValidParentheses(String s) {
 		final int n = s.length();
-		final int[] l = new int[n];
-		final Deque<Integer> openingStack = new ArrayDeque<>();
 		int maxLen = 0;
-
+		final int[] len = new int[n];
+		final Deque<Integer> stack = new ArrayDeque<>();
 		for (int j = 0; j < n; j++) {
-			if (s.charAt(j) == '(')
-				openingStack.push(j);
-			else if (!openingStack.isEmpty()) {
-				final int i = openingStack.pop();
+			final char ch = s.charAt(j);
+			if (ch == OPEN_BRACKET)
+				stack.push(j);
+			else if (!stack.isEmpty()) {
+				final int i = stack.pop();
 				if (i == 0)
-					l[j] = j - i + 1;
+					len[j] = j + 1;
 				else
-					l[j] = l[i - 1] + j - i + 1;
-				maxLen = Math.max(maxLen, l[j]);
+					len[j] = len[i - 1] + j - i + 1;
+
+				maxLen = Math.max(maxLen, len[j]);
 			}
 		}
 		return maxLen;
