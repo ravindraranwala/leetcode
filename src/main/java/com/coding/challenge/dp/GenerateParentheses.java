@@ -23,7 +23,7 @@ class GenerateParentheses {
 	static List<String> generateParenthesis(int n) {
 		final List<Set<String>> sln = new ArrayList<>();
 		for (int j = 0; j <= n; j++)
-			sln.add(new HashSet<String>());
+			sln.add(new HashSet<>());
 
 		sln.get(1).add("" + OPEN_BRACKET + CLOSE_BRACKET);
 		for (int k = 2; k <= n; k++) {
