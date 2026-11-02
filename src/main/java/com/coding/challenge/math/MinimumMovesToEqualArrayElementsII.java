@@ -1,6 +1,6 @@
 package com.coding.challenge.math;
 
-import java.util.Arrays;
+import com.coding.challenge.quick.select.QuickSelect;
 
 class MinimumMovesToEqualArrayElementsII {
 	MinimumMovesToEqualArrayElementsII() {
@@ -8,21 +8,20 @@ class MinimumMovesToEqualArrayElementsII {
 	}
 
 	public static void main(String[] args) {
-		final int[] numsOne = { 1, 2, 3 };
-		assert minMoves2(numsOne) == 2;
+		final int[] nums1 = { 1, 2, 3 };
+		assert minMoves(nums1) == 2;
 
-		final int[] numsTwo = { 1, 10, 2, 9 };
-		assert minMoves2(numsTwo) == 16;
+		final int[] nums2 = { 1, 10, 2, 9 };
+		assert minMoves(nums2) == 16;
 	}
 
-	static int minMoves2(int[] nums) {
+	static int minMoves(int[] nums) {
 		final int n = nums.length;
-		Arrays.sort(nums);
-		final int median = nums[n/ 2];
-		int moves = 0;
-		for (int num : nums)
-			moves = moves + Math.abs(num - median);
+		final int median = QuickSelect.randomizedSelect(nums, 0, n - 1, (n + 1) / 2);
+		int m = 0;
+		for (int val : nums)
+			m = m + Math.abs(val - median);
 
-		return moves;
+		return m;
 	}
 }
