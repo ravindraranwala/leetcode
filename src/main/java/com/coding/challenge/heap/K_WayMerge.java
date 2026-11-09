@@ -1,4 +1,4 @@
-package com.coding.challenge.heaps;
+package com.coding.challenge.heap;
 
 import java.util.Comparator;
 

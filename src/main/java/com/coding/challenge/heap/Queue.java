@@ -1,4 +1,4 @@
-package com.coding.challenge.heaps;
+package com.coding.challenge.heap;
 
 /**
  * A data structure designed for holding elements prior to processing.
