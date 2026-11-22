@@ -14,7 +14,7 @@ class MinimumNumberOfChangesToMakeBinaryStringBeautiful {
 		assert minChanges("001011001111100001") == 3;
 	}
 
-	// Sub-optimal dynamic programming implementation.
+	// Sub-optimal dynamic programming solution.
 	static int minChangesDp(String s) {
 		final int n = s.length();
 		final int[] c = new int[n];
