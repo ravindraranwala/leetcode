@@ -21,18 +21,19 @@ class MinimumNumberOfChangesToMakeBinaryStringBeautiful {
 
 		for (int i = 1; i < n; i = i + 2) {
 			c[i] = Integer.MAX_VALUE;
-			for (int k = i, zeros = 0; k >= 0; k--) {
-				if (s.charAt(k) == ZERO) {
+			int zeros = 0;
+			for (int k = i; k > 0; k--) {
+				if (s.charAt(k) == ZERO)
 					zeros = zeros + 1;
-				}
-				if ((i - k + 1) % 2 == 0) {
-					if (k == 0) {
-						c[i] = Math.min(c[i], Math.min(zeros, i + 1 - zeros));
-					} else {
-						c[i] = Math.min(c[i], c[k - 1] + Math.min(zeros, i - k + 1 - zeros));
-					}
-				}
+
+				if ((i - k + 1) % 2 == 0)
+					c[i] = Math.min(c[i], c[k - 1] + Math.min(zeros, i - k + 1 - zeros));
 			}
+			if (s.charAt(0) == ZERO)
+				zeros = zeros + 1;
+
+			// solution with no splits.
+			c[i] = Math.min(c[i], Math.min(zeros, i + 1 - zeros));
 		}
 		return c[n - 1];
 	}
