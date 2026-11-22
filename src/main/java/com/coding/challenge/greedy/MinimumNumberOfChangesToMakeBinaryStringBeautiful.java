@@ -32,6 +32,7 @@ class MinimumNumberOfChangesToMakeBinaryStringBeautiful {
 			if (s.charAt(0) == ZERO)
 				zeros = zeros + 1;
 
+			// solution with no splits.
 			c[i] = Math.min(c[i], Math.min(zeros, i + 1 - zeros));
 		}
 		return c[n - 1];
